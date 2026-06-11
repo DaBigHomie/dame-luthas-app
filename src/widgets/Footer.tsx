@@ -48,7 +48,7 @@ export function Footer() {
   return (
     <footer className="mt-auto bg-[var(--dl-bg)] pt-16">
       <ContactFormBlock />
-      <FooterBottomBar footer={footer} />
+      <FooterBottomBar footer={footer} site={site} navigation={navigation} />
     </footer>
   );
 }
