@@ -1,36 +1,36 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --dl-bg: #0a0a0f;
-  --dl-surface: #14141c;
+  --background: #0f0f0f;
+  --foreground: #ffffff;
+  --bg: #0f0f0f;
+  --text: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.7);
+  --dl-bg: #0f0f0f;
+  --dl-surface: #181818;
   --dl-accent: #8f93f1;
-  --dl-footer-yellow: #f3e04a;
-  --dl-footer-lavender: #c4c0ee;
+  --dl-accent-hover: #3c3950;
+  --dl-footer-yellow: #f7df3d;
+  --dl-footer-lavender: #cecee8;
+  --dl-yellow: #f7df3d;
+  --dl-lavender: #cecee8;
+  --dl-container-max: 1170px;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-outfit), system-ui, sans-serif;
+  --font-serif: var(--font-cardo), Georgia, serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+html,
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-outfit), system-ui, sans-serif;
 }
 
-/* Let The Gem theme CSS control typography/colors in pilot mode */
 body.wp-pilot-theme {
   background: transparent;
   color: inherit;
@@ -39,4 +39,49 @@ body.wp-pilot-theme {
 
 body.wp-pilot-theme .wp-pilot-content {
   width: 100%;
+}
+
+.dl-typography-hero-h1 {
+  font-size: clamp(40px, 6.5vw, 100px);
+  line-height: 1.1;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.dl-typography-big-heading {
+  font-size: clamp(36px, 4.6vw, 70px);
+  line-height: 1.14;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.dl-typography-category {
+  font-size: 24px;
+  line-height: 34px;
+  font-weight: 600;
+}
+
+.gem-button:hover,
+.dl-gem-btn-hover:hover,
+.portfolio-filter.active {
+  background: var(--dl-accent);
+}
+
+@keyframes dl-clients-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.dl-clients-marquee-track {
+  animation: dl-clients-marquee 30s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dl-clients-marquee-track {
+    animation: none;
+  }
 }

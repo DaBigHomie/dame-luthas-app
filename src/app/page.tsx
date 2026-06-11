@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import { isNativeSiteShellEnabled } from "@/content/availability";
+import { serviceBlocks } from "@/content";
 import {
   getPilotStatus,
   getSiteInfo,
@@ -13,15 +15,32 @@ import {
 import { PilotBanner } from "@/shared/ui/PilotBanner";
 import { RichContent } from "@/shared/ui/RichContent";
 import { Hero } from "@/widgets/Hero";
+import {
+  AdvisorSection,
+  BigHeadingSection,
+  ClientsMarquee,
+  ManifestoBand,
+  ServiceBlockSection,
+  TestimonialsCarousel,
+} from "@/widgets/home";
 import { PortfolioGrid } from "@/widgets/PortfolioGrid";
 
 export default async function HomePage() {
-  if (isMigratedAvailable()) {
-    const { portfolio } = loadMigrated();
+  if (isNativeSiteShellEnabled()) {
+    const portfolio = isMigratedAvailable() ? loadMigrated().portfolio : [];
+
     return (
       <main>
         <Hero />
+        <AdvisorSection />
+        <ManifestoBand />
+        <BigHeadingSection />
+        {serviceBlocks.map((block) => (
+          <ServiceBlockSection key={block.id} block={block} />
+        ))}
         <PortfolioGrid items={portfolio} title="Selected work" />
+        <ClientsMarquee />
+        <TestimonialsCarousel />
       </main>
     );
   }

@@ -1,14 +1,15 @@
 import Image from "next/image";
 
-import { loadMigrated } from "@/shared/lib/migrated/content";
+import { heroFallback } from "@/content/hero-fallback";
+import { isMigratedAvailable, loadMigrated } from "@/shared/lib/migrated/content";
 import { AnimatedHeading } from "@/shared/ui/AnimatedHeading";
 import { AnimatedButton } from "@/shared/ui/AnimatedButton";
 
 export function Hero() {
-  const { hero } = loadMigrated();
+  const hero = isMigratedAvailable() ? loadMigrated().hero : heroFallback;
 
   return (
-    <section className="mx-auto grid max-w-6xl gap-10 px-6 py-16 md:grid-cols-2 md:items-center md:py-24">
+    <section className="mx-auto grid max-w-[var(--dl-container-max)] gap-10 px-[21px] py-16 md:grid-cols-2 md:items-center md:py-24">
       <div className="space-y-6">
         <AnimatedHeading
           as="p"
@@ -21,14 +22,14 @@ export function Hero() {
           text={hero.title}
           variant="letters-slide-up"
           staggerMs={15}
-          className="text-4xl font-bold leading-tight text-white md:text-5xl"
+          className="dl-typography-hero-h1 text-white"
         />
         <AnimatedHeading
           as="p"
           text={hero.subtitle}
           variant="words-slide-left"
           staggerMs={30}
-          className="max-w-xl text-lg leading-relaxed text-zinc-300"
+          className="max-w-xl text-[length:clamp(18px,1.6vw,24px)] leading-relaxed text-[var(--text-muted)]"
         />
         <div className="flex flex-wrap gap-4">
           <AnimatedButton

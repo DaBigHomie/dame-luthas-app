@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 
+import { cardo, outfit } from "@/app/fonts";
+import { isNativeSiteShellEnabled } from "@/content/availability";
 import { isMigratedAvailable } from "@/shared/lib/migrated/content";
 import { TheGemMotionRoot } from "@/shared/ui/TheGemMotionRoot";
 import { WpPilotStyles } from "@/shared/ui/WpPilotStyles";
@@ -15,16 +16,6 @@ function pilotCssEnabled(): boolean {
   return !isMigratedAvailable();
 }
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
   title: "Dame Luthas",
   description: "Technology consulting & digital transformation",
@@ -35,17 +26,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const migrated = isMigratedAvailable();
-  const pilotCss = pilotCssEnabled();
+  const nativeShell = isNativeSiteShellEnabled();
+  const pilotCss = pilotCssEnabled() && !nativeShell;
 
   const bodyClass = [
-    "min-h-full flex flex-col",
+    "min-h-full flex flex-col font-sans",
     pilotCss
       ? "wp-pilot-theme wp-theme-thegem-elementor thegem-elementor elementor-default"
-      : null,
-    migrated && !pilotCss
-      ? "bg-[var(--dl-bg)] text-zinc-100"
-      : null,
+      : "bg-[var(--dl-bg)] text-white",
   ]
     .filter(Boolean)
     .join(" ");
@@ -53,12 +41,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased${
+      className={`${outfit.variable} ${cardo.variable} h-full antialiased${
         pilotCss ? " wp-pilot-theme" : ""
       }`}
     >
       <body className={bodyClass}>
-        {migrated ? (
+        {nativeShell ? (
           <TheGemMotionRoot>
             {pilotCss ? <WpPilotStyles /> : null}
             <Header />

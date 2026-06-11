@@ -1,4 +1,4 @@
-import { loadMigrated } from "@/shared/lib/migrated/content";
+import { isMigratedAvailable, loadMigrated } from "@/shared/lib/migrated/content";
 import {
   getTemplateBySlug,
   parseFooterContent,
@@ -8,8 +8,24 @@ import { ContactFormBlock } from "./ContactFormBlock";
 import { FooterBottomBar } from "./FooterBottomBar";
 
 export function Footer() {
-  const { site, navigation } = loadMigrated();
-  const footerTemplate = getTemplateBySlug("footer");
+  const migrated = isMigratedAvailable();
+  const { site, navigation } = migrated
+    ? loadMigrated()
+    : {
+        site: {
+          name: "Dame Luthas",
+          contact: {
+            email: "hello@dameluthas.com",
+            linkedin: "https://www.linkedin.com/in/dameluthas/",
+          },
+        },
+        navigation: [
+          { label: "Home", href: "/" },
+          { label: "Case Studies", href: "/portfolio" },
+          { label: "Contact", href: "/contact" },
+        ],
+      };
+  const footerTemplate = migrated ? getTemplateBySlug("footer") : null;
   const footer = footerTemplate
     ? parseFooterContent(footerTemplate.bodyHtml)
     : {
