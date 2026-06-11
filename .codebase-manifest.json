@@ -30,7 +30,6 @@
     "/case-studies/[slug]",
     "/services",
     "/services/[slug]",
-    "/about",
     "/contact",
     "/admin",
     "/admin/portfolio",

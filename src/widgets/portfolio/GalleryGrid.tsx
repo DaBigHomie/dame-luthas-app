@@ -45,7 +45,7 @@ export function GalleryGrid({ items, className }: GalleryGridProps) {
 
       {active ? (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-6"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-6 dl-gem-gallery-lightbox"
           role="dialog"
           aria-modal="true"
           aria-label="Gallery preview"

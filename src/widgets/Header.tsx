@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { headerNavigation, socialLinks } from "@/content";
+import { headerNavigation, sanitizeHeaderNavigation, socialLinks } from "@/content";
 import { isMigratedAvailable, loadMigrated } from "@/shared/lib/migrated/content";
 import { AnimatedButton } from "@/shared/ui/AnimatedButton";
 import { SocialIcons } from "@/shared/ui/SocialIcons";
@@ -23,8 +23,8 @@ function resolveNavigation() {
     ? parsePrimaryNavigation(headerTemplate.bodyHtml)
     : [];
 
-  if (parsed.length) return parsed;
-  return migrated.navigation;
+  if (parsed.length) return sanitizeHeaderNavigation(parsed);
+  return sanitizeHeaderNavigation(migrated.navigation);
 }
 
 export function Header() {

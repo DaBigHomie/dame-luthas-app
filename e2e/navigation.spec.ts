@@ -6,7 +6,7 @@ import { expect, test } from "@playwright/test";
 
 import { waitForPageLoad } from "./fixtures/helpers";
 
-const NAV_LABELS = ["Home", "Case Studies", "About", "Contact"];
+const NAV_LABELS = ["Home", "Case Studies", "Contact"];
 
 test.describe("Navigation — desktop", { tag: "@critical" }, () => {
   test.use({ viewport: { width: 1280, height: 800 } });

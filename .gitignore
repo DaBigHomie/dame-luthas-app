@@ -58,7 +58,8 @@ next-env.d.ts
 /data/extracted/
 /data/audit/
 /data/snapshot/
-/data/migrated/
+/data/migrated/*
+!/data/migrated/content.json
 
 # Agent
 .cortex-boot.json

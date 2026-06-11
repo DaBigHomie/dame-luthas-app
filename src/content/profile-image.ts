@@ -1,4 +1,4 @@
-/** Canonical Dame Luthas headshot (matches /about). */
+/** Canonical Dame Luthas headshot (hero + contact). */
 export const PROFILE_IMAGE = "/assets/site/IMG_0666-2-2500px.webp";
 
 /** Prefer full-size profile asset for large hero panels. */

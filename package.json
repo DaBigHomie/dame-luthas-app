@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "prebuild": "npx tsx scripts/wp/ensure-migrated-content.mts",
     "start": "next start",
     "lint": "eslint",
     "wp:snapshot": "npx tsx scripts/wp/build-snapshot.mts",
