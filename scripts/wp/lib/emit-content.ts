@@ -82,6 +82,8 @@ export function emitContentModules(
 
   const index = `${BANNER}
 export * from "./types";
+export { textBands } from "./text-bands";
+export { serviceBlocks } from "./service-blocks";
 export { serviceCards } from "./services";
 export { clientLogos } from "./clients";
 export { testimonials } from "./testimonials";

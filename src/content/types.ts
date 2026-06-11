@@ -1,7 +1,34 @@
 export interface ServiceMenuItem {
   label: string;
-  href: string;
+  href?: string;
+  badge?: string;
   description?: string;
+}
+
+export interface ServiceCategory {
+  id: string;
+  title: string;
+  rotating: string[];
+  items: ServiceMenuItem[];
+}
+
+export interface ServiceBlock {
+  id: string;
+  slide: "01/03" | "02/03" | "03/03";
+  heading: string;
+  image: string;
+  categories: ServiceCategory[];
+  ctaText: string;
+}
+
+export interface TextBands {
+  unAdvisorBand: string;
+  manifesto: { eyebrow: string; body: string };
+  bigHeading: string;
+  servicesCtas: {
+    sections01and02: string;
+    section03: string;
+  };
 }
 
 export interface ServiceCardColumn {

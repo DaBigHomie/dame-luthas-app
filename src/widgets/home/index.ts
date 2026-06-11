@@ -1,8 +1,7 @@
 export { AdvisorSection } from "./AdvisorSection";
-export { ClientLogosSection } from "./ClientLogosSection";
-export { CtaBandSection } from "./CtaBandSection";
-export { ManifestoSection } from "./ManifestoSection";
-export { PartnerIntroSection } from "./PartnerIntroSection";
-export { RotatingHeadlineSection } from "./RotatingHeadlineSection";
-export { ServiceCardsSection } from "./ServiceCardsSection";
-export { TestimonialsSection } from "./TestimonialsSection";
+export { BigHeadingSection } from "./BigHeadingSection";
+export { ClientsMarquee } from "./ClientsMarquee";
+export { ManifestoBand } from "./ManifestoBand";
+export { ServiceBlockSection } from "./ServiceBlockSection";
+export { ServiceCard } from "./ServiceCard";
+export { TestimonialsCarousel } from "./TestimonialsCarousel";

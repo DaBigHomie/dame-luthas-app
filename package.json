@@ -25,6 +25,10 @@
     "wp:extract-content": "npx tsx scripts/wp/extract-wp-content.mts",
     "wp:copy-assets": "npx tsx scripts/wp/copy-wp-assets.mts",
     "wp:codegen": "npm run wp:extract-content && npm run wp:copy-assets",
+    "wp:extract-design-system": "npx tsx scripts/wp/extract-design-system.mts",
+    "test:parity": "playwright test e2e/parity.spec.ts",
+    "deploy:staging": "npx tsx scripts/deploy-vercel.mts preview",
+    "deploy:prod": "npx tsx scripts/deploy-vercel.mts production",
     "wp:extract-live": "WP_HEADLESS_GRAPHQL_URL=http://dameluthas.local/graphql npx tsx scripts/wp/extract-content.mts"
   },
   "dependencies": {
@@ -34,6 +38,7 @@
     "server-only": "^0.0.1"
   },
   "devDependencies": {
+    "@playwright/test": "^1.60.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

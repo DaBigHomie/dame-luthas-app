@@ -1,21 +1,15 @@
+import { textBands } from "@/content/text-bands";
 import { AnimatedHeading } from "@/shared/ui/AnimatedHeading";
-import type { ContentSection } from "@/content/types";
 
-interface AdvisorSectionProps {
-  section: ContentSection;
-}
-
-export function AdvisorSection({ section }: AdvisorSectionProps) {
-  if (!section.title) return null;
-
+export function AdvisorSection() {
   return (
-    <section className="border-y border-white/10 bg-white/[0.02] py-16">
-      <div className="mx-auto max-w-4xl px-6 text-center">
+    <section className="border-b border-white/10 bg-white/[0.02] py-16">
+      <div className="mx-auto max-w-4xl px-[21px] text-center">
         <AnimatedHeading
           as="h2"
-          text={section.title}
+          text={textBands.unAdvisorBand}
           variant="fade-simple"
-          className="text-2xl font-medium leading-snug text-white md:text-3xl"
+          className="text-xl font-medium leading-snug text-white md:text-2xl"
         />
       </div>
     </section>
