@@ -2,27 +2,37 @@
 
 import { useEffect, useState } from "react";
 
-import { testimonials } from "@/content/testimonials";
+import { testimonials as defaultTestimonials } from "@/content/testimonials";
+import type { Testimonial } from "@/content/types";
 import { AnimatedHeading } from "@/shared/ui/AnimatedHeading";
 
-export function TestimonialsCarousel() {
+interface TestimonialsCarouselProps {
+  items?: readonly Testimonial[];
+  title?: string;
+}
+
+export function TestimonialsCarousel({
+  items = defaultTestimonials,
+  title = "Feedback From Our Clients",
+}: TestimonialsCarouselProps) {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    if (testimonials.length <= 1) return;
+    if (items.length <= 1) return;
     const timer = window.setInterval(() => {
-      setIndex((i) => (i + 1) % testimonials.length);
+      setIndex((i) => (i + 1) % items.length);
     }, 6000);
     return () => window.clearInterval(timer);
-  }, []);
+  }, [items]);
 
-  const active = testimonials[index] ?? testimonials[0];
+  const active = items[index] ?? items[0];
+  if (!active) return null;
 
   return (
     <section className="mx-auto max-w-[var(--dl-container-max)] px-[21px] py-16">
       <AnimatedHeading
         as="h2"
-        text="Feedback From Our Clients"
+        text={title}
         variant="words-slide-left"
         className="mb-10 text-2xl font-semibold text-white md:text-3xl"
       />
@@ -43,7 +53,7 @@ export function TestimonialsCarousel() {
           </footer>
         </blockquote>
         <div className="mt-6 flex justify-center gap-2">
-          {testimonials.map((item, i) => (
+          {items.map((item, i) => (
             <button
               key={item.author}
               type="button"

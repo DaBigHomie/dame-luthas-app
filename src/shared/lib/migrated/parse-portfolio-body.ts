@@ -46,7 +46,10 @@ export function parseDiagramSkills(html: string): DiagramSkill[] {
 
 export function stripExtractedPortfolioSections(html: string): string {
   const $ = cheerio.load(html);
-  $(".gem-gallery-grid, .gallery-preloader-wrapper, .digram-line-box, .diagram-item").remove();
+  $(
+    ".gem-gallery-grid, .gallery-preloader-wrapper, .digram-line-box, .diagram-item, .gem-testimonials, .thegem-testimonials, .preloader, .portfolio-filters, .portfolio-top-panel",
+  ).remove();
+  $("h1").first().remove();
   const body = $("body").length ? $("body").html() : $.root().html();
   return (body ?? "").trim();
 }

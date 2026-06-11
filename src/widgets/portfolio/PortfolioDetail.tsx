@@ -1,9 +1,11 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import type { MigratedPortfolioItem } from "@/shared/lib/migrated/content";
-import { parsePortfolioBody } from "@/shared/lib/migrated/parse-portfolio-body";
+import { resolveCaseStudy } from "@/shared/lib/migrated/resolve-case-study";
 import type { PortfolioNavLink } from "@/shared/types/portfolio-widgets";
 import { rewriteMigratedMediaUrl } from "@/shared/ui/MigratedContent";
+import { TestimonialsCarousel } from "@/widgets/home/TestimonialsCarousel";
 
 import { Diagram } from "./Diagram";
 import { GalleryGrid } from "./GalleryGrid";
@@ -20,11 +22,18 @@ interface PortfolioDetailProps {
 }
 
 export function PortfolioDetail({ item, prev, next }: PortfolioDetailProps) {
-  const { gallery, skills, strippedHtml } = parsePortfolioBody(item.bodyHtml);
+  const resolved = resolveCaseStudy(item);
+  const meta = [
+    ...(resolved.client ? [{ label: "Client", value: resolved.client }] : []),
+    ...(resolved.sectors.length
+      ? [{ label: "Sector", value: resolved.sectors.join(", ") }]
+      : []),
+    ...(resolved.year ? [{ label: "Year", value: resolved.year }] : []),
+  ];
 
   return (
     <main className="mx-auto max-w-[var(--dl-container-max)] px-6 py-12">
-      <PortfolioInfo backHref="/portfolio" backLabel="Portfolio" />
+      <PortfolioInfo backHref="/case-studies" backLabel="Case Studies" meta={meta} />
 
       {item.image ? (
         <div className="relative mt-8 aspect-[16/9] overflow-hidden rounded-xl border border-white/10">
@@ -45,15 +54,34 @@ export function PortfolioDetail({ item, prev, next }: PortfolioDetailProps) {
         <PortfolioExcerpt excerpt={item.excerpt} />
       </header>
 
-      {gallery.length > 0 ? (
+      {resolved.gallery.length > 0 ? (
         <section className="mt-10" aria-label="Gallery">
-          <GalleryGrid items={gallery} />
+          <GalleryGrid items={resolved.gallery} />
         </section>
       ) : null}
 
-      <Diagram skills={skills} />
+      <Diagram skills={resolved.skills} />
 
-      <PortfolioContent html={strippedHtml} />
+      <PortfolioContent html={resolved.proseHtml} />
+
+      {resolved.testimonials.length > 0 ? (
+        <TestimonialsCarousel
+          items={resolved.testimonials}
+          title="Client Feedback"
+        />
+      ) : null}
+
+      {resolved.cta ? (
+        <div className="mt-12 text-center">
+          <Link
+            href={resolved.cta.href}
+            className="inline-flex rounded-full bg-[var(--dl-accent)] px-8 py-3 text-sm font-semibold uppercase text-white transition hover:opacity-90"
+          >
+            {resolved.cta.label}
+          </Link>
+        </div>
+      ) : null}
+
       <PortfolioNav prev={prev} next={next} />
     </main>
   );
