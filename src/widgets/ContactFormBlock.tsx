@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { loadMigrated } from "@/shared/lib/migrated/content";
+import { isMigratedAvailable, loadMigrated } from "@/shared/lib/migrated/content";
 import {
   getTemplateBySlug,
   parseFooterContent,
@@ -9,8 +9,15 @@ import {
 import { ContactFormFields } from "./ContactFormFields";
 
 export function ContactFormBlock() {
-  const { site } = loadMigrated();
-  const footerTemplate = getTemplateBySlug("footer");
+  const migrated = isMigratedAvailable();
+  const { site } = migrated
+    ? loadMigrated()
+    : {
+        site: {
+          contact: { email: "hello@dameluthas.com" },
+        },
+      };
+  const footerTemplate = migrated ? getTemplateBySlug("footer") : null;
   const footer = footerTemplate
     ? parseFooterContent(footerTemplate.bodyHtml)
     : null;
