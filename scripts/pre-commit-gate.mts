@@ -56,4 +56,12 @@ if (touchesAssets && existsSync(join(ROOT, "data/extracted/converted-assets.json
   run("npm run assets:verify-bindings", "Asset bindings");
 }
 
+const touchesUi =
+  staged.some((f) => f.startsWith("src/app/") || f.startsWith("src/widgets/")) ||
+  staged.some((f) => f.startsWith("e2e/"));
+
+if (touchesUi && process.env.PRE_COMMIT_E2E === "1") {
+  run("E2E critical", "npm run test:e2e:critical");
+}
+
 console.log("\nPre-commit gate passed.");

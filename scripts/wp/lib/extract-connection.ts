@@ -3,8 +3,6 @@ import { GraphQLClient } from "./graphql-client";
 import { buildConnectionQuery, MEDIA_QUERY } from "./queries";
 import type { Connection, WpContentNode, WpMediaItem } from "./types";
 
-const TEMPLATE_KEYS = new Set(["templates", "titles", "footers"]);
-
 export async function extractConnection<T>(
   client: GraphQLClient,
   field: string,

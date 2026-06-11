@@ -1,0 +1,28 @@
+[
+  { "path": "/", "name": "Home", "category": "homepage", "expectH1": false, "tags": ["@critical"] },
+  { "path": "/contact", "name": "Contact", "category": "content", "expectH1": true, "tags": ["@critical"] },
+  { "path": "/about", "name": "About", "category": "content", "expectH1": true, "tags": ["@critical"] },
+  { "path": "/case-studies", "name": "Case Studies", "category": "content", "expectH1": true, "tags": ["@critical"] },
+  { "path": "/portfolio", "name": "Portfolio", "category": "portfolio", "expectH1": false, "tags": ["@critical"] },
+  {
+    "path": "/portfolio/united-nations-cloud-migration-fobos",
+    "name": "UN Portfolio",
+    "category": "portfolio",
+    "expectH1": true,
+    "tags": ["@critical"]
+  },
+  {
+    "path": "/portfolio/amazon-labor-union-digital-transformation",
+    "name": "Amazon Labor Union",
+    "category": "portfolio",
+    "expectH1": true,
+    "tags": ["@critical"]
+  },
+  {
+    "path": "/portfolio/gatorade-embraces-generative-ai-powered-bottle-design",
+    "name": "Gatorade Gen-AI",
+    "category": "portfolio",
+    "expectH1": true,
+    "tags": ["@critical"]
+  }
+]

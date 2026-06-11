@@ -2,7 +2,7 @@
 /**
  * Rebuild converted-assets.json from public/assets/ when manifest was lost or partial.
  */
-import { existsSync, readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
+import { existsSync, readdirSync, statSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 import { REPO_ROOT } from "../wp/config";
@@ -29,7 +29,7 @@ function walkAssets(): Array<{ domain: AssetDomain; filename: string; bytes: num
   return out;
 }
 
-function inferComponent(domain: AssetDomain, filename: string): string {
+function inferComponent(domain: AssetDomain): string {
   const binding = MODULE_ASSET_BINDINGS.find((b) => b.domain === domain);
   if (binding) return binding.component;
   if (domain === "portfolio") return "PortfolioGrid";
@@ -42,7 +42,7 @@ function main(): void {
     uploadRel: filename,
     publicPath: `/assets/${domain}/${filename}`,
     domain,
-    component: inferComponent(domain, filename),
+    component: inferComponent(domain),
     source: "rebuild-manifest-from-disk",
     sha256: "",
     bytesBefore: bytes,

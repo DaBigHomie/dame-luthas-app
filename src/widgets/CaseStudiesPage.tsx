@@ -3,13 +3,11 @@ import Link from "next/link";
 import {
   getPageBySlug,
   listPortfolio,
-  loadMigrated,
 } from "@/shared/lib/migrated/content";
 import { MigratedContent } from "@/shared/ui/MigratedContent";
 import { PortfolioGrid } from "@/widgets/PortfolioGrid";
 
 export function CaseStudiesPage() {
-  const migrated = loadMigrated();
   const page = getPageBySlug("case-studies");
   const items = listPortfolio();
 

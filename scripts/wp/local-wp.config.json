@@ -1,10 +1,10 @@
 {
   "siteSlug": "dameluthas",
   "siteDomain": "dameluthas.local",
-  "localSiteId": "cfEOO-2XZ",
+  "localSiteId": "ZSxUXGBjq",
   "publicPath": "/Users/dame/management-git/dame-luthas-app/local-wp/app/public",
   "legacyPublicPath": "/Users/dame/Unused Repos/wordpress-local/dameluthas-com-restore/app/public",
-  "localSshEntryScript": "/Users/dame/Library/Application Support/Local/ssh-entry/cfEOO-2XZ.sh",
+  "localSshEntryScript": "/Users/dame/Library/Application Support/Local/ssh-entry/ZSxUXGBjq.sh",
   "symlinkPath": "/Users/dame/management-git/wordpress-local",
   "symlinkTarget": "/Users/dame/Unused Repos/wordpress-local",
   "graphqlUrl": "http://dameluthas.local/graphql",
