@@ -1,0 +1,24 @@
+/**
+ * The Gem design tokens — remixed from pilot theme customizer values.
+ * Source: themes/thegem-elementor/style.css, uploads/thegem/css/
+ */
+:root {
+  --dl-gem-duration-fast: 200ms;
+  --dl-gem-duration-base: 300ms;
+  --dl-gem-duration-slow: 500ms;
+  --dl-gem-ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+  --dl-footer-yellow: #f3e04a;
+  --dl-footer-lavender: #c4c0ee;
+  --dl-footer-bar-bg: #ffffff;
+  --dl-footer-bar-text: #0a0a0f;
+  --dl-footer-bar-muted: #6b6b6b;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dl-gem-duration-fast: 0ms;
+    --dl-gem-duration-base: 0ms;
+    --dl-gem-duration-slow: 0ms;
+  }
+}

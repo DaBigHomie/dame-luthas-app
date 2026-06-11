@@ -1,6 +1,5 @@
-import { createClient } from '@supabase/supabase-js';
-
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+/**
+ * Supabase client — deferred during headless WP pilot.
+ * Wire when migrating off snapshot/live GraphQL to Supabase system-of-record.
+ */
+export const supabase = null;

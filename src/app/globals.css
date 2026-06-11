@@ -3,6 +3,11 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --dl-bg: #0a0a0f;
+  --dl-surface: #14141c;
+  --dl-accent: #8f93f1;
+  --dl-footer-yellow: #f3e04a;
+  --dl-footer-lavender: #c4c0ee;
 }
 
 @theme inline {
@@ -23,4 +28,15 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Let The Gem theme CSS control typography/colors in pilot mode */
+body.wp-pilot-theme {
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+}
+
+body.wp-pilot-theme .wp-pilot-content {
+  width: 100%;
 }

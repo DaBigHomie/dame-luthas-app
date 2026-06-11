@@ -7,8 +7,13 @@
 
 export const tokens = {
   colors: {
+    brand: {
+      accent: '#8F93F1',
+      background: '#0a0a0f',
+      surface: '#14141c',
+    },
     primary: {
-      DEFAULT: 'hsl(220, 90%, 56%)',     // Blue
+      DEFAULT: '#8F93F1',
       foreground: 'hsl(0, 0%, 100%)',
       50: 'hsl(220, 90%, 96%)',
       100: 'hsl(220, 90%, 90%)',

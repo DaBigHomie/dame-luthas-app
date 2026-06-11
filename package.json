@@ -6,12 +6,28 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "wp:snapshot": "npx tsx scripts/wp/build-snapshot.mts",
+    "wp:migrate": "npx tsx scripts/wp/migrate-content.mts",
+    "wp:sync-local": "npx tsx scripts/wp/sync-local-wp-path.mts",
+    "wp:build-content": "npm run wp:snapshot && npm run wp:migrate",
+    "wp:build-live": "npm run wp:extract-live && npm run wp:snapshot && npm run wp:migrate",
+    "wp:pilot": "npm run wp:build-content && npm run dev",
+    "wp:verify": "npx tsx scripts/wp/verify-headless.mts",
+    "wp:install-graphql": "npx tsx scripts/wp/install-graphql-mu-plugin.mts",
+    "wp:prepare": "npx tsx scripts/wp/prepare-backup.mts",
+    "wp:extract": "npx tsx scripts/wp/extract-content.mts",
+    "wp:map": "npx tsx scripts/wp/map-to-supabase.mts",
+    "wp:screenshots": "npx tsx scripts/wp/capture-screenshots.mts",
+    "wp:screenshots:next": "npx tsx scripts/wp/capture-next-screenshots.mts",
+    "thegem:audit-css": "npx tsx scripts/thegem/audit-css-manifest.mts",
+    "wp:extract-live": "WP_HEADLESS_GRAPHQL_URL=http://dameluthas.local/graphql npx tsx scripts/wp/extract-content.mts"
   },
   "dependencies": {
     "next": "16.2.7",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "server-only": "^0.0.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -20,6 +36,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.7",
+    "playwright": "^1.60.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

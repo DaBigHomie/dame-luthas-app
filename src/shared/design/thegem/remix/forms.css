@@ -1,0 +1,36 @@
+/**
+ * Remixed from: plugins/.../thegem-cf7.css
+ */
+@import "../tokens.css";
+
+.dl-gem-form-underline {
+  border: 0;
+  border-bottom: 1px solid rgb(0 0 0 / 0.3);
+  background: transparent;
+  transition: border-color var(--dl-gem-duration-base) var(--dl-gem-ease);
+}
+
+.dl-gem-form-underline:focus {
+  border-bottom-color: rgb(0 0 0 / 0.8);
+  outline: none;
+}
+
+.dl-gem-form-submit {
+  border-radius: 9999px;
+  background: var(--dl-footer-bar-bg);
+  color: var(--dl-footer-bar-text);
+  transition: background-color var(--dl-gem-duration-base) var(--dl-gem-ease),
+    color var(--dl-gem-duration-base) var(--dl-gem-ease);
+}
+
+.dl-gem-form-submit:hover {
+  background: var(--dl-footer-bar-text);
+  color: var(--dl-footer-bar-bg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dl-gem-form-underline,
+  .dl-gem-form-submit {
+    transition: none;
+  }
+}
