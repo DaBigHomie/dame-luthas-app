@@ -8,7 +8,24 @@ import { SocialIcons } from "@/shared/ui/SocialIcons";
 import {
   getTemplateBySlug,
   parseLogoFromTemplateHtml,
+  parsePrimaryNavigation,
 } from "@/shared/lib/migrated/templates";
+
+import { HeaderNav } from "./HeaderNav";
+
+function resolveNavigation() {
+  if (!isMigratedAvailable()) return headerNavigation;
+
+  const migrated = loadMigrated();
+  const headerTemplate =
+    getTemplateBySlug("header-sticky") ?? getTemplateBySlug("header");
+  const parsed = headerTemplate
+    ? parsePrimaryNavigation(headerTemplate.bodyHtml)
+    : [];
+
+  if (parsed.length) return parsed;
+  return migrated.navigation;
+}
 
 export function Header() {
   const migrated = isMigratedAvailable();
@@ -20,7 +37,7 @@ export function Header() {
           contact: { linkedin: socialLinks[0]?.href },
         },
       };
-  const navigation = migrated ? loadMigrated().navigation : headerNavigation;
+  const navigation = resolveNavigation();
   const headerTemplate = migrated ? getTemplateBySlug("header-sticky") : null;
   const logoSrc = headerTemplate
     ? parseLogoFromTemplateHtml(headerTemplate.bodyHtml)
@@ -28,7 +45,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-[var(--dl-bg)]/90 backdrop-blur">
-      <div className="mx-auto flex max-w-[var(--dl-container-max)] items-center justify-between gap-6 px-[21px] py-4">
+      <div className="mx-auto flex max-w-[var(--dl-container-max)] items-center justify-between gap-4 px-[21px] py-4 lg:gap-6">
         <Link href="/" className="flex shrink-0 items-center">
           {logoSrc ? (
             <Image
@@ -45,26 +62,15 @@ export function Header() {
             </span>
           )}
         </Link>
-        <nav
-          className="hidden flex-1 justify-center gap-6 text-sm text-zinc-300 md:flex"
-          aria-label="Primary"
-        >
-          {navigation.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="dl-gem-nav-link transition hover:text-[var(--dl-accent)]"
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-        <div className="flex items-center gap-4">
+
+        <HeaderNav items={navigation} />
+
+        <div className="flex shrink-0 items-center gap-3 md:gap-4">
           <SocialIcons links={socialLinks} className="hidden md:flex" />
           <AnimatedButton
             href="/contact"
             variant="fade-left"
-            className="dl-gem-btn-hover hidden rounded-full bg-[var(--dl-accent)] px-5 py-2 text-sm font-medium text-white md:inline-flex"
+            className="dl-gem-btn-hover hidden rounded-full bg-[var(--dl-accent)] px-5 py-2 text-sm font-medium text-white sm:inline-flex"
           >
             Let&apos;s talk
           </AnimatedButton>

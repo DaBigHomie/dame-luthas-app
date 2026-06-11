@@ -19,7 +19,8 @@
 
 | Doc | Purpose |
 |-----|---------|
-| [MIGRATION-PLAYBOOK.md](./MIGRATION-PLAYBOOK.md) | 6-phase repeatable process |
+| [MIGRATION-PLAYBOOK.md](./MIGRATION-PLAYBOOK.md) | 10-phase process (TheGem complete; JNews scaffold) |
+| [adapters/JNEWS-ADAPTER.md](./adapters/JNEWS-ADAPTER.md) | JNews adapter for sites 2 & 3 |
 | [LESSONS-LEARNED-DAME-LUTHAS-WP-MIGRATION.md](./LESSONS-LEARNED-DAME-LUTHAS-WP-MIGRATION.md) | All errors, false starts, and mitigations from pilot session |
 | [SWARM-PLAYBOOK-WP-TO-NEXT-MIGRATION.md](./SWARM-PLAYBOOK-WP-TO-NEXT-MIGRATION.md) | Agent swarm roles + step-by-step gates for sites 2 & 3 |
 

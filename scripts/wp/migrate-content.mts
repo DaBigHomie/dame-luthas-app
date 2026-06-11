@@ -48,9 +48,8 @@ const SKIP_PAGE_SLUGS = new Set([
 function rewriteMedia(url: string | null | undefined): string | null {
   if (!url) return null;
   return url
-    .replace(/https?:\/\/dameluthas\.local\/wp-content\/uploads\//, "/api/wp-media/")
-    .replace(/https?:\/\/dameluthas-com-restore\.local\/wp-content\/uploads\//, "/api/wp-media/")
-    .replace(/\/wp-content\/uploads\//, "/api/wp-media/");
+    .replace(/https?:\/\/dameluthas\.local\/wp-content\/uploads\//, "/wp-content/uploads/")
+    .replace(/https?:\/\/dameluthas-com-restore\.local\/wp-content\/uploads\//, "/wp-content/uploads/");
 }
 
 function mapPortfolio(item: SnapshotItem) {
@@ -190,7 +189,7 @@ function buildAboutPage(
     role: "Consultant",
     bio,
     image: rewriteMedia(
-      team.image ?? "/api/wp-media/2025/04/IMG_0666-2-2500px-768x1024.webp",
+      team.image ?? "/assets/site/IMG_0666-2-2500px.webp",
     ),
     address,
     bodyHtml: sanitizeWpHtml(about?.content ?? ""),
@@ -258,7 +257,6 @@ function main(): void {
     },
     navigation: [
       { label: "Home", href: "/" },
-      { label: "Portfolio", href: "/portfolio" },
       { label: "Case Studies", href: "/case-studies" },
       { label: "About", href: "/about" },
       { label: "Contact", href: "/contact" },
@@ -280,11 +278,11 @@ function main(): void {
           label: "Contact Me",
           href: "/contact",
         },
-        ctaSecondary: { label: "Case Studies", href: "/portfolio" },
+        ctaSecondary: { label: "Case Studies", href: "/case-studies" },
         image: rewriteMedia(
           home?.featuredImageUrl ??
             portfolio[0]?.image ??
-            "/api/wp-media/2025/02/home-04.webp",
+            "/assets/services/home-04.webp",
         ),
       };
     })(),

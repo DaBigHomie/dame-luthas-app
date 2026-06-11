@@ -45,7 +45,7 @@ export function ContactFormBlock() {
 
       <div className="pointer-events-none absolute bottom-6 left-1/2 z-10 hidden -translate-x-1/2 md:block">
         <Image
-          src="/api/wp-media/2025/02/circle-dark.svg"
+          src="/assets/pages/circle-dark.svg"
           alt=""
           width={88}
           height={88}

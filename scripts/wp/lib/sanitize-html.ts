@@ -12,13 +12,13 @@ export function sanitizeWpHtml(html: string): string {
   out = out.replace(/javascript:\s*void\(0\)/gi, "#");
   out = out.replace(
     /https?:\/\/dameluthas\.local\/wp-content\/uploads\//gi,
-    "/api/wp-media/",
+    "/assets/site/",
   );
   out = out.replace(
     /https?:\/\/dameluthas-com-restore\.local\/wp-content\/uploads\//gi,
-    "/api/wp-media/",
+    "/assets/site/",
   );
-  out = out.replace(/\/wp-content\/uploads\//gi, "/api/wp-media/");
+  out = out.replace(/\/wp-content\/uploads\//gi, "/assets/site/");
   out = out.replace(/https?:\/\/dameluthas\.local/gi, "");
   out = out.replace(/https?:\/\/dameluthas-com-restore\.local/gi, "");
   // SQL dump parser often leaves literal "n" where newlines were escaped.

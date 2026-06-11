@@ -73,8 +73,8 @@ wp:install-graphql → wp:extract-live → wp:migrate → data/migrated/content.
          └── src/content/portfolio.ts (optional; may defer to content.json)
          │
          ▼
-  copy-wp-assets.mts
-  └── public/wp-migrated/** + path rewrites
+  assets:convert + copy-portfolio-video
+  └── public/assets/{domain}/** + converted-assets.json
          │
          ▼
   Native widgets (src/widgets/home/*)
@@ -137,7 +137,7 @@ graph TB
 | **`src/widgets/home/`** | Presentational section components | None |
 | **`src/shared/ui/Animated*`** | Motion triggers, a11y, reduced-motion | None |
 | **`data/migrated/content.json`** | Legacy bundle (hero, nav, portfolio shell) | None — merge or supersede per section |
-| **`/api/wp-media`** | Fallback proxy during pilot | Optional — remove after asset copy |
+| **`public/assets/`** | Converted static media (webp/svg/webm) | None — served by Next static |
 
 ---
 

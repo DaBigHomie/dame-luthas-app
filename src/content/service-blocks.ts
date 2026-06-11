@@ -2,9 +2,9 @@
 import type { ServiceBlock } from "./types";
 
 const rotateDigital = ["Web Design", "Web Dev", "Web Hosting"];
-const img04 = "/wp-migrated/2025/02/home-04.webp";
-const img03 = "/wp-migrated/2025/02/home-03.webp";
-const img05 = "/wp-migrated/2025/02/home-05.webp";
+const img04 = "/assets/services/home-04.webp";
+const img03 = "/assets/services/home-03.webp";
+const img05 = "/assets/services/home-05.webp";
 
 export const serviceBlocks = [
   {

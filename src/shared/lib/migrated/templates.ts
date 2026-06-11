@@ -21,6 +21,51 @@ export function parseLogoFromTemplateHtml(html: string): string | null {
   return match?.[1] ?? null;
 }
 
+const DEMO_NAV_LABELS = new Set([
+  "Homepages",
+  "Homepage Dark",
+  "Homepage Light",
+  "The Agency",
+  "Services",
+  "Work",
+  "Stories",
+  "Let's talk",
+]);
+
+/** Primary header links from thegem-template-menu markup (WP-aligned). */
+export function parsePrimaryNavigation(
+  html: string,
+): Array<{ label: string; href: string }> {
+  const items: Array<{ label: string; href: string }> = [];
+  const seen = new Set<string>();
+
+  const patterns = [
+    /<a href="([^"]*)"[^>]*>\s*<span class="text">([^<]+)/gi,
+    /<a href="([^"]*)"[^>]*class="[^"]*menu-link[^"]*"[^>]*>([^<]+)/gi,
+  ];
+
+  for (const re of patterns) {
+    let match: RegExpExecArray | null;
+    while ((match = re.exec(html)) !== null) {
+      const rawHref = match[1].trim();
+      const label = match[2].replace(/\s+/g, " ").trim();
+      if (!label || DEMO_NAV_LABELS.has(label)) continue;
+      if (rawHref === "#" || rawHref.startsWith("#")) continue;
+
+      const href = rawHref
+        .replace(/^https?:\/\/[^/]+/i, "")
+        .replace(/\/$/, "") || "/";
+
+      const key = `${label}:${href}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      items.push({ label, href });
+    }
+  }
+
+  return items;
+}
+
 export function parseFooterContent(html: string): ParsedFooterContent {
   const headings = [...html.matchAll(/thegem-heading[^>]*>([\s\S]*?)<\/div>/gi)]
     .map((m) =>

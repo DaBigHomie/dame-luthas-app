@@ -24,6 +24,7 @@ interface SourceAuditFile {
   auditedAt: string;
   widgetTypes: Record<string, number>;
   widgetCensus?: WidgetCensusResult;
+  pagesAudited?: string[];
 }
 
 function main(): void {
@@ -63,7 +64,11 @@ function main(): void {
   const seen = new Set(Object.keys(audit.widgetTypes));
   const orphans = Object.keys(WIDGET_REGISTRY).filter((k) => !seen.has(k));
   if (orphans.length) {
-    console.log("\nRegistry entries not present on audited page (informational):");
+    const scope =
+      Array.isArray(audit.pagesAudited) && audit.pagesAudited.length > 1
+        ? "full-site audit"
+        : "homepage-only audit";
+    console.log(`\nRegistry entries not present on ${scope} (informational):`);
     for (const o of orphans) {
       console.log(`  ${o}`);
     }

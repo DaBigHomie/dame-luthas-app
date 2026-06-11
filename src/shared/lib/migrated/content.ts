@@ -92,6 +92,26 @@ export function getPortfolioBySlug(
   return loadMigrated().portfolio.find((item) => item.slug === slug);
 }
 
+export function getPortfolioNeighbors(slug: string): {
+  prev: { slug: string; title: string; href: string } | null;
+  next: { slug: string; title: string; href: string } | null;
+} {
+  const items = listPortfolio();
+  const index = items.findIndex((item) => item.slug === slug);
+  if (index < 0) return { prev: null, next: null };
+
+  const toLink = (item: MigratedPortfolioItem) => ({
+    slug: item.slug,
+    title: item.title,
+    href: item.href,
+  });
+
+  return {
+    prev: index > 0 ? toLink(items[index - 1]!) : null,
+    next: index < items.length - 1 ? toLink(items[index + 1]!) : null,
+  };
+}
+
 export function getPageBySlug(slug: string) {
   return loadMigrated().pages.find((page) => page.slug === slug);
 }

@@ -2,6 +2,13 @@
 /**
  * Audit The Gem CSS remix manifest vs local pilot stylesheets.
  */
+import { loadLocalWpPublicPathEnv } from "../wp/lib/load-local-wp-env";
+
+loadLocalWpPublicPathEnv();
+
+import { existsSync } from "node:fs";
+import { join } from "node:path";
+
 import {
   HOMEPAGE_ACTIVE_ANIMATIONS,
   HOMEPAGE_ANIMATION_WIDGET_COUNTS,
@@ -10,9 +17,24 @@ import {
   THEGEM_REMIX_MANIFEST,
   getRemixProgress,
 } from "@/features/thegem-remix/model/manifest";
-import { listPilotStylesheets } from "@/shared/lib/headless/wp-content-paths";
 
-const pilot = new Set(listPilotStylesheets());
+function localWpContentRoot(): string | null {
+  const publicPath = process.env.LOCAL_WP_PUBLIC_PATH?.trim();
+  if (!publicPath) return null;
+  return join(publicPath, "wp-content");
+}
+
+function pilotStylesheetExists(pilotPath: string): boolean {
+  const root = localWpContentRoot();
+  if (!root) return false;
+  return existsSync(join(root, pilotPath));
+}
+
+const pilot = new Set(
+  THEGEM_REMIX_MANIFEST.filter((e) => pilotStylesheetExists(e.pilotPath)).map(
+    (e) => e.pilotPath,
+  ),
+);
 const progress = getRemixProgress();
 
 console.log("The Gem CSS Remix Manifest Audit\n");

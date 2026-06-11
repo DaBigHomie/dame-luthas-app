@@ -8,21 +8,20 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: repoRoot,
   },
-  async rewrites() {
+  async redirects() {
     return [
       {
-        source: "/wp-content/:path*",
-        destination: "/api/wp-content/:path*",
+        source: "/pf/:slug",
+        destination: "/portfolio/:slug",
+        permanent: true,
       },
     ];
   },
+  outputFileTracingExcludes: {
+    "*": ["./local-wp/**", "./temp/**"],
+  },
   images: {
     remotePatterns: [
-      {
-        protocol: "http",
-        hostname: "dameluthas-com-restore.local",
-        pathname: "/wp-content/uploads/**",
-      },
       {
         protocol: "https",
         hostname: "dameluthas.com",

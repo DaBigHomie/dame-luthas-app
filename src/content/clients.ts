@@ -4,26 +4,26 @@ import type { ClientLogo } from "./types";
 export const clientLogos = [
   {
     "name": "Brand Name 01",
-    "src": "/wp-content/uploads/2025/05/un-logo-1a.png",
+    "src": "/assets/clients/un-logo-1a.webp",
   },
   {
     "name": "Brand Name 02",
-    "src": "/wp-content/uploads/2025/05/who-logo-500px.png",
+    "src": "/assets/clients/who-logo-500px.webp",
   },
   {
     "name": "Brand Name 03",
-    "src": "/wp-content/uploads/2025/05/unicef-logo-white-1.png",
+    "src": "/assets/clients/unicef-logo-white-1.webp",
   },
   {
     "name": "Brand Name 04",
-    "src": "/wp-content/uploads/2025/05/unwomen-logo.png",
+    "src": "/assets/clients/unwomen-logo.webp",
   },
   {
     "name": "Brand Name 05",
-    "src": "/wp-content/uploads/2025/05/msg-logo-1.png",
+    "src": "/assets/clients/msg-logo-1.webp",
   },
   {
     "name": "Brand Name 06",
-    "src": "/wp-content/uploads/2025/05/glg-logo-white-1.png",
+    "src": "/assets/clients/glg-logo-white-1.webp",
   },
 ] as const satisfies readonly ClientLogo[];

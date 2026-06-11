@@ -27,8 +27,8 @@ Tracks **non-homepage** migration work, **media/asset architecture**, and **de-W
 
 | ID | Priority | Area | Problem | Target state | Acceptance |
 |----|----------|------|---------|--------------|------------|
-| `task_luthas_wp_032` | **P1** | De-WP runtime | App still exposes `wp` prefix in routes, paths, and APIs (`/api/wp-content`, `/api/wp-media`, `public/wp-migrated`, `WpPilotStyles`, `rewrite-wp-urls.ts`) | **Zero `wp` references in shipped runtime** — scripts under `scripts/wp/` are dev-only extract tooling | No `wp-*` paths in `src/` public URLs; pilot CSS proxy removed or renamed; grep `src/` for `\bwp[-/]` returns 0 in production bundle |
-| `task_luthas_wp_033` | **P1** | Media FSD | Assets copied to `public/wp-migrated/`; content modules mix `/wp-content/uploads/…` and `/wp-migrated/…`; not in FSD-aligned locations | FSD layout: `public/assets/{images,media}/…` or `src/shared/assets/` for static imports; codegen emits site-relative paths only | All homepage + route pages load images from `/assets/…`; `copy-wp-assets` writes to FSD paths; no broken images on `/`, `/contact`, `/case-studies`, portfolio detail |
+| `task_luthas_wp_032` | **P1** | De-WP runtime | ~~App exposes wp routes~~ | **Done 2026-06-11** — removed `/api/wp-*`, pilot CSS proxy; static `/assets/` only | `grep -r 'api/wp-' src/` → 0 |
+| `task_luthas_wp_033` | **P1** | Media FSD | ~~wp-migrated raw copies~~ | **Done 2026-06-11** — `npm run assets:pipeline`; 73 files in `public/assets/` | `assets:verify-bindings` passes |
 | `task_luthas_wp_034` | **P1** | Public endpoint audit | `wp:audit-source` only audits homepage URL passed in; no Next-side route matrix | Extend audit: WP URL list → expected Next path → status (200/404/content diff) | Script exits 1 if any public route missing or 404 on Next; documented in playbook Phase 1b |
 
 ---
@@ -66,17 +66,27 @@ Tracks **non-homepage** migration work, **media/asset architecture**, and **de-W
 
 ## Media FSD migration notes (`task_luthas_wp_033`)
 
-**Current state (incorrect):**
+**Current state (2026-06-11 — pipeline added):**
 
-| Location | Example | Issue |
-|----------|---------|-------|
-| `public/wp-migrated/` | `/wp-migrated/2025/02/home-04.webp` | `wp` prefix; not FSD |
-| `src/content/clients.ts` | `/wp-content/uploads/2025/05/un-logo-1a.png` | Proxied WP path, not migrated file |
-| `src/content/services.ts` | `/wp-content/uploads/2025/02/home-03.webp` | Same |
-| `src/content/service-blocks.ts` | `/wp-migrated/2025/02/…` | Mixed with clients.ts |
-| `ContactFormBlock.tsx` | `/api/wp-media/2025/02/circle-dark.svg` | Runtime WP proxy |
+| Location | Status |
+|----------|--------|
+| `public/assets/{clients,services,portfolio,site,pages}/` | Converted webp/svg only (sharp) |
+| `data/extracted/converted-assets.json` | Component binding manifest (gitignored) |
+| `public/wp-migrated/` | **Deprecated** — delete after verify passes |
+| `src/content/*.ts`, widgets | Rewritten to `/assets/…` by `assets:convert` |
 
-**Target FSD layout (proposed):**
+**Pipeline (replaces raw `wp:sync-media`):**
+
+```bash
+npm run assets:convert          # sharp webp + FSD paths + rewrite src/content
+npm run assets:verify-bindings  # legacy path ban + disk + component manifest
+npm run assets:pipeline         # both
+npm run wp:codegen              # extract-content → assets:convert
+```
+
+Reference: `damieus-workflow-agents/tools/image-processing/wp-media-pipeline.mjs`
+
+**Target FSD layout:**
 
 ```
 public/
@@ -88,7 +98,7 @@ public/
     pages/           # contact, case-studies inline assets
 ```
 
-**Codegen rule:** `copy-wp-assets.mts` + `emit-content.ts` rewrite all `src` fields to `/assets/images/…` at extract time. Delete `public/wp-migrated/` after migration.
+**Codegen rule:** `assets:convert` rewrites all `src` fields to `/assets/{domain}/…`. Delete `public/wp-migrated/` after migration.
 
 ---
 
@@ -114,7 +124,7 @@ public/
 ```bash
 npm run verify:public-routes     # WP vs Next public endpoint matrix
 npm run wp:audit-source          # homepage widget census (existing)
-npm run assets:migrate-fsd       # planned: wp-migrated → public/assets
+npm run assets:pipeline         # convert + verify bindings
 ```
 
 ---

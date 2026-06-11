@@ -2,11 +2,14 @@
  * Widget-type census guardrail — every data-widget_type on a migrated page
  * must map to a React component or an explicit skip (component: null).
  *
+ * Site-wide scope: homepage + /contact/ + /case-studies/ + /pf/* portfolio singles.
+ * Keep in sync with docs/MIGRATION-PLAYBOOK.md Phase 3 table.
+ *
  * Used by: audit-wp-source.mts, verify-widget-census.mts
  */
 
 export interface WidgetRegistryEntry {
-  /** React component name in src/widgets, or null = intentional skip (chrome/templates). */
+  /** React component name in src/widgets (or shared/ui), or null = intentional skip. */
   component: string | null;
   /** Plugin/source layer for the playbook. */
   source: "thegem" | "elementor" | "elementor-pro" | "cf7" | "other";
@@ -19,6 +22,7 @@ export interface WidgetRegistryEntry {
  * Add an entry BEFORE building a handler; unmapped types fail the census check.
  */
 export const WIDGET_REGISTRY: Record<string, WidgetRegistryEntry> = {
+  // ── Homepage ──────────────────────────────────────────────────────────────
   "thegem-animated-heading.default": {
     component: "AnimatedHeading",
     source: "thegem",
@@ -42,6 +46,7 @@ export const WIDGET_REGISTRY: Record<string, WidgetRegistryEntry> = {
   "thegem-testimonials.default": {
     component: "TestimonialsCarousel",
     source: "thegem",
+    note: "Full quotes need _elementor_data extraction",
   },
   "thegem-portfolio.default": {
     component: "PortfolioGrid",
@@ -68,6 +73,75 @@ export const WIDGET_REGISTRY: Record<string, WidgetRegistryEntry> = {
     component: "Header",
     source: "thegem",
   },
+
+  // ── /contact/ (surfaced by endpoint audit) ────────────────────────────────
+  "text-editor.default": {
+    component: "RichContent",
+    source: "elementor",
+    note: "Migrated HTML bands — RichContent / MigratedContent",
+  },
+  "heading.default": {
+    component: "AnimatedHeading",
+    source: "elementor",
+  },
+  "image.default": {
+    component: "StyledImage",
+    source: "elementor",
+  },
+  "icon-list.default": {
+    component: "IconList",
+    source: "elementor",
+  },
+  "html.default": {
+    component: "RichContent",
+    source: "elementor",
+    note: "Raw HTML embeds — sanitize via RichContent",
+  },
+  "thegem-team.default": {
+    component: "TeamMember",
+    source: "thegem",
+  },
+  "button.default": {
+    component: "AnimatedButton",
+    source: "elementor",
+  },
+
+  // ── /pf/* portfolio singles ───────────────────────────────────────────────
+  "spacer.default": {
+    component: null,
+    source: "elementor",
+    note: "Layout spacer — skip",
+  },
+  "thegem-diagram.default": {
+    component: "Diagram",
+    source: "thegem",
+  },
+  "thegem-gallery-grid.default": {
+    component: "GalleryGrid",
+    source: "thegem",
+  },
+  "thegem-template-portfolio-info.default": {
+    component: "PortfolioInfo",
+    source: "thegem",
+  },
+  "thegem-template-portfolio-title.default": {
+    component: "PortfolioTitle",
+    source: "thegem",
+  },
+  "thegem-template-portfolio-excerpt.default": {
+    component: "PortfolioExcerpt",
+    source: "thegem",
+  },
+  "thegem-template-portfolio-content.default": {
+    component: "PortfolioContent",
+    source: "thegem",
+  },
+  "thegem-template-portfolio-navigation.default": {
+    component: "PortfolioNav",
+    source: "thegem",
+  },
+
+  // ── Template chrome (explicit skips) ────────────────────────────────────────
   "thegem-template-post-title.default": {
     component: null,
     source: "thegem",
@@ -83,24 +157,24 @@ export const WIDGET_REGISTRY: Record<string, WidgetRegistryEntry> = {
     source: "thegem",
     note: "Template meta — skip",
   },
-  "heading.default": {
-    component: "AnimatedHeading",
-    source: "elementor",
-  },
-  "text-editor.default": {
-    component: null,
-    source: "elementor",
-    note: "Legacy core widget — skip unless encountered on homepage",
-  },
-  "image.default": {
-    component: "StyledImage",
-    source: "elementor",
-  },
-  "button.default": {
-    component: "AnimatedButton",
-    source: "elementor",
-  },
 };
+
+/** TheGem Elementor template CPT names (headers, footers, loops, title areas). */
+export const TEMPLATE_REGISTRY = {
+  header: [
+    "Header-01",
+    "Header 02 (Demo)",
+    "Header Sticky-01",
+    "Header Sticky (Demo)",
+    "Mobile Nav (Demo)",
+  ],
+  footer: ["Footer (Demo)", "Footer 02 (Demo)"],
+  single: ["Single Post 23", "Blog Post (Demo)"],
+  archive: ["Portfolio Page (Demo)"],
+  loop: ["Testimonials Loop Item (Demo)"],
+  title: ["Title Area 01 (Demo)"],
+  other: ["Digital Marketing", "Draft Template"],
+} as const;
 
 export interface WidgetCensusResult {
   unmapped: string[];

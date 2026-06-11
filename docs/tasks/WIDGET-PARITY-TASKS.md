@@ -19,7 +19,7 @@ Generated from `scripts/wp/lib/widget-registry.ts` partial notes + visual audit 
 | `task_luthas_wp_030` | P3 | P8 hovers | Deferred TheGem hover remix | Complete `p8-hovers-scope.ts` items |
 | `task_luthas_wp_031` | P3 | Sites 2 & 3 | Not audited | Run `wp:audit-source` per site; extend registry |
 | `task_luthas_wp_032` | **P1** | De-WP runtime | `wp` prefix in app routes/paths/APIs | Zero `wp` in shipped `src/` URLs — see [MIGRATION-BACKLOG.md](./MIGRATION-BACKLOG.md) |
-| `task_luthas_wp_033` | **P1** | Media FSD | Assets in `public/wp-migrated/`, mixed `/wp-content/` paths | Migrate to `public/assets/` FSD layout; codegen emits `/assets/…` only |
+| `task_luthas_wp_033` | **P1** | Media FSD | ~~wp-migrated~~ | **Done** — `public/assets/` + `assets:pipeline` | verify-bindings passes |
 | `task_luthas_wp_034` | **P1** | Public route audit | Audit homepage-only | `verify:public-routes` — WP vs Next for all public endpoints |
 | `task_luthas_wp_035` | **P1** | `/contact` | Not native-migrated | Extract + native `ContactPage` (WP: `dameluthas.local/contact/`) |
 | `task_luthas_wp_036` | **P1** | `/case-studies` | Route missing | Full page migration (WP: `dameluthas.local/case-studies/`) |

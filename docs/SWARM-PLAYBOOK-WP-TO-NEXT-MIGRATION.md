@@ -3,7 +3,7 @@
 > **Purpose:** Step-by-step instructions for AI agents and engineers migrating Elementor/TheGem WordPress sites to native Next.js — based on the Dame Luthas pilot (`dame-luthas-app`, session 2026-06-07 → 2026-06-11).  
 > **Audience:** Cursor agents, Copilot agents, and humans running **Luthas Center** (`luthas-center-app`), **Luthas Org** (`luthas-org-app`), or greenfield Elementor migrations.  
 > **Prerequisites doc:** [LESSONS-LEARNED-DAME-LUTHAS-WP-MIGRATION.md](./LESSONS-LEARNED-DAME-LUTHAS-WP-MIGRATION.md) — read before starting to avoid known failure modes.  
-> **Canonical process:** [MIGRATION-PLAYBOOK.md](./MIGRATION-PLAYBOOK.md)  
+> **Canonical process:** [MIGRATION-PLAYBOOK.md](./MIGRATION-PLAYBOOK.md) (10 phases · TheGem complete · [JNews scaffold](./adapters/JNEWS-ADAPTER.md))  
 > **Cross-site context:** [MIGRATION-WALKTHROUGH.md](./MIGRATION-WALKTHROUGH.md)
 
 ---
@@ -35,7 +35,7 @@
                             ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │  SSOT: src/content/*.ts (committed, typed, static)              │
-│  ASSETS: public/wp-migrated/                                    │
+│  ASSETS: public/assets/{clients,services,portfolio,site,pages}/ │
 └───────────────────────────┬─────────────────────────────────────┘
                             ▼
 ┌─────────────────────────────────────────────────────────────────┐
@@ -296,10 +296,12 @@ WP_HEADLESS_GRAPHQL_URL=http://SITE.local/graphql npm run wp:extract-content
 # Offline (CI only — truncated testimonials):
 npm run wp:extract-content -- --fixture
 
-# Assets:
-npm run wp:copy-assets
+# Assets (converted — sharp webp, FSD domains):
+npm run assets:convert
+npm run assets:copy-portfolio-video
+npm run assets:verify-bindings
 
-# Combined:
+# Combined extract + assets:
 npm run wp:codegen
 ```
 
@@ -307,7 +309,7 @@ npm run wp:codegen
 
 ```bash
 git diff src/content/
-git diff public/wp-migrated/
+git diff public/assets/
 ```
 
 **Auto-generated (do not hand-edit):**
@@ -433,32 +435,23 @@ All must pass:
 
 ## Phase 8 — Build hygiene (Build Agent)
 
-### 8.1 Turbopack rules (mandatory)
+### 8.1 Turbopack / runtime rules (mandatory)
 
 **Never in `src/`:**
 ```typescript
-// ❌ ANTI-PATTERN
+// ❌ ANTI-PATTERN — traces local-wp at build time
 path.join(process.cwd(), "local-wp/app/public/wp-content")
-path.join(process.cwd(), "temp/plugins")
 ```
 
-**Always:**
-```typescript
-// ✅ CORRECT — src/shared/lib/headless/wp-content-root.ts
-const publicRoot = process.env.LOCAL_WP_PUBLIC_PATH?.trim();
-if (!publicRoot) return buildStubContentDirs(); // public/wp-migrated
-```
+**Production runtime:**
+- No `/api/wp-content` or `/api/wp-media` routes — static files only under `public/assets/`
+- No `WpPilotStyles` / pilot CSS proxy — use `src/shared/design/thegem/` remix CSS
+- Legacy HTML in `content.json` rewritten at render via `rewriteWpMediaUrls()` + manifest
 
 **Config JSON:** read only in `scripts/wp/lib/load-local-wp-env.ts` — never in Next bundle.
 
-**next.config.ts must include:**
+**next.config.ts:**
 ```typescript
-turbopack: {
-  ignoreIssue: [
-    { path: "src/shared/lib/headless/wp-content-root.ts" },
-    { path: "src/shared/lib/headless/wp-content-paths.ts" },
-  ],
-},
 outputFileTracingExcludes: {
   "*": ["./local-wp/**", "./temp/**"],
 },
@@ -474,9 +467,9 @@ npm run build
 
 ### 8.3 Production deploy checklist
 
-- [ ] `LOCAL_WP_PUBLIC_PATH` **unset** on Vercel
-- [ ] `public/wp-migrated/` assets committed or on CDN
-- [ ] Native shell enabled (remix CSS, not pilot proxy)
+- [ ] `LOCAL_WP_PUBLIC_PATH` **unset** on Vercel (extract/convert is dev-only)
+- [ ] `public/assets/` committed (converted webp/svg/webm only)
+- [ ] Native shell enabled (remix CSS — no WP proxy)
 - [ ] `HEADLESS_PILOT_CSS=false` in production env
 
 ---
@@ -627,7 +620,8 @@ git config core.hooksPath .githooks
 | Document | Path |
 |----------|------|
 | Lessons learned (errors) | [LESSONS-LEARNED-DAME-LUTHAS-WP-MIGRATION.md](./LESSONS-LEARNED-DAME-LUTHAS-WP-MIGRATION.md) |
-| 6-phase playbook | [MIGRATION-PLAYBOOK.md](./MIGRATION-PLAYBOOK.md) |
+| 10-phase playbook | [MIGRATION-PLAYBOOK.md](./MIGRATION-PLAYBOOK.md) |
+| JNews adapter (sites 2 & 3) | [adapters/JNEWS-ADAPTER.md](./adapters/JNEWS-ADAPTER.md) |
 | Homepage TSA | [architecture/HOMEPAGE-GRAPHQL-CODEGEN-TSA.md](./architecture/HOMEPAGE-GRAPHQL-CODEGEN-TSA.md) |
 | Implementation backlog | [tasks/WIDGET-PARITY-TASKS.md](./tasks/WIDGET-PARITY-TASKS.md) |
 | Cross-site walkthrough | [MIGRATION-WALKTHROUGH.md](./MIGRATION-WALKTHROUGH.md) |

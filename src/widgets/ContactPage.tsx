@@ -1,8 +1,11 @@
-import Image from "next/image";
 import Link from "next/link";
 
 import type { MigratedAboutPage } from "@/shared/lib/migrated/content";
 import { loadMigrated } from "@/shared/lib/migrated/content";
+import { ContactFormBlock } from "@/widgets/ContactFormBlock";
+
+import { IconList } from "./contact/IconList";
+import { TeamMember } from "./contact/TeamMember";
 
 interface ContactPageProps {
   title: string;
@@ -11,6 +14,30 @@ interface ContactPageProps {
 
 export function ContactPage({ title, about }: ContactPageProps) {
   const { site } = loadMigrated();
+
+  const contactItems = [
+    ...(about?.address
+      ? [
+          {
+            icon: "pin" as const,
+            label: "Address",
+            text: `${about.address.line1}, ${about.address.line2}`,
+          },
+        ]
+      : []),
+    {
+      icon: "phone" as const,
+      label: "Phone",
+      text: site.contact.phone,
+      href: `tel:${site.contact.phone.replace(/\s/g, "")}`,
+    },
+    {
+      icon: "mail" as const,
+      label: "Email",
+      text: site.contact.email,
+      href: `mailto:${site.contact.email}`,
+    },
+  ];
 
   return (
     <main className="mx-auto max-w-6xl px-6 py-16 md:py-24">
@@ -37,52 +64,24 @@ export function ContactPage({ title, about }: ContactPageProps) {
       </div>
 
       {about ? (
-        <div className="mx-auto grid max-w-4xl gap-10 rounded-2xl border border-white/10 bg-[var(--dl-surface)] p-8 md:grid-cols-[220px_1fr] md:items-start md:p-10">
-          {about.image ? (
-            <div className="relative mx-auto aspect-square w-48 overflow-hidden rounded-full border-2 border-[var(--dl-accent)]/40 md:mx-0">
-              <Image
-                src={about.image}
-                alt={about.headline}
-                fill
-                className="object-cover"
-                sizes="192px"
-                unoptimized
-              />
-            </div>
-          ) : null}
-          <div className="space-y-4 text-center md:text-left">
-            <div>
-              <h3 className="text-xl font-semibold text-white">{about.headline}</h3>
-              <p className="text-sm text-zinc-400">{about.role}</p>
-            </div>
-            <p className="leading-relaxed text-zinc-300">{about.bio}</p>
-            <div className="flex flex-wrap justify-center gap-4 text-sm md:justify-start">
-              <a
-                href={`tel:${site.contact.phone.replace(/\s/g, "")}`}
-                className="text-[var(--dl-accent)] hover:underline"
-              >
-                {site.contact.phone}
-              </a>
-              <a
-                href={`mailto:${site.contact.email}`}
-                className="text-[var(--dl-accent)] hover:underline"
-              >
-                {site.contact.email}
-              </a>
-              <Link
-                href={site.contact.linkedin}
-                className="text-[var(--dl-accent)] hover:underline"
-              >
-                LinkedIn
-              </Link>
-            </div>
-          </div>
-        </div>
+        <TeamMember
+          name={about.headline}
+          role={about.role}
+          bio={about.bio}
+          image={about.image}
+          phone={site.contact.phone}
+          email={site.contact.email}
+          social={[{ label: "LinkedIn", href: site.contact.linkedin }]}
+        />
       ) : null}
 
-      <p className="mt-12 text-center text-sm text-zinc-500">
-        Use the contact form below to reach out directly.
-      </p>
+      <div className="mx-auto mt-10 max-w-md">
+        <IconList items={contactItems} />
+      </div>
+
+      <div className="mt-16">
+        <ContactFormBlock />
+      </div>
     </main>
   );
 }

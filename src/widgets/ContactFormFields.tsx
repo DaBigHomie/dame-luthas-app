@@ -38,7 +38,7 @@ export function ContactFormFields({ email }: ContactFormFieldsProps) {
     "dl-gem-form-underline w-full py-3 text-sm text-black placeholder:text-black/45";
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-6" suppressHydrationWarning>
       <div className="grid gap-6 sm:grid-cols-2">
         <label className="block">
           <span className="mb-1 block text-xs font-medium uppercase tracking-wide text-black/70">

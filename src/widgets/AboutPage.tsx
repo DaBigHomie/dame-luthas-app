@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import type { MigratedAboutPage } from "@/shared/lib/migrated/content";
 import { loadMigrated } from "@/shared/lib/migrated/content";
+import { IconList } from "@/widgets/contact/IconList";
 
 interface AboutPageProps {
   about: MigratedAboutPage;
@@ -46,8 +47,14 @@ export function AboutPage({ about }: AboutPageProps) {
               <h2 className="mb-3 text-sm font-medium uppercase tracking-wide text-zinc-400">
                 Location
               </h2>
-              <p className="text-zinc-200">{about.address.line1}</p>
-              <p className="text-zinc-200">{about.address.line2}</p>
+              <IconList
+                items={[
+                  {
+                    icon: "pin",
+                    text: `${about.address.line1}, ${about.address.line2}`,
+                  },
+                ]}
+              />
             </div>
           ) : null}
 

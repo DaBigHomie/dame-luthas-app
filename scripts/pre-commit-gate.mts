@@ -48,4 +48,12 @@ if (registryChanged && existsSync(auditPath)) {
   run("npm run wp:verify-widget-census", "Widget census");
 }
 
+const touchesAssets =
+  staged.some((f) => f.startsWith("public/assets/")) ||
+  staged.some((f) => f.startsWith("src/content/")) ||
+  staged.some((f) => f.startsWith("src/widgets/"));
+if (touchesAssets && existsSync(join(ROOT, "data/extracted/converted-assets.json"))) {
+  run("npm run assets:verify-bindings", "Asset bindings");
+}
+
 console.log("\nPre-commit gate passed.");
