@@ -1,5 +1,6 @@
 import * as cheerio from "cheerio";
 
+import { parseHero } from "./parse-hero";
 import { parseAllServiceCards, parseServiceCards } from "./parse-service-cards";
 import { parseClients } from "./parse-clients";
 import { parseTestimonials } from "./parse-testimonials";
@@ -14,6 +15,7 @@ export function parseHomepageHtml(html: string, options?: { allServices?: boolea
   const testimonials = parseTestimonials($);
   const rotatingPhrases = parseRotatingPhrases($);
   const sections = parseSections($);
+  const hero = parseHero($);
 
   const assetUrls = new Set<string>();
   for (const column of services) {
@@ -31,6 +33,7 @@ export function parseHomepageHtml(html: string, options?: { allServices?: boolea
   });
 
   return {
+    hero,
     services,
     clients,
     testimonials,

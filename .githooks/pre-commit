@@ -1,0 +1,5 @@
+#!/bin/sh
+# Dame Luthas pre-commit — MALFIG G5 + widget census when registry changes
+# Install: git config core.hooksPath .githooks
+set -e
+npx tsx scripts/pre-commit-gate.mts

@@ -6,7 +6,10 @@ import type {
   Testimonial,
 } from "../../../../src/content/types";
 
+import type { ParsedHero } from "./parse-hero";
+
 export interface ParsedHomepage {
+  hero: ParsedHero | null;
   services: ServiceCardColumn[];
   clients: ClientLogo[];
   testimonials: Testimonial[];

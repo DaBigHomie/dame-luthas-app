@@ -28,6 +28,10 @@ html.thegem-motion-ready
   overflow: hidden;
 }
 
+.thegem-heading .thegem-heading-word-wrap {
+  white-space: nowrap;
+}
+
 .thegem-heading .thegem-heading-word {
   display: inline-flex;
   white-space: nowrap;

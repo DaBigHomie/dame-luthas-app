@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { isNativeSiteShellEnabled } from "@/content/availability";
-import { serviceBlocks } from "@/content";
+import { serviceBlocks, textBands } from "@/content";
 import {
   getPilotStatus,
   getSiteInfo,
@@ -18,7 +18,8 @@ import { Hero } from "@/widgets/Hero";
 import {
   AdvisorSection,
   BigHeadingSection,
-  ClientsMarquee,
+  CtaBandSection,
+  LogoMarquee,
   ManifestoBand,
   ServiceBlockSection,
   TestimonialsCarousel,
@@ -33,13 +34,17 @@ export default async function HomePage() {
       <main>
         <Hero />
         <AdvisorSection />
+        <LogoMarquee />
         <ManifestoBand />
         <BigHeadingSection />
-        {serviceBlocks.map((block) => (
-          <ServiceBlockSection key={block.id} block={block} />
-        ))}
+        <ServiceBlockSection block={serviceBlocks[0]} />
+        <CtaBandSection body={textBands.servicesCtas.sections01and02} />
+        <LogoMarquee />
+        <ServiceBlockSection block={serviceBlocks[1]} />
+        <CtaBandSection body={textBands.servicesCtas.sections01and02} />
+        <ServiceBlockSection block={serviceBlocks[2]} />
+        <CtaBandSection body={textBands.servicesCtas.section03} />
         <PortfolioGrid items={portfolio} title="Selected work" />
-        <ClientsMarquee />
         <TestimonialsCarousel />
       </main>
     );

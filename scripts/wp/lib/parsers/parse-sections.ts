@@ -43,10 +43,7 @@ export function parseSections($: CheerioAPI): ContentSection[] {
     });
   }
 
-  const manifesto = findHeadingText(
-    $,
-    /create impactful digital experiences/i,
-  );
+  const manifesto = findHeadingText($, /break the mold/i);
   if (manifesto) {
     sections.push({
       id: "brand-manifesto",

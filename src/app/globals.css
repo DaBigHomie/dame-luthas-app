@@ -9,6 +9,7 @@
   --dl-bg: #0f0f0f;
   --dl-surface: #181818;
   --dl-accent: #8f93f1;
+  --dl-cta-mint: #a9fdff;
   --dl-accent-hover: #3c3950;
   --dl-footer-yellow: #f7df3d;
   --dl-footer-lavender: #cecee8;
@@ -46,6 +47,18 @@ body.wp-pilot-theme .wp-pilot-content {
   line-height: 1.1;
   font-weight: 800;
   text-transform: uppercase;
+}
+
+@media (max-width: 1024px) {
+  .dl-typography-hero-h1 {
+    font-size: 50px;
+  }
+}
+
+@media (max-width: 767px) {
+  .dl-typography-hero-h1 {
+    font-size: 40px;
+  }
 }
 
 .dl-typography-big-heading {

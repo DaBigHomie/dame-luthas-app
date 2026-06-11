@@ -16,6 +16,8 @@ import {
   parseAddressFromHtml,
   parseTeamFromHtml,
 } from "./lib/parse-team-from-html";
+import { parseHero } from "./lib/parsers/parse-hero";
+import * as cheerio from "cheerio";
 
 interface SnapshotItem {
   id: number;
@@ -263,19 +265,29 @@ function main(): void {
     ],
     pages,
     portfolio,
-    hero: {
-      eyebrow: "Dame Luthas Consulting",
-      title: "Hi, I'm Dame Luthas.",
-      subtitle:
-        "I partner with organizations to solve complex technology challenges and build digital products that drive measurable growth.",
-      ctaPrimary: { label: "View Portfolio", href: "/portfolio" },
-      ctaSecondary: { label: "Contact Me", href: "/contact" },
-      image: rewriteMedia(
-        home?.featuredImageUrl ??
-          portfolio[0]?.image ??
-          "/api/wp-media/2025/02/home-04.webp",
-      ),
-    },
+    hero: (() => {
+      const parsed =
+        home?.content != null
+          ? parseHero(cheerio.load(sanitizeWpHtml(home.content)))
+          : null;
+      return {
+        eyebrow: "",
+        title: parsed?.title ?? "Hi, I'm Dame Luthas. Lets Build Together.",
+        subtitle:
+          parsed?.subtitle ??
+          "I partner with organizations to solve complex technology challenges and build digital products that drive measurable growth.",
+        ctaPrimary: parsed?.ctaPrimary ?? {
+          label: "Contact Me",
+          href: "/contact",
+        },
+        ctaSecondary: { label: "Case Studies", href: "/portfolio" },
+        image: rewriteMedia(
+          home?.featuredImageUrl ??
+            portfolio[0]?.image ??
+            "/api/wp-media/2025/02/home-04.webp",
+        ),
+      };
+    })(),
     contactPage: contact
       ? {
           title: contact.title,

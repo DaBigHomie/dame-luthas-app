@@ -52,22 +52,34 @@ export function AnimatedHeading({
   let content: React.ReactNode;
 
   if (variant === "letters-slide-up") {
+    const tokens = splitWords(text);
     let delayIndex = 0;
-    const letters = [...text];
 
     content = (
       <span className="thegem-heading-line-wrap">
-        {letters.map((char, index) => {
-          const isSpace = char === " ";
-          const style =
-            animated && !isSpace
-              ? { animationDelay: `${delayIndex++ * staggerMs}ms` }
-              : undefined;
+        {tokens.map((token, tokenIndex) => {
+          if (/^\s+$/.test(token)) {
+            return <span key={`space-${tokenIndex}`}>{token}</span>;
+          }
 
           return (
-            <span key={`${char}-${index}`} className="thegem-heading-letter-wrap">
-              <span className="thegem-heading-letter" style={style}>
-                {char === " " ? "\u00a0" : char}
+            <span key={`word-${tokenIndex}`} className="thegem-heading-word-wrap">
+              <span className="thegem-heading-word">
+                {[...token].map((char, charIndex) => {
+                  const style = animated
+                    ? { animationDelay: `${delayIndex++ * staggerMs}ms` }
+                    : undefined;
+                  return (
+                    <span
+                      key={`${tokenIndex}-${charIndex}`}
+                      className="thegem-heading-letter-wrap"
+                    >
+                      <span className="thegem-heading-letter" style={style}>
+                        {char}
+                      </span>
+                    </span>
+                  );
+                })}
               </span>
             </span>
           );

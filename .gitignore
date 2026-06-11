@@ -52,9 +52,11 @@ next-env.d.ts
 /temp/
 /local-wp/
 /data/screenshots/
+/reports/
 
 # WP extraction output (legacy pipeline — prefer headless pilot)
 /data/extracted/
+/data/audit/
 /data/snapshot/
 /data/migrated/
 

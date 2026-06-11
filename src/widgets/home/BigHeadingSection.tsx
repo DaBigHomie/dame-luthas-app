@@ -3,14 +3,14 @@ import { AnimatedHeading } from "@/shared/ui/AnimatedHeading";
 
 export function BigHeadingSection() {
   return (
-    <section className="border-y border-white/10 bg-[var(--dl-surface)] py-20">
-      <div className="mx-auto max-w-[var(--dl-container-max)] px-[21px] text-center">
+    <section className="border-t border-white/10 py-16 md:py-20">
+      <div className="mx-auto max-w-[var(--dl-container-max)] px-[21px] md:flex md:justify-end">
         <AnimatedHeading
           as="h2"
           text={textBands.bigHeading}
           variant="letters-slide-up"
-          staggerMs={12}
-          className="dl-typography-big-heading text-white"
+          staggerMs={15}
+          className="dl-typography-big-heading max-w-4xl text-right text-white"
         />
       </div>
     </section>
