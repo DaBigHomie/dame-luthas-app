@@ -1,6 +1,14 @@
 import Link from "next/link";
 
 import {
+  clientLogos,
+  contentSections,
+  rotatingPhrases,
+  serviceCards,
+  testimonials,
+} from "@/content";
+import type { ContentSection } from "@/content/types";
+import {
   getPilotStatus,
   getSiteInfo,
   listPages,
@@ -13,14 +21,44 @@ import {
 import { PilotBanner } from "@/shared/ui/PilotBanner";
 import { RichContent } from "@/shared/ui/RichContent";
 import { Hero } from "@/widgets/Hero";
+import {
+  AdvisorSection,
+  ClientLogosSection,
+  CtaBandSection,
+  ManifestoSection,
+  PartnerIntroSection,
+  RotatingHeadlineSection,
+  ServiceCardsSection,
+  TestimonialsSection,
+} from "@/widgets/home";
 import { PortfolioGrid } from "@/widgets/PortfolioGrid";
+
+function sectionById(
+  sections: readonly ContentSection[],
+  id: string,
+): ContentSection | undefined {
+  return sections.find((section) => section.id === id);
+}
 
 export default async function HomePage() {
   if (isMigratedAvailable()) {
     const { portfolio } = loadMigrated();
+    const partnerIntro = sectionById(contentSections, "partner-intro");
+    const advisor = sectionById(contentSections, "un-advisor");
+    const manifesto = sectionById(contentSections, "brand-manifesto");
+    const ctaBand = sectionById(contentSections, "cta-band");
+
     return (
       <main>
         <Hero />
+        {partnerIntro ? <PartnerIntroSection section={partnerIntro} /> : null}
+        {advisor ? <AdvisorSection section={advisor} /> : null}
+        <ServiceCardsSection columns={serviceCards} />
+        <RotatingHeadlineSection phrases={rotatingPhrases} />
+        {manifesto ? <ManifestoSection section={manifesto} /> : null}
+        <ClientLogosSection logos={clientLogos} />
+        <TestimonialsSection items={testimonials} />
+        {ctaBand ? <CtaBandSection section={ctaBand} /> : null}
         <PortfolioGrid items={portfolio} title="Selected work" />
       </main>
     );
