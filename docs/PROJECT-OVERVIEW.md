@@ -14,7 +14,7 @@ Personal portfolio and consulting site — case studies, services, contact. Migr
 | Backup | UpdraftPlus (Google Drive) |
 | Production | https://dame-luthas-app.vercel.app |
 | Vercel project | `prj_SF0avm0b1fTz5sWtyRdsaoG1hLtv` (`dame-luthas/dame-luthas-app`) |
-| Dev domain (target) | dame-luthas.damieus.app |
+| Dev domain | dameluthas.damieus.app |
 
 ## Tech stack
 
@@ -48,8 +48,8 @@ Personal portfolio and consulting site — case studies, services, contact. Migr
 - [x] Vercel production deploy
 - [x] Hero profile headshot (not demo hoodie)
 - [x] Portfolio CSS batch 6 (card hover, lightbox)
-- [ ] Custom domain `dame-luthas.damieus.app` attached
-- [ ] Resend env vars on Vercel
+- [x] Custom domain `dameluthas.damieus.app` attached
+- [x] Resend env on Vercel
 - [ ] Full HTML removal on case-study detail (structured schema only)
 - [ ] Supabase schema / admin (future webapp phases)
 

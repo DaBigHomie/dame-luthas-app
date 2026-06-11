@@ -1,4 +1,16 @@
 import { testimonials } from "@/content/testimonials";
+import {
+  amazonLaborGallery,
+  amazonLaborProseHtml,
+} from "@/content/case-studies/prose/amazon-labor";
+import {
+  gatoradeProseHtml,
+} from "@/content/case-studies/prose/gatorade";
+import {
+  unitedNationsGallery,
+  unitedNationsProseHtml,
+  unitedNationsSkills,
+} from "@/content/case-studies/prose/united-nations";
 import type { StructuredCaseStudy } from "@/shared/types/case-study";
 
 const amazonTestimonials = testimonials.filter((item) =>
@@ -21,19 +33,36 @@ export const structuredCaseStudies: Record<string, StructuredCaseStudy> = {
     slug: "amazon-labor-union-digital-transformation",
     client: "Amazon Labor Union",
     sectors: ["Labor Organizing", "Digital Transformation"],
-    sections: [{ type: "testimonials", items: amazonTestimonials }, contactCta],
+    nativeContent: true,
+    sections: [
+      { type: "prose", html: amazonLaborProseHtml },
+      { type: "gallery", items: [...amazonLaborGallery] },
+      { type: "testimonials", items: amazonTestimonials },
+      contactCta,
+    ],
   },
   "gatorade-embraces-generative-ai-powered-bottle-design": {
     slug: "gatorade-embraces-generative-ai-powered-bottle-design",
     client: "Gatorade",
     sectors: ["Consumer Products", "Generative AI", "E-Commerce"],
-    sections: [contactCta],
+    nativeContent: true,
+    sections: [
+      { type: "prose", html: gatoradeProseHtml },
+      contactCta,
+    ],
   },
   "united-nations-cloud-migration-fobos": {
     slug: "united-nations-cloud-migration-fobos",
     client: "United Nations",
     sectors: ["Public Sector", "Cloud Transformation", "Solution Architecture"],
-    sections: [{ type: "testimonials", items: unTestimonials }, contactCta],
+    nativeContent: true,
+    sections: [
+      { type: "prose", html: unitedNationsProseHtml },
+      { type: "gallery", items: [...unitedNationsGallery] },
+      { type: "skills", items: [...unitedNationsSkills] },
+      { type: "testimonials", items: unTestimonials },
+      contactCta,
+    ],
   },
 };
 

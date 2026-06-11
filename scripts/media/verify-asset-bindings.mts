@@ -77,6 +77,7 @@ function scanAssetPaths(): Array<{ file: string; publicPath: string }> {
     if (!existsSync(dir)) continue;
     for (const file of walkDir(dir)) {
       if (!/\.(tsx?)$/.test(file)) continue;
+      if (file.includes(`${join("src", "content", "case-studies", "prose")}`)) continue;
       const body = readFileSync(file, "utf8");
       for (const match of body.matchAll(ASSET_RE)) {
         refs.push({

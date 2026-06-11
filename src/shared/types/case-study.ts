@@ -14,6 +14,8 @@ export interface StructuredCaseStudy {
   client: string;
   sectors: string[];
   year?: string;
+  /** When true, resolveCaseStudy skips bodyHtml parsing (native prose only). */
+  nativeContent?: boolean;
   sections: CaseStudySection[];
 }
 

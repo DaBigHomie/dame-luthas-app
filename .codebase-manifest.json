@@ -48,14 +48,14 @@
   ],
   "wpMigration": {
     "source": "dameluthas.com",
-    "devDomain": "dame-luthas.damieus.app",
+    "devDomain": "dameluthas.damieus.app",
     "backup": "UpdraftPlus (Google Drive)"
   },
   "vercel": {
     "projectId": "prj_SF0avm0b1fTz5sWtyRdsaoG1hLtv",
     "orgId": "team_gDyS6wIPTEdeuMu1PVvorxXx",
     "projectName": "dame-luthas-app",
-    "productionDomain": "dame-luthas.damieus.app"
+    "productionDomain": "dameluthas.damieus.app"
   },
   "scripts": {
     "dev": "next dev",

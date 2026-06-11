@@ -6,11 +6,19 @@ import type { ResolvedCaseStudy } from "@/shared/types/case-study";
 
 import { parsePortfolioBody } from "./parse-portfolio-body";
 
+const EMPTY_RESOLVED: ResolvedCaseStudy = {
+  sectors: [],
+  gallery: [],
+  skills: [],
+  proseHtml: "",
+  testimonials: [],
+};
+
 export function resolveCaseStudy(item: MigratedPortfolioItem): ResolvedCaseStudy {
-  const parsed = parsePortfolioBody(item.bodyHtml);
   const structured = getStructuredCaseStudy(item.slug);
 
   if (!structured) {
+    const parsed = parsePortfolioBody(item.bodyHtml);
     return {
       sectors: [],
       gallery: parsed.gallery,
@@ -19,6 +27,10 @@ export function resolveCaseStudy(item: MigratedPortfolioItem): ResolvedCaseStudy
       testimonials: [],
     };
   }
+
+  const parsed = structured.nativeContent
+    ? { gallery: [], skills: [], strippedHtml: "" }
+    : parsePortfolioBody(item.bodyHtml);
 
   let proseHtml = parsed.strippedHtml;
   let gallery = parsed.gallery;
@@ -59,3 +71,5 @@ export function resolveCaseStudy(item: MigratedPortfolioItem): ResolvedCaseStudy
     cta,
   };
 }
+
+export { EMPTY_RESOLVED };

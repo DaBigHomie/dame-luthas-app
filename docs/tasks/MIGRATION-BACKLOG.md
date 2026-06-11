@@ -51,7 +51,7 @@ Tracks **non-homepage** migration work, **media/asset architecture**, and **de-W
 
 - `/portfolio/[slug]` with `resolveCaseStudy()` + structured registry (Amazon, Gatorade, UN)
 - `/pf/[slug]` → `/portfolio/[slug]` redirect
-- **Follow-up:** migrate remaining prose off `MigratedContent` / HTML parse
+- **Follow-up:** migrate remaining prose off `MigratedContent` / HTML parse — **done 2026-06-11** (all 3 case studies use `nativeContent` registry)
 
 ---
 
