@@ -2,18 +2,23 @@
 import type { ServiceBlock } from "./types";
 
 const rotateDigital = ["Web Design", "Web Dev", "Web Hosting"];
+const img04 = "/wp-migrated/2025/02/home-04.webp";
+const img03 = "/wp-migrated/2025/02/home-03.webp";
+const img05 = "/wp-migrated/2025/02/home-05.webp";
 
 export const serviceBlocks = [
   {
     id: "services-01",
     slide: "01/03",
     heading: "Don't Get Left Behind",
-    image: "/wp-migrated/2025/02/home-04.webp",
     categories: [
       {
         id: "artificial-intelligence",
         title: "Artificial Intelligence",
-        rotating: rotateDigital,
+        eyebrow: "Don't Get Left Behind",
+        image: img04,
+        imagePosition: "left",
+        rotating: [],
         items: [
           { label: "AI for Social Impact" },
           { label: "AI Hands On Training" },
@@ -25,6 +30,8 @@ export const serviceBlocks = [
       {
         id: "digital-presence",
         title: "Digital Presence",
+        image: img03,
+        imagePosition: "right",
         rotating: rotateDigital,
         items: [
           { label: "WordPress" },
@@ -39,6 +46,9 @@ export const serviceBlocks = [
       {
         id: "cloud-solutions",
         title: "Cloud Solutions",
+        eyebrow: "Work from Anywhere",
+        image: img05,
+        imagePosition: "right",
         rotating: [],
         items: [
           { label: "Microsoft Cloud", badge: "M365" },
@@ -58,11 +68,12 @@ export const serviceBlocks = [
     id: "services-02",
     slide: "02/03",
     heading: "Non Profits & Design",
-    image: "/wp-migrated/2025/02/home-03.webp",
     categories: [
       {
         id: "non-profits",
         title: "Non Profits",
+        image: img04,
+        imagePosition: "left",
         rotating: [],
         items: [
           { label: "Start a Nonprofit", badge: "HELP OTHERS" },
@@ -77,6 +88,8 @@ export const serviceBlocks = [
       {
         id: "graphic-designs",
         title: "Graphic Designs",
+        image: img03,
+        imagePosition: "right",
         rotating: [],
         items: [
           { label: "Social Media Flyers Design" },
@@ -95,11 +108,13 @@ export const serviceBlocks = [
     id: "services-03",
     slide: "03/03",
     heading: "Back to Work & Build Your Dream",
-    image: "/wp-migrated/2025/02/home-05.webp",
     categories: [
       {
         id: "back-to-work",
         title: "Get A Job",
+        eyebrow: "Back to Work",
+        image: img04,
+        imagePosition: "left",
         rotating: [],
         items: [
           { label: "Customized Resumes", badge: "HOT" },
@@ -111,6 +126,9 @@ export const serviceBlocks = [
       {
         id: "build-your-dream",
         title: "Be Your Own Boss",
+        eyebrow: "Build Your Dream",
+        image: img03,
+        imagePosition: "right",
         rotating: [],
         items: [
           { label: "Business Plans", badge: "VISION TO CONCEPT" },

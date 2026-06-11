@@ -7,9 +7,11 @@ import { AnimatedHeading } from "@/shared/ui/AnimatedHeading";
 
 interface ServiceCardProps {
   category: ServiceCategory;
+  /** Optional h4 line above the animated category title. */
+  eyebrow?: string;
 }
 
-export function ServiceCard({ category }: ServiceCardProps) {
+export function ServiceCard({ category, eyebrow }: ServiceCardProps) {
   const [rotateIndex, setRotateIndex] = useState(0);
   const hasRotating = category.rotating.length > 0;
 
@@ -23,6 +25,11 @@ export function ServiceCard({ category }: ServiceCardProps) {
 
   return (
     <article className="thegem-menu-custom thegem-menu-custom--vertical flex flex-col gap-4">
+      {eyebrow ? (
+        <p className="text-sm font-medium uppercase tracking-wide text-[var(--dl-cta-mint)]">
+          {eyebrow}
+        </p>
+      ) : null}
       <AnimatedHeading
         as="h3"
         text={category.title}

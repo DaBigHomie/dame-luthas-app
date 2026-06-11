@@ -5,7 +5,7 @@ export const serviceCards = [
   {
     "id": "ai-for-social-impact",
     "title": "AI for Social Impact",
-    "image": "/wp-migrated/2025/02/home-04.webp",
+    "image": "/wp-content/uploads/2025/02/home-04.webp",
     "items": [
       {
         "label": "AI for Social Impact",
@@ -32,7 +32,7 @@ export const serviceCards = [
   {
     "id": "wordpress",
     "title": "WordPress",
-    "image": "/wp-migrated/2025/02/home-03.webp",
+    "image": "/wp-content/uploads/2025/02/home-03.webp",
     "items": [
       {
         "label": "WordPress",
@@ -67,7 +67,7 @@ export const serviceCards = [
   {
     "id": "microsoft-cloud",
     "title": "Microsoft Cloud",
-    "image": "/wp-migrated/2025/02/home-05.webp",
+    "image": "/wp-content/uploads/2025/02/home-05.webp",
     "items": [
       {
         "label": "Microsoft Cloud",

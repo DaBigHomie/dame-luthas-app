@@ -37,14 +37,14 @@ export default async function HomePage() {
         <LogoMarquee />
         <ManifestoBand />
         <BigHeadingSection />
-        <ServiceBlockSection block={serviceBlocks[0]} />
+        <ServiceBlockSection block={serviceBlocks[0]} id="services" />
         <CtaBandSection body={textBands.servicesCtas.sections01and02} />
         <LogoMarquee />
         <ServiceBlockSection block={serviceBlocks[1]} />
         <CtaBandSection body={textBands.servicesCtas.sections01and02} />
         <ServiceBlockSection block={serviceBlocks[2]} />
         <CtaBandSection body={textBands.servicesCtas.section03} />
-        <PortfolioGrid items={portfolio} title="Selected work" />
+        <PortfolioGrid items={portfolio} title="Selected work" columns="2" id="work" />
         <TestimonialsCarousel />
       </main>
     );

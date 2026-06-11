@@ -6,4 +6,5 @@ export { LogoMarquee } from "./LogoMarquee";
 export { ManifestoBand } from "./ManifestoBand";
 export { ServiceBlockSection } from "./ServiceBlockSection";
 export { ServiceCard } from "./ServiceCard";
+export { ServiceStaggerRow } from "./ServiceStaggerRow";
 export { TestimonialsCarousel } from "./TestimonialsCarousel";

@@ -6,7 +6,7 @@
  */
 
 import { copyFileSync, existsSync, mkdirSync } from "node:fs";
-import { dirname, join, resolve } from "node:path";
+import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { HEADLESS_CONFIG } from "./config";
@@ -28,7 +28,7 @@ function main(): void {
   const dest = join(muDir, "dameluthas-headless-graphql.php");
   copyFileSync(TEMPLATE, dest);
 
-  console.log("✅ Installed WPGraphQL mu-plugin");
+  console.log("Installed WPGraphQL mu-plugin");
   console.log(`   ${dest}`);
   console.log("   Reload http://dameluthas.local/graphql to pick up changes");
 }

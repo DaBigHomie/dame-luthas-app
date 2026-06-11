@@ -1,5 +1,6 @@
 import * as cheerio from "cheerio";
 
+import { parseCustomMenus } from "./parse-custom-menus";
 import { parseHero } from "./parse-hero";
 import { parseAllServiceCards, parseServiceCards } from "./parse-service-cards";
 import { parseClients } from "./parse-clients";
@@ -11,6 +12,7 @@ import type { ParsedHomepage } from "./types";
 export function parseHomepageHtml(html: string, options?: { allServices?: boolean }): ParsedHomepage {
   const $ = cheerio.load(html);
   const services = options?.allServices ? parseAllServiceCards($) : parseServiceCards($);
+  const customMenus = parseCustomMenus($);
   const clients = parseClients($);
   const testimonials = parseTestimonials($);
   const rotatingPhrases = parseRotatingPhrases($);
@@ -34,6 +36,7 @@ export function parseHomepageHtml(html: string, options?: { allServices?: boolea
 
   return {
     hero,
+    customMenus,
     services,
     clients,
     testimonials,

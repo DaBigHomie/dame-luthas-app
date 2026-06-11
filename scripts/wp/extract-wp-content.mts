@@ -15,6 +15,7 @@ import { join } from "node:path";
 import { HEADLESS_CONFIG, REPO_ROOT } from "./config";
 import { emitContentModules } from "./lib/emit-content";
 import { GraphQLClient } from "./lib/graphql-client";
+import { fetchTestimonialsFromGraphQL } from "./lib/parsers/fetch-testimonials-graphql";
 import { parseHomepageHtml } from "./lib/parsers/parse-homepage";
 
 const dryRun = process.argv.includes("--dry-run");
@@ -71,27 +72,45 @@ async function main(): Promise<void> {
   const html = await loadHomepageHtml();
   const parsed = parseHomepageHtml(html, { allServices });
 
+  let testimonials = parsed.testimonials;
+  if (!useFixture && process.env.WP_HEADLESS_GRAPHQL_URL) {
+    const client = new GraphQLClient(HEADLESS_CONFIG.graphql.endpoint);
+    const fromGraphql = await fetchTestimonialsFromGraphQL(client);
+    if (fromGraphql?.length) {
+      testimonials = fromGraphql;
+      console.log(`GraphQL testimonials: ${fromGraphql.length} full quotes`);
+    }
+  }
+
+  const parsedWithQuotes = { ...parsed, testimonials };
+
   const report = {
     generatedAt: new Date().toISOString(),
     sourcePageId: pageId,
     counts: {
-      services: parsed.services.length,
-      clients: parsed.clients.length,
-      testimonials: parsed.testimonials.length,
-      rotatingPhrases: parsed.rotatingPhrases.length,
-      sections: parsed.sections.length,
-      assets: parsed.assetUrls.length,
+      customMenus: parsedWithQuotes.customMenus.length,
+      services: parsedWithQuotes.services.length,
+      clients: parsedWithQuotes.clients.length,
+      testimonials: parsedWithQuotes.testimonials.length,
+      rotatingPhrases: parsedWithQuotes.rotatingPhrases.length,
+      sections: parsedWithQuotes.sections.length,
+      assets: parsedWithQuotes.assetUrls.length,
     },
     warnings: [] as string[],
   };
 
-  if (parsed.services.length === 0) {
+  if (parsedWithQuotes.customMenus.length < 7) {
+    report.warnings.push(
+      `Only ${parsedWithQuotes.customMenus.length} custom menus parsed — expected ~11 widget walk`,
+    );
+  }
+  if (parsedWithQuotes.services.length === 0) {
     report.warnings.push("No service cards parsed — check .nav-menu-custom selectors");
   }
-  if (parsed.clients.length === 0) {
+  if (parsedWithQuotes.clients.length === 0) {
     report.warnings.push("No client logos parsed — check .gem-client selectors");
   }
-  if (parsed.testimonials.length === 0) {
+  if (parsedWithQuotes.testimonials.length === 0) {
     report.warnings.push("No testimonials parsed — check .gem-testimonial-item selectors");
   }
 
@@ -117,7 +136,7 @@ async function main(): Promise<void> {
     return;
   }
 
-  emitContentModules(REPO_ROOT, parsed, pageId);
+  emitContentModules(REPO_ROOT, parsedWithQuotes, pageId);
   console.log("\nWrote src/content/*.ts");
 }
 

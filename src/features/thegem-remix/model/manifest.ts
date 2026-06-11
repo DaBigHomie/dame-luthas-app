@@ -61,7 +61,7 @@ export const THEGEM_REMIX_MANIFEST: TheGemRemixEntry[] = [
   { id: "43", pilotPath: "plugins/thegem-elements-elementor/inc/elementor/widgets/clients/assets/css/thegem-clients.css", remixPath: "remix/clients.css", layer: "portfolio", status: "pending", widgets: [] },
   { id: "44", pilotPath: "plugins/thegem-elements-elementor/inc/elementor/widgets/gallery-slider/assets/css/thegem-gallery-slider.css", remixPath: "remix/gallery.css", layer: "portfolio", status: "pending", widgets: [] },
   { id: "45", pilotPath: "plugins/thegem-elements-elementor/inc/elementor/widgets/icon/assets/css/thegem-icon.css", remixPath: "remix/icon-widget.css", layer: "icons", status: "pending", widgets: [] },
-  { id: "46", pilotPath: "plugins/thegem-elements-elementor/inc/elementor/widgets/styled-image/assets/css/thegem-styled-image.css", remixPath: "remix/styled-image.css", layer: "footer", status: "pending", widgets: ["ContactFormBlock"] },
+  { id: "46", pilotPath: "plugins/thegem-elements-elementor/inc/elementor/widgets/styled-image/assets/css/thegem-styled-image.css", remixPath: "remix/styled-image.css", layer: "footer", status: "verified", widgets: ["StyledImage", "ServiceBlockSection"] },
   { id: "47", pilotPath: "themes/thegem-elementor/css/thegem-woocommerce.css", remixPath: "remix/woocommerce.css", layer: "foundation", status: "pending", widgets: [] },
   { id: "48", pilotPath: "themes/thegem-elementor/css/thegem-additional-blog.css", remixPath: "remix/blog.css", layer: "portfolio", status: "pending", widgets: [] },
   { id: "49", pilotPath: "themes/thegem-elementor/css/thegem-quickfinders.css", remixPath: "remix/quickfinders.css", layer: "foundation", status: "pending", widgets: [] },

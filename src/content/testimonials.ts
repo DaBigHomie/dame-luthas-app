@@ -3,28 +3,28 @@ import type { Testimonial } from "./types";
 
 export const testimonials = [
   {
-    "quote": "Before Dame Luthas joined our cause, our digital operations were fragmented and insecure, holding back our ability to scale. Dame Luthas didn’t just give us tools; they delivered a cohesive strategy. They guided us through a critical migration from Google…",
+    "quote": "Before Dame Luthas joined our cause, our digital operations were fragmented and insecure, holding back our ability to scale. Dame Luthas didn't just give us tools; they delivered a cohesive strategy. They guided us through a critical migration from Google Workspace to a secure Microsoft 365 E5 environment, established our new domain at alu.network, and implemented robust security protocols that resulted in zero data breaches. The automation they introduced saves our core team 15-20 hours of manual work every single week. This transformation empowered us to operate with the confidence and efficiency of a long-established organization, allowing us to focus on the fight for our workers.\"",
     "author": "Maria Sanchez",
-    "role": "ALU",
+    "role": "ALU Leadership Committee",
   },
   {
-    "quote": "Out here, communication is our lifeline. It’s how we coordinate, how we stay safe, and how we connect with headquarters. In the past, new system rollouts could be disruptive, leaving us with unreliable service when we needed it most. The…",
+    "quote": "Out here, communication is our lifeline. It's how we coordinate, how we stay safe, and how we connect with headquarters. In the past, new system rollouts could be disruptive, leaving us with unreliable service when we needed it most. The transition managed by Dame Luthas using the FOBOS system was the smoothest we've ever experienced. We had a stable, secure communications platform up and running in record time. Knowing that the technology we rely on is robust allows us to focus entirely on our mission of serving vulnerable communities. It’s technology that truly serves a purpose.",
     "author": "Lt. Sofia Reyes",
-    "role": "UNWomen Liaison",
+    "role": "Peacekeeping Mission Officer",
   },
   {
-    "quote": "As an organizer on the ground, trust is everything. The new website and secure Cognito forms Dame Luthas built meant that for the first time, workers felt truly safe submitting their information online. What really empowered us was the automation…",
+    "quote": "As an organizer on the ground, trust is everything. The new website and secure Cognito forms Dame Luthas built meant that for the first time, workers felt truly safe submitting their information online. What really empowered us was the automation of launching new bargaining unit pages for different Amazon warehouses. What used to be a slow, manual process became a quick, repeatable launch, making us more agile as we expanded to new locations. The M365 training provided was also incredibly helpful, ensuring our entire team felt confident using the new, secure communication tools. It felt like we finally had a tech infrastructure that supported our work, instead of getting in the way.",
     "author": "Jamal Washington",
-    "role": "ALU",
+    "role": "JFK8 Worker & Field Organizer",
   },
   {
-    "quote": "My team is responsible for setting up communications in war zones and disaster areas. Before FOBOS, every deployment was a white-knuckle experience. Dame Luthas didn’t just understand our technical needs; he understood the pressure we were under. The FOBOS tool…",
+    "quote": "My team is responsible for setting up communications in war zones and disaster areas. Before FOBOS, every deployment was a white-knuckle experience. Dame Luthas didn't just understand our technical needs; he understood the pressure we were under. The FOBOS tool he developed was a game-changer for us on the ground. It's an intuitive, powerful solution that automated the most complex parts of the process, making our work more predictable and reliable. The 70% reduction in post-deployment issues meant my team could focus on supporting our colleagues instead of constant troubleshooting. FOBOS gave us back control and confidence in our infrastructure.",
     "author": "Kenji Tanaka",
-    "role": "UNICC Managed Services",
+    "role": "IT Team Lead",
   },
   {
-    "quote": "In the complex environment of United Nations global operations, deploying new communication systems was traditionally a significant logistical challenge, fraught with delays and instability. The FOBOS solution, architected and delivered by Dame Luthas, was nothing short of transformative. It wasn’t…",
+    "quote": "In the complex environment of United Nations global operations, deploying new communication systems was traditionally a significant logistical challenge, fraught with delays and instability. The FOBOS solution, architected and delivered by Dame Luthas, was nothing short of transformative. It wasn't just an IT fix; it was a strategic innovation that empowered our entire mission delivery. By automating our Unified Communications deployments, FOBOS reduced our go-live times by 50% and slashed system outages by a staggering 70%. This allowed us to equip our teams in the world's most challenging terrains with reliable tools faster than ever before, enhancing both our efficiency and our operational resilience.",
     "author": "Dr. Alistair Finch",
-    "role": "UNDP",
+    "role": "Director of Global Field Operations",
   },
 ] as const satisfies readonly Testimonial[];

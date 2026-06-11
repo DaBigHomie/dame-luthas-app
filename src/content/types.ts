@@ -1,3 +1,14 @@
+export interface SocialLink {
+  network: string;
+  href: string;
+  label?: string;
+}
+
+export interface NavItem {
+  label: string;
+  href: string;
+}
+
 export interface ServiceMenuItem {
   label: string;
   href?: string;
@@ -5,9 +16,16 @@ export interface ServiceMenuItem {
   description?: string;
 }
 
+export type StyledImagePosition = "left" | "right";
+
 export interface ServiceCategory {
   id: string;
   title: string;
+  /** Per-category styled image (thegem-styledimage widget). */
+  image: string;
+  imagePosition: StyledImagePosition;
+  /** Optional h4 eyebrow above the animated category title. */
+  eyebrow?: string;
   rotating: string[];
   items: ServiceMenuItem[];
 }
@@ -16,7 +34,6 @@ export interface ServiceBlock {
   id: string;
   slide: "01/03" | "02/03" | "03/03";
   heading: string;
-  image: string;
   categories: ServiceCategory[];
   ctaText: string;
 }

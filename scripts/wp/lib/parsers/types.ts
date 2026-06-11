@@ -6,10 +6,12 @@ import type {
   Testimonial,
 } from "../../../../src/content/types";
 
+import type { ParsedCustomMenu } from "./parse-custom-menus";
 import type { ParsedHero } from "./parse-hero";
 
 export interface ParsedHomepage {
   hero: ParsedHero | null;
+  customMenus: ParsedCustomMenu[];
   services: ServiceCardColumn[];
   clients: ClientLogo[];
   testimonials: Testimonial[];

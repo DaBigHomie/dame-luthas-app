@@ -11,9 +11,17 @@ import { PortfolioFilterMenu } from "./PortfolioFilterMenu";
 interface PortfolioGridProps {
   items: MigratedPortfolioItem[];
   title?: string;
+  /** WP thegem-portfolio preset: 2 columns on desktop. */
+  columns?: "2" | "3";
+  id?: string;
 }
 
-export function PortfolioGrid({ items, title = "Portfolio" }: PortfolioGridProps) {
+export function PortfolioGrid({
+  items,
+  title = "Portfolio",
+  columns = "3",
+  id,
+}: PortfolioGridProps) {
   const filterLabels = useMemo(
     () => ["All", ...items.map((item) => item.title)],
     [items],
@@ -52,8 +60,10 @@ export function PortfolioGrid({ items, title = "Portfolio" }: PortfolioGridProps
       : items.filter((item) => item.title === activeFilter);
 
   return (
-    <section className="mx-auto max-w-6xl px-6 py-12">
-      <h2 className="mb-8 text-3xl font-semibold text-white">{title}</h2>
+    <section id={id} className="mx-auto max-w-[var(--dl-container-max)] px-[21px] py-12">
+      <h2 className="mb-8 text-3xl font-semibold uppercase tracking-wide text-white">
+        {title}
+      </h2>
 
       <PortfolioFilterMenu
         labels={filterLabels}
@@ -81,7 +91,9 @@ export function PortfolioGrid({ items, title = "Portfolio" }: PortfolioGridProps
         ))}
       </nav>
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div
+        className={`grid gap-6 ${columns === "2" ? "md:grid-cols-2" : "md:grid-cols-2 lg:grid-cols-3"}`}
+      >
         {visibleItems.map((item) => (
           <article
             key={item.id}

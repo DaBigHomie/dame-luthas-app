@@ -15,7 +15,7 @@ export const contentSections = [
   {
     "id": "brand-manifesto",
     "kind": "manifesto",
-    "title": "I create impactful digital experiences and redefine brand identities",
+    "title": "Utilizing experience and creativity to break the mold and craft digital experiences that defy the status quo. Harnessing the cutting-edge technologies of today, we disrupt, innovate and shape the behaviors of tomorrow.",
   },
   {
     "id": "cta-band",

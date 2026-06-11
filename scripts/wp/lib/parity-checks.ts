@@ -49,12 +49,12 @@ export const SECTION_MARKERS: readonly SectionMarker[] = [
   {
     id: "services-02",
     label: "Services 02/03",
-    needles: ["non profits & design", "02/03"],
+    needles: ["non profits", "02/03"],
   },
   {
     id: "services-03",
     label: "Services 03/03",
-    needles: ["back to work & build your dream", "03/03"],
+    needles: ["back to work", "get a job", "03/03"],
   },
   {
     id: "portfolio",

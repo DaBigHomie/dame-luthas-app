@@ -35,6 +35,13 @@ if (!touchesTs) {
 run("npx tsc --noEmit", "TypeScript");
 run("npm run lint", "ESLint");
 
+const parserChanged = staged.some((f) =>
+  f.includes("parse-custom-menus") || f.includes("parse-widget-walk"),
+);
+if (parserChanged) {
+  run("npm run wp:verify-custom-menus", "Custom menu walk");
+}
+
 const registryChanged = staged.some((f) => f.includes("widget-registry.ts"));
 const auditPath = join(ROOT, "data/audit/source-audit.json");
 if (registryChanged && existsSync(auditPath)) {

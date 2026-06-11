@@ -1,3 +1,4 @@
+import { socialLinks } from "@/content";
 import { isMigratedAvailable, loadMigrated } from "@/shared/lib/migrated/content";
 import {
   getTemplateBySlug,
@@ -38,7 +39,10 @@ export function Footer() {
           { label: "Email Me", href: `mailto:${site.contact.email}` },
           { label: "Book Meeting", href: "/contact" },
         ],
-        socialIcons: [{ network: "linkedin", href: site.contact.linkedin }],
+        socialIcons: socialLinks.map((link) => ({
+          network: link.network,
+          href: link.href,
+        })),
       };
 
   return (

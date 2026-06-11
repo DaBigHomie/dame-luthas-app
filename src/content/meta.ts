@@ -2,6 +2,6 @@
 import type { HomepageContentMeta } from "./types";
 
 export const homepageContentMeta = {
-  generatedAt: "2026-06-11T14:17:58.420Z",
+  generatedAt: "2026-06-11T18:04:38.778Z",
   sourcePageId: 375,
 } as const satisfies HomepageContentMeta;

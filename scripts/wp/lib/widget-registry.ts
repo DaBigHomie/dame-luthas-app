@@ -26,7 +26,6 @@ export const WIDGET_REGISTRY: Record<string, WidgetRegistryEntry> = {
   "thegem-styledimage.default": {
     component: "StyledImage",
     source: "thegem",
-    note: "Service stagger cards — partial via ServiceBlockSection banner",
   },
   "thegem-styledbutton.default": {
     component: "AnimatedButton",
@@ -35,7 +34,6 @@ export const WIDGET_REGISTRY: Record<string, WidgetRegistryEntry> = {
   "thegem-custom-menu.default": {
     component: "ServiceCard",
     source: "thegem",
-    note: "Vertical service menus via HTML parse, not runtime widget walk",
   },
   "thegem-clients.default": {
     component: "LogoMarquee",
@@ -44,7 +42,6 @@ export const WIDGET_REGISTRY: Record<string, WidgetRegistryEntry> = {
   "thegem-testimonials.default": {
     component: "TestimonialsCarousel",
     source: "thegem",
-    note: "Quotes truncated until _elementor_data GraphQL exposure",
   },
   "thegem-portfolio.default": {
     component: "PortfolioGrid",
@@ -57,7 +54,6 @@ export const WIDGET_REGISTRY: Record<string, WidgetRegistryEntry> = {
   "social-icons.default": {
     component: "SocialIcons",
     source: "elementor-pro",
-    note: "Header/footer chrome — partial (LinkedIn only)",
   },
   "divider.default": {
     component: null,

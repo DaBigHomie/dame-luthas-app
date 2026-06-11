@@ -1,0 +1,62 @@
+/* TheGem styled-image / wrapbox — service stagger rows */
+
+.styled-image-wrapper {
+  width: 100%;
+}
+
+.gem-wrapbox-inner {
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.gem-wrapbox-element {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.dl-service-stagger-row {
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .dl-service-stagger-row {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 3rem;
+  }
+
+  .dl-service-stagger-row--right .styled-image-wrapper {
+    order: 2;
+  }
+
+  .dl-service-stagger-row--right .dl-service-stagger-content {
+    order: 1;
+  }
+}
+
+.dl-service-block {
+  position: relative;
+}
+
+.dl-services-watermark {
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 0;
+  font-size: clamp(4rem, 12vw, 9rem);
+  font-weight: 800;
+  line-height: 1;
+  text-transform: lowercase;
+  color: #232323;
+  user-select: none;
+}
+
+.dl-service-stagger-divider {
+  margin: 2.5rem 0;
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
