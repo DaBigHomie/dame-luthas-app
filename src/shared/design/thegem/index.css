@@ -2,3 +2,10 @@
 @import "./animations.css";
 @import "./remix/footer-bar.css";
 @import "./remix/forms.css";
+@import "./remix/heading-animations.css";
+@import "./remix/button-animation.css";
+@import "./remix/scroll-reveal.css";
+@import "./remix/portfolio-filters.css";
+@import "./remix/hovers.css";
+@import "./remix/hovers-circular.css";
+@import "./remix/item-animations.css";

@@ -3,6 +3,10 @@
  * Audit The Gem CSS remix manifest vs local pilot stylesheets.
  */
 import {
+  HOMEPAGE_ACTIVE_ANIMATIONS,
+  HOMEPAGE_ANIMATION_WIDGET_COUNTS,
+} from "@/features/thegem-remix/model/homepage-inventory";
+import {
   THEGEM_REMIX_MANIFEST,
   getRemixProgress,
 } from "@/features/thegem-remix/model/manifest";
@@ -44,3 +48,13 @@ for (const entry of THEGEM_REMIX_MANIFEST.filter((e) => e.status === "in_progres
 }
 
 console.log(`\nTotal pilot CSS available (full tree): ${pilot.size}`);
+
+console.log("\nHomepage animation priority (dameluthas.local audit):");
+for (const anim of HOMEPAGE_ACTIVE_ANIMATIONS) {
+  console.log(
+    `  ${anim.name}: ${anim.elementCount} elements → ${anim.widgets.join(", ") || "—"}`,
+  );
+}
+console.log(
+  `\nWidget counts: ${HOMEPAGE_ANIMATION_WIDGET_COUNTS.animatedHeadings} animated headings, ${HOMEPAGE_ANIMATION_WIDGET_COUNTS.animatedButtons} animated buttons`,
+);

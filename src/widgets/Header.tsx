@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { loadMigrated } from "@/shared/lib/migrated/content";
+import { AnimatedButton } from "@/shared/ui/AnimatedButton";
 import {
   getTemplateBySlug,
   parseLogoFromTemplateHtml,
@@ -44,12 +45,13 @@ export function Header() {
             </Link>
           ))}
         </nav>
-        <Link
+        <AnimatedButton
           href="/contact"
-          className="hidden rounded-full bg-[var(--dl-accent)] px-5 py-2 text-sm font-medium text-white transition hover:opacity-90 md:inline-flex"
+          variant="fade-left"
+          className="dl-gem-btn-hover hidden rounded-full bg-[var(--dl-accent)] px-5 py-2 text-sm font-medium text-white md:inline-flex"
         >
           Let&apos;s talk
-        </Link>
+        </AnimatedButton>
       </div>
     </header>
   );

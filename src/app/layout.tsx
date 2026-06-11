@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
 import { isMigratedAvailable } from "@/shared/lib/migrated/content";
+import { TheGemMotionRoot } from "@/shared/ui/TheGemMotionRoot";
 import { WpPilotStyles } from "@/shared/ui/WpPilotStyles";
 import { Footer } from "@/widgets/Footer";
 import { Header } from "@/widgets/Header";
@@ -57,10 +58,19 @@ export default function RootLayout({
       }`}
     >
       <body className={bodyClass}>
-        {pilotCss ? <WpPilotStyles /> : null}
-        {migrated ? <Header /> : null}
-        {children}
-        {migrated ? <Footer /> : null}
+        {migrated ? (
+          <TheGemMotionRoot>
+            {pilotCss ? <WpPilotStyles /> : null}
+            <Header />
+            {children}
+            <Footer />
+          </TheGemMotionRoot>
+        ) : (
+          <>
+            {pilotCss ? <WpPilotStyles /> : null}
+            {children}
+          </>
+        )}
       </body>
     </html>
   );

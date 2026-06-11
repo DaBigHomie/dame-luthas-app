@@ -1,0 +1,316 @@
+/**
+ * Remixed from: plugins/thegem-elements-elementor/inc/heading-animation/assets/css/main.css
+ * Homepage: 213× letters-slide-up, 63× words-slide-left (dameluthas.local audit).
+ */
+
+.thegem-heading {
+  position: relative;
+}
+
+/* Progressive enhancement: visible until JS hydrates, then hide pending trigger */
+.thegem-heading.thegem-heading-animate:not(.thegem-heading-animated) {
+  opacity: 1;
+}
+
+html.thegem-motion-ready
+  .thegem-heading.thegem-heading-animate:not(.thegem-heading-animated) {
+  opacity: 0 !important;
+}
+
+.thegem-heading .thegem-heading-line-wrap {
+  display: block;
+  overflow: hidden;
+}
+
+.thegem-heading .thegem-heading-word-wrap,
+.thegem-heading .thegem-heading-letter-wrap {
+  display: inline-flex;
+  overflow: hidden;
+}
+
+.thegem-heading .thegem-heading-word {
+  display: inline-flex;
+  white-space: nowrap;
+}
+
+.thegem-heading.lines-slide-up.thegem-heading-animated .thegem-heading-line {
+  animation-name: thegemHeadingLinesSlideUp;
+  transform: translateY(100%);
+  display: inline-block;
+  animation-fill-mode: forwards;
+  animation-duration: 1200ms;
+  animation-timing-function: cubic-bezier(0, 1, 0.3, 1);
+}
+
+@keyframes thegemHeadingLinesSlideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.thegem-heading.lines-slide-up-random.thegem-heading-animated .thegem-heading-word {
+  animation-name: thegemHeadingLinesSlideUpRandom;
+  transform: translateY(100%);
+  animation-fill-mode: forwards;
+  animation-duration: 1200ms;
+  animation-timing-function: cubic-bezier(0.3, 0, 0, 1);
+}
+
+@keyframes thegemHeadingLinesSlideUpRandom {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.thegem-heading.words-slide-up.thegem-heading-animated .thegem-heading-word {
+  animation-name: thegemHeadingWordsSlideUp;
+  transform: translateY(100%);
+  animation-fill-mode: forwards;
+  animation-duration: 1000ms;
+  animation-timing-function: cubic-bezier(0.3, 1.7, 0.4, 1);
+}
+
+@keyframes thegemHeadingWordsSlideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.thegem-heading.words-slide-left.thegem-heading-animated .thegem-heading-word {
+  animation-name: thegemHeadingWordsSlideLeft;
+  transform: translateX(100%);
+  animation-fill-mode: forwards;
+  animation-duration: 1200ms;
+  animation-timing-function: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+@keyframes thegemHeadingWordsSlideLeft {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.thegem-heading.words-slide-right.thegem-heading-animated .thegem-heading-word {
+  animation-name: thegemHeadingWordsSlideRight;
+  transform: translateX(-100%);
+  animation-fill-mode: forwards;
+  animation-duration: 1200ms;
+  animation-timing-function: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+@keyframes thegemHeadingWordsSlideRight {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.thegem-heading.letters-slide-up.thegem-heading-animated .thegem-heading-letter {
+  animation-name: thegemHeadingLettersSlideUp;
+  position: relative;
+  transform: translateY(100%);
+  display: inline-flex;
+  animation-fill-mode: forwards;
+  animation-duration: 350ms;
+  animation-timing-function: cubic-bezier(0.3, 1.7, 0.4, 1);
+}
+
+@keyframes thegemHeadingLettersSlideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.thegem-heading.typewriter.thegem-heading-animated .thegem-heading-letter {
+  animation-name: thegemHeadingTypewriter;
+  position: relative;
+  opacity: 0;
+  display: inline-flex;
+  animation-fill-mode: forwards;
+  animation-duration: 0ms;
+}
+
+@keyframes thegemHeadingTypewriter {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.thegem-heading.letters-scale-out.thegem-heading-animated .thegem-heading-letter {
+  animation-name: thegemHeadingLettersScaleOut;
+  position: relative;
+  transform: scale(1.5);
+  opacity: 0;
+  display: inline-flex;
+  animation-fill-mode: forwards;
+  animation-duration: 500ms;
+  animation-timing-function: cubic-bezier(0.3, 4, 0.4, 1);
+}
+
+@keyframes thegemHeadingLettersScaleOut {
+  from {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.thegem-heading.thegem-heading-animated.fade-simple {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  animation-name: thegemHeadingFadeSimple;
+}
+
+@keyframes thegemHeadingFadeSimple {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.thegem-heading.thegem-heading-animated.fade-tb {
+  animation-duration: 0.7s;
+  animation-fill-mode: both;
+  animation-name: thegemHeadingFadeTB;
+  animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes thegemHeadingFadeTB {
+  from {
+    transform: translate(0, -10%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+}
+
+.thegem-heading.thegem-heading-animated.fade-bt {
+  animation-duration: 0.7s;
+  animation-fill-mode: both;
+  animation-name: thegemHeadingFadeBT;
+  animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes thegemHeadingFadeBT {
+  from {
+    transform: translate(0, 10%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+}
+
+.thegem-heading.thegem-heading-animated.fade-lr {
+  animation-duration: 0.7s;
+  animation-fill-mode: both;
+  animation-name: thegemHeadingFadeLR;
+  animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes thegemHeadingFadeLR {
+  from {
+    transform: translate(-10%, 0);
+    opacity: 0;
+  }
+  to {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+}
+
+.thegem-heading.thegem-heading-animated.fade-rl {
+  animation-duration: 0.7s;
+  animation-fill-mode: both;
+  animation-name: thegemHeadingFadeRL;
+  animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes thegemHeadingFadeRL {
+  from {
+    transform: translate(10%, 0);
+    opacity: 0;
+  }
+  to {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+}
+
+.thegem-heading-wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.thegem-heading.background-sliding {
+  display: inline-flex;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+.thegem-heading.background-sliding::before {
+  content: "";
+  transform-origin: left;
+  transform: scale(0, 1);
+  position: absolute;
+  inset: 0;
+  background: var(--dl-accent);
+  opacity: 0.15;
+}
+
+.thegem-heading.background-sliding.thegem-heading-animated::before {
+  animation-name: thegemHeadingBackgroundSliding;
+  animation-duration: 700ms;
+  animation-fill-mode: forwards;
+}
+
+@keyframes thegemHeadingBackgroundSliding {
+  from {
+    transform: scale(0, 1);
+  }
+  to {
+    transform: scale(1, 1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .thegem-heading.thegem-heading-animate:not(.thegem-heading-animated),
+  .thegem-heading.thegem-heading-animate.thegem-heading-animated,
+  .thegem-heading.thegem-heading-animate .thegem-heading-line,
+  .thegem-heading.thegem-heading-animate .thegem-heading-word,
+  .thegem-heading.thegem-heading-animate .thegem-heading-letter {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+    transition: none !important;
+  }
+}

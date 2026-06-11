@@ -16,6 +16,20 @@ handoffs:
 
 You are the **The Gem Animation Audit** agent for **dame-luthas-app**. You verify motion patterns migrated from The Gem theme are performant, accessible, and match pilot behavior.
 
+## Homepage inventory (dameluthas.local)
+
+Structured SSOT: `src/features/thegem-remix/model/homepage-inventory.ts`
+
+| Active animation | Count | Native target |
+|------------------|-------|---------------|
+| `thegemHeadingLettersSlideUp` | 213 | `AnimatedHeading` + `remix/heading-animations.css` |
+| `thegemHeadingWordsSlideLeft` | 63 | `AnimatedHeading` (Hero subtitle) |
+| `rotate` | 1 | `.dl-gem-rotate` on contact circle |
+| `fadeIn` | 1 | Elementor entrance (pending) |
+| `buttonFadeLeft` | 1 | `remix/button-animation.css` (pending) |
+
+Ignore `claude-pulse` / `#claude-agent-glow-border-inner` — browser-agent overlay, not site CSS.
+
 ## Source references (pilot CSS)
 
 Priority animation sources from manifest:

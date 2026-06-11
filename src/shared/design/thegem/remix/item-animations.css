@@ -1,0 +1,25 @@
+/**
+ * P8 remix — subset of thegem-itemsAnimations.css (scroll-triggered item reveals).
+ * Full JS port deferred; CSS hooks ready for future scroll interaction widgets.
+ */
+
+.dl-gem-item-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity var(--dl-gem-duration-slow) var(--dl-gem-ease),
+    transform var(--dl-gem-duration-slow) var(--dl-gem-ease);
+}
+
+.dl-gem-item-reveal.dl-gem-item-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dl-gem-item-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

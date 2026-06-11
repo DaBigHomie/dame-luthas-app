@@ -21,6 +21,7 @@
     "wp:screenshots": "npx tsx scripts/wp/capture-screenshots.mts",
     "wp:screenshots:next": "npx tsx scripts/wp/capture-next-screenshots.mts",
     "thegem:audit-css": "npx tsx scripts/thegem/audit-css-manifest.mts",
+    "wp:probe-schema": "npx tsx scripts/wp/probe-schema.mts",
     "wp:extract-live": "WP_HEADLESS_GRAPHQL_URL=http://dameluthas.local/graphql npx tsx scripts/wp/extract-content.mts"
   },
   "dependencies": {

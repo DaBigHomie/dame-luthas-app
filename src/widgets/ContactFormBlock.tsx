@@ -42,7 +42,7 @@ export function ContactFormBlock() {
           alt=""
           width={88}
           height={88}
-          className="rounded-full"
+          className="dl-gem-rotate rounded-full"
           unoptimized
         />
       </div>

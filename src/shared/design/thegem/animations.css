@@ -35,3 +35,23 @@
     transform: scale(1.05);
   }
 }
+
+/** Remixed from uploads/thegem/css/custom — decorative circle on contact block */
+@keyframes dlGemRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.dl-gem-rotate {
+  animation: dlGemRotate 10s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dl-gem-rotate {
+    animation: none;
+  }
+}

@@ -25,6 +25,7 @@ You are the **The Gem CSS Audit** agent for **dame-luthas-app**. You review CSS 
 2. `.github/instructions/design-system.instructions.md`
 3. `src/shared/design/tokens.ts` — token SSOT
 4. `src/features/thegem-remix/model/manifest.ts` — 50-file remix manifest
+5. `src/features/thegem-remix/model/homepage-inventory.ts` — ~80 stylesheet groups + live animation counts
 5. `src/shared/design/thegem/` — remixed native CSS output
 
 ## Scope
