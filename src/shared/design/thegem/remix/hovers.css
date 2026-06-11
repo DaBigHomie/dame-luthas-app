@@ -1,0 +1,38 @@
+/**
+ * P8 remix — native widget hovers (subset of thegem-hovers.css).
+ * Gallery/slider hovers deferred until those widgets exist.
+ */
+
+@media (prefers-reduced-motion: no-preference) {
+  .dl-gem-portfolio-card {
+    transition:
+      border-color var(--dl-gem-duration-base) var(--dl-gem-ease),
+      box-shadow var(--dl-gem-duration-base) var(--dl-gem-ease);
+  }
+
+  .dl-gem-portfolio-card:hover {
+    border-color: color-mix(in srgb, var(--dl-accent) 50%, transparent);
+    box-shadow: 0 12px 40px rgb(0 0 0 / 0.25);
+  }
+
+  .dl-gem-portfolio-card__image img,
+  .dl-gem-portfolio-card__image {
+    transition: transform var(--dl-gem-duration-slow) var(--dl-gem-ease);
+  }
+
+  .dl-gem-portfolio-card:hover .dl-gem-portfolio-card__image img,
+  .dl-gem-portfolio-card:hover .dl-gem-portfolio-card__image {
+    transform: scale(1.05);
+  }
+
+  .dl-gem-btn-hover {
+    transition:
+      opacity var(--dl-gem-duration-base) var(--dl-gem-ease),
+      border-color var(--dl-gem-duration-base) var(--dl-gem-ease),
+      background-color var(--dl-gem-duration-base) var(--dl-gem-ease);
+  }
+
+  .dl-gem-btn-hover:hover {
+    opacity: 0.92;
+  }
+}

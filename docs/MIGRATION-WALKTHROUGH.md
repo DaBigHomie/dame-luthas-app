@@ -3,7 +3,7 @@
 > **Agent Reference**: This document is the single source of truth for the WordPress-to-React migration across all three Luthas sites.
 > **CORTEX Key**: `artifact:sess_luthas:walkthrough`
 > **Session**: `sess_luthas_wp_react_20260607`
-> **Last Updated**: 2026-06-07
+> **Last Updated**: 2026-06-11
 
 ---
 
@@ -408,10 +408,21 @@ graph TB
 
 ---
 
+## Dame Luthas — Homepage codegen (Phase 2)
+
+> **CORTEX artifact:** `artifact:dame-luthas-app:graphql-codegen-tsa`  
+> **Full TSA:** [`docs/architecture/HOMEPAGE-GRAPHQL-CODEGEN-TSA.md`](./architecture/HOMEPAGE-GRAPHQL-CODEGEN-TSA.md)
+
+Homepage source is **WPGraphQL page ID 375** (not 14). Clients, testimonials, and service-card columns are Elementor HTML — extracted via codegen (`extract-wp-content.mts` + Cheerio), not runtime WP or Supabase.
+
+---
+
 ## Key Files & Scripts
 
 | File | Purpose |
 |------|---------|
+| `docs/architecture/HOMEPAGE-GRAPHQL-CODEGEN-TSA.md` | Homepage GraphQL codegen TSA + migration steps |
+| `scripts/wp/probe-schema.mts` | GraphQL schema + page 375 probe (`npm run wp:probe-schema`) |
 | `~/management-git/damieus-workflow-agents/scripts/setup-luthas-workspace.mts` | Setup/regenerate repo structure |
 | `~/management-git/damieus-workflow-agents/scripts/refresh-gdrive-token.mts` | Refresh Google Drive MCP OAuth token |
 | `~/management-git/scripts/session-startup.mts` | CORTEX session bootstrap (aliases registered) |

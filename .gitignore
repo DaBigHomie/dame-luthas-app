@@ -46,6 +46,16 @@ next-env.d.ts
 *.swp
 *.swo
 
+# WordPress backup extraction (UpdraftPlus restore — local only)
+/temp/
+/local-wp/
+/data/screenshots/
+
+# WP extraction output (legacy pipeline — prefer headless pilot)
+/data/extracted/
+/data/snapshot/
+/data/migrated/
+
 # Agent
 .cortex-boot.json
 .handoff.config.json

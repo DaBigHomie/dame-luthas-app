@@ -1,0 +1,69 @@
+/**
+ * Remixed from: thegem-portfolio.css, thegem-portfolio-filters-list.css
+ */
+
+.dl-gem-portfolio-filters {
+  perspective: 1200px;
+}
+
+.dl-gem-portfolio-filters__menu.dl-animate-in {
+  animation: MenuAnimIn 0.3s ease forwards;
+}
+
+.dl-gem-portfolio-filters__menu.dl-animate-out {
+  animation: MenuAnimOut 0.4s ease forwards;
+}
+
+@keyframes MenuAnimIn {
+  0% {
+    transform: translateZ(-500px) rotateY(0deg);
+    opacity: 0;
+  }
+  20% {
+    transform: translateZ(-250px) rotateY(30deg);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateZ(0) rotateY(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes MenuAnimOut {
+  0% {
+  }
+  50% {
+    transform: translateZ(-250px) rotateY(30deg);
+  }
+  75% {
+    transform: translateZ(-372.5px) rotateY(15deg);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateZ(-500px) rotateY(0deg);
+    opacity: 0;
+  }
+}
+
+@keyframes dlGemFilterSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.dl-gem-filter-spinner {
+  animation: dlGemFilterSpin 0.8s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dl-gem-portfolio-filters__menu.dl-animate-in,
+  .dl-gem-portfolio-filters__menu.dl-animate-out,
+  .dl-gem-filter-spinner {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
