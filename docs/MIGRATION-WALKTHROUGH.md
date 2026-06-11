@@ -15,6 +15,14 @@
 | Luthas.Org | luthas.org | `luthas-org-app` | luthas-org.damieus.app | Content/Blog |
 | Dame Luthas | dameluthas.com | `dame-luthas-app` | dame-luthas.damieus.app | Portfolio |
 
+### Migration documentation (Dame Luthas pilot)
+
+| Doc | Purpose |
+|-----|---------|
+| [MIGRATION-PLAYBOOK.md](./MIGRATION-PLAYBOOK.md) | 6-phase repeatable process |
+| [LESSONS-LEARNED-DAME-LUTHAS-WP-MIGRATION.md](./LESSONS-LEARNED-DAME-LUTHAS-WP-MIGRATION.md) | All errors, false starts, and mitigations from pilot session |
+| [SWARM-PLAYBOOK-WP-TO-NEXT-MIGRATION.md](./SWARM-PLAYBOOK-WP-TO-NEXT-MIGRATION.md) | Agent swarm roles + step-by-step gates for sites 2 & 3 |
+
 ---
 
 ## System Architecture

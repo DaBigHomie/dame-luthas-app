@@ -18,6 +18,16 @@ Generated from `scripts/wp/lib/widget-registry.ts` partial notes + visual audit 
 | `task_luthas_wp_029` | P3 | `thegem-styledbutton` ×10 | CTA styling approximations | Outline/flat skins match TheGem `gem-button` variants |
 | `task_luthas_wp_030` | P3 | P8 hovers | Deferred TheGem hover remix | Complete `p8-hovers-scope.ts` items |
 | `task_luthas_wp_031` | P3 | Sites 2 & 3 | Not audited | Run `wp:audit-source` per site; extend registry |
+| `task_luthas_wp_032` | **P1** | De-WP runtime | `wp` prefix in app routes/paths/APIs | Zero `wp` in shipped `src/` URLs — see [MIGRATION-BACKLOG.md](./MIGRATION-BACKLOG.md) |
+| `task_luthas_wp_033` | **P1** | Media FSD | Assets in `public/wp-migrated/`, mixed `/wp-content/` paths | Migrate to `public/assets/` FSD layout; codegen emits `/assets/…` only |
+| `task_luthas_wp_034` | **P1** | Public route audit | Audit homepage-only | `verify:public-routes` — WP vs Next for all public endpoints |
+| `task_luthas_wp_035` | **P1** | `/contact` | Not native-migrated | Extract + native `ContactPage` (WP: `dameluthas.local/contact/`) |
+| `task_luthas_wp_036` | **P1** | `/case-studies` | Route missing | Full page migration (WP: `dameluthas.local/case-studies/`) |
+| `task_luthas_wp_037` | **P1** | Portfolio detail | UN Fobos case study | `/portfolio/united-nations-cloud-migration-fobos` |
+| `task_luthas_wp_038` | **P1** | Portfolio detail | Amazon Labor Union | `/portfolio/amazon-labor-union-digital-transformation` |
+| `task_luthas_wp_039` | **P1** | Portfolio detail | Gatorade Gen-AI | `/portfolio/gatorade-embraces-generative-ai-powered-bottle-design` |
+
+Full route matrix: [MIGRATION-BACKLOG.md](./MIGRATION-BACKLOG.md)
 
 ## Commands
 

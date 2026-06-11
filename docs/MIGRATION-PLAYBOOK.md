@@ -29,6 +29,32 @@ npm run wp:audit-source -- http://site-two.local/
 
 ---
 
+## Phase 1b — Public route audit (Next vs WP)
+
+Homepage widget census (Phase 1) is **not sufficient**. Every **public-facing route** on the source site must have a matching Next.js endpoint before migration sign-off.
+
+**Ground truth:** WP page URLs (view-source). **Target:** Next routes in `src/app/`.
+
+| WP URL | Next route | Backlog task |
+|--------|------------|--------------|
+| `/` | `/` | — |
+| `/contact/` | `/contact` | `task_luthas_wp_035` |
+| `/case-studies/` | `/case-studies` | `task_luthas_wp_036` |
+| `/pf/{slug}/` | `/portfolio/{slug}` (+ `/pf/*` redirect) | `task_luthas_wp_037`–`039` |
+
+**Planned command:**
+
+```bash
+npm run verify:public-routes
+# Compares HTTP status + H1/title on WP vs Next for matrix in docs/tasks/MIGRATION-BACKLOG.md
+```
+
+**Exit code 1** if any Next route returns 404 or missing primary heading while WP source returns 200.
+
+See [docs/tasks/MIGRATION-BACKLOG.md](./tasks/MIGRATION-BACKLOG.md) for full matrix and media/de-WP tasks (`task_luthas_wp_032`–`034`).
+
+---
+
 ## Phase 2 — Configure GraphQL (source WP)
 
 Install/confirm **WPGraphQL**. Register Elementor post meta so widget settings (full testimonial bodies, etc.) are queryable:
@@ -162,6 +188,9 @@ High-count widgets to implement (not skip):
 
 ## New site checklist (sites 2 & 3)
 
+> **Full agent playbook:** [SWARM-PLAYBOOK-WP-TO-NEXT-MIGRATION.md](./SWARM-PLAYBOOK-WP-TO-NEXT-MIGRATION.md)  
+> **Known pitfalls:** [LESSONS-LEARNED-DAME-LUTHAS-WP-MIGRATION.md](./LESSONS-LEARNED-DAME-LUTHAS-WP-MIGRATION.md)
+
 1. `npm run wp:audit-source -- http://NEW-SITE.local/` → fix registry gaps
 2. Register `_elementor_data` in source WP `functions.php`
 3. `npm run wp:probe-schema` → confirm CPTs + page ID
@@ -176,7 +205,10 @@ High-count widgets to implement (not skip):
 
 | Doc | Purpose |
 |-----|---------|
+| `docs/LESSONS-LEARNED-DAME-LUTHAS-WP-MIGRATION.md` | **Errors & false starts** from Dame Luthas pilot session — read before sites 2 & 3 |
+| `docs/SWARM-PLAYBOOK-WP-TO-NEXT-MIGRATION.md` | **Agent orchestration** — phased swarm roles, gates, commands for other projects |
 | `docs/architecture/HOMEPAGE-GRAPHQL-CODEGEN-TSA.md` | Dame Luthas homepage codegen architecture |
+| `docs/tasks/MIGRATION-BACKLOG.md` | Route migration, media FSD, de-WP runtime, public endpoint matrix |
 | `scripts/wp/lib/widget-registry.ts` | Widget → component map |
 | `scripts/wp/audit-wp-source.mts` | Phase 1 audit CLI |
 | `scripts/wp/verify-widget-census.mts` | Phase 6 census CLI |
