@@ -35,13 +35,13 @@ export function ContactFormFields({ email }: ContactFormFieldsProps) {
   }
 
   const inputClass =
-    "dl-gem-form-underline w-full py-3 text-sm text-black placeholder:text-black/45";
+    "dl-gem-form-underline w-full py-3 text-sm text-foreground placeholder:text-muted-foreground";
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6" suppressHydrationWarning>
       <div className="grid gap-6 sm:grid-cols-2">
         <label className="block">
-          <span className="mb-1 block text-xs font-medium uppercase tracking-wide text-black/70">
+          <span className="mb-1 block text-xs font-medium uppercase tracking-wide text-muted-foreground">
             Name
           </span>
           <input
@@ -53,7 +53,7 @@ export function ContactFormFields({ email }: ContactFormFieldsProps) {
           />
         </label>
         <label className="block">
-          <span className="mb-1 block text-xs font-medium uppercase tracking-wide text-black/70">
+          <span className="mb-1 block text-xs font-medium uppercase tracking-wide text-muted-foreground">
             Email
           </span>
           <input
@@ -65,7 +65,7 @@ export function ContactFormFields({ email }: ContactFormFieldsProps) {
           />
         </label>
         <label className="block">
-          <span className="mb-1 block text-xs font-medium uppercase tracking-wide text-black/70">
+          <span className="mb-1 block text-xs font-medium uppercase tracking-wide text-muted-foreground">
             Website
           </span>
           <input
@@ -76,7 +76,7 @@ export function ContactFormFields({ email }: ContactFormFieldsProps) {
           />
         </label>
         <label className="block">
-          <span className="mb-1 block text-xs font-medium uppercase tracking-wide text-black/70">
+          <span className="mb-1 block text-xs font-medium uppercase tracking-wide text-muted-foreground">
             Phone
           </span>
           <input
@@ -88,7 +88,7 @@ export function ContactFormFields({ email }: ContactFormFieldsProps) {
         </label>
       </div>
       <label className="block">
-        <span className="mb-1 block text-xs font-medium uppercase tracking-wide text-black/70">
+        <span className="mb-1 block text-xs font-medium uppercase tracking-wide text-muted-foreground">
           Message
         </span>
         <textarea

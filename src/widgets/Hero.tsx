@@ -24,26 +24,26 @@ export function Hero() {
   return (
     <section className="mx-auto max-w-[var(--dl-container-max)] px-[21px] py-12 md:py-16">
       <div className="grid gap-6 md:grid-cols-2 md:items-stretch">
-        <div className="flex flex-col justify-center rounded-[2rem] bg-white p-8 text-black md:p-12 lg:p-14">
+        <div className="flex flex-col justify-center p-8 text-foreground md:p-12 lg:p-14">
           <AnimatedHeading
             as="h1"
             text={hero.title}
             variant="letters-slide-up"
             staggerMs={15}
-            className="dl-typography-hero-h1 text-black"
+            className="dl-typography-hero-h1 text-foreground"
           />
           <AnimatedHeading
             as="p"
             text={hero.subtitle}
             variant="words-slide-left"
             staggerMs={20}
-            className="mt-6 max-w-xl text-base leading-relaxed text-black/80 md:text-lg"
+            className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg"
           />
           <div className="mt-8">
             <AnimatedButton
               href={hero.ctaPrimary.href}
               variant="fade-left"
-              className="gem-button inline-flex rounded-full bg-black px-8 py-3 text-sm font-semibold uppercase text-white"
+              className="gem-button inline-flex rounded-full bg-primary px-8 py-3 text-sm font-semibold uppercase text-primary-foreground"
             >
               {hero.ctaPrimary.label}
             </AnimatedButton>

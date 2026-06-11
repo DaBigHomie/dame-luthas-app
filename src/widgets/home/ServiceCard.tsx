@@ -26,7 +26,7 @@ export function ServiceCard({ category, eyebrow }: ServiceCardProps) {
   return (
     <article className="thegem-menu-custom thegem-menu-custom--vertical flex flex-col gap-4">
       {eyebrow ? (
-        <p className="text-sm font-medium uppercase tracking-wide text-[var(--dl-cta-mint)]">
+        <p className="text-sm font-medium uppercase tracking-wide text-muted-foreground">
           {eyebrow}
         </p>
       ) : null}
