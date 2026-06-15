@@ -1,6 +1,6 @@
 {
   "$schema": "https://one4three.co/schemas/projects.json",
-  "generatedAt": "2026-06-15T03:48:35.291Z",
+  "generatedAt": "2026-06-15T14:30:00.538Z",
   "generatedBy": "documentation-standards/scripts/generate-workspace.mts",
   "repo": {
     "name": "Dame Luthas App",
@@ -23,34 +23,14 @@
   },
   "utilityRepos": [
     {
-      "name": "Image Gen 30x",
-      "path": "image-gen-30x-cli",
-      "alias": "image-gen"
-    },
-    {
-      "name": "Audit Orchestrator",
-      "path": "audit-orchestrator",
-      "alias": "audit-orch"
-    },
-    {
-      "name": "UGWTF",
-      "path": "ugwtf",
-      "alias": "ugwtf"
-    },
-    {
       "name": "Documentation Standards",
       "path": "documentation-standards",
       "alias": "docs-std"
     },
     {
-      "name": "Workflow Agents",
-      "path": "damieus-workflow-agents",
-      "alias": "wf-agents"
-    },
-    {
-      "name": "Management",
-      "path": "Management",
-      "alias": "mgmt"
+      "name": "Career Corpus",
+      "path": "career-corpus",
+      "alias": "cc"
     }
   ],
   "cortex": {

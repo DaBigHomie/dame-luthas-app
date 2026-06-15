@@ -8,7 +8,8 @@
     ],
     "stop": [
       {
-        "command": "node ../.agent-kb/db/node_modules/tsx/dist/cli.mjs .cursor/hooks/prime-session-stop.mts"
+        "command": "node ../.agent-kb/db/node_modules/tsx/dist/cli.mjs .cursor/hooks/prime-session-stop.mts",
+        "loop_limit": 1
       }
     ]
   }

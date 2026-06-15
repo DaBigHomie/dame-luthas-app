@@ -51,7 +51,7 @@ Personal portfolio and consulting site — case studies, services, contact. Migr
 - [x] Custom domain `dameluthas.damieus.app` attached
 - [x] Resend env on Vercel
 - [ ] Full HTML removal on case-study detail (structured schema only)
-- [ ] Supabase schema / admin (future webapp phases)
+- [x] Supabase schema migrations (`supabase/migrations/`) — pending remote link + seed
 
 ## Key commands
 

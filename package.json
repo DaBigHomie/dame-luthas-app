@@ -48,6 +48,11 @@
     "wp:verify-custom-menus": "npx tsx scripts/wp/verify-custom-menus.mts",
     "deploy:staging": "npx tsx scripts/deploy-vercel.mts preview",
     "deploy:prod": "npx tsx scripts/deploy-vercel.mts production",
+    "db:start": "supabase start",
+    "db:stop": "supabase stop",
+    "db:reset": "supabase db reset",
+    "db:push": "supabase db push",
+    "db:seed": "npx tsx scripts/supabase/seed-from-wp-bundle.mts",
     "wp:extract-live": "WP_HEADLESS_GRAPHQL_URL=http://dameluthas.local/graphql npx tsx scripts/wp/extract-content.mts"
   },
   "dependencies": {

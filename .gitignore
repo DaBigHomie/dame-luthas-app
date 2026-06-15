@@ -79,3 +79,6 @@ dist/
 .vercel/
 coverage/
 *.tsbuildinfo
+
+# Supabase CLI
+supabase/.temp/

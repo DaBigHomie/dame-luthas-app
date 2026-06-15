@@ -43,7 +43,8 @@ Check items off top to bottom. Stop if a gate fails.
 
 - [x] Resend server action scaffold (`src/app/actions/contact.ts`)
 - [ ] `RESEND_API_KEY` + verified domain on Vercel
-- [ ] Supabase: `posts`, `subscribers`, media bucket
+- [x] Supabase migrations — `supabase/migrations/*` (portfolio, case studies, services, posts, RLS)
+- [ ] Link remote project + `db:push` / `db:seed`
 - [ ] Dashboard post editor
 
 ## Phase 5 — Social embeds

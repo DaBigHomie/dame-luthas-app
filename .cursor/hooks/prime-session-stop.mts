@@ -1,8 +1,8 @@
 #!/usr/bin/env npx tsx
 /**
  * Prime Gate — Cursor stop hook (.mts only).
- * Emits followup_message ONLY when an active CORTEX session exists (breaks close-reminder loop).
- * Also assigns background PR review when handoff context lists open_prs.
+ * Emits followup_message ONLY for actionable automation (open PR review).
+ * Session close is @exit / prime_close — never a passive stop-hook reminder.
  */
 import { existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
@@ -30,7 +30,12 @@ async function main(): Promise<void> {
   }
 
   const hooks = await import(join(agentKb, 'anvil/lib/prime-gate-hooks.mts'));
-  await hooks.drainHookStdin();
+  const stopPayload = await hooks.readStopHookStdin();
+
+  if (stopPayload.status && stopPayload.status !== 'completed') {
+    process.stdout.write('{}');
+    process.exit(0);
+  }
 
   let repoSlug: string;
   try {
@@ -65,12 +70,10 @@ async function main(): Promise<void> {
     /* PR review assignment is best-effort */
   }
 
-  parts.push(
-    `Before ending: MCP prime_close (repo=${repoSlug}, session=${activeSessionId}) or ` +
-      `npx tsx ../.agent-kb/anvil/run.mts close --repo=${repoSlug}. ` +
-      'Handoff must be in DB (handoffs + knowledge), not HANDOVER.md. ' +
-      'Run prime_checkpoint after each task slice.',
-  );
+  if (parts.length === 0) {
+    process.stdout.write('{}');
+    process.exit(0);
+  }
 
   process.stdout.write(JSON.stringify({ followup_message: parts.join('\n\n') }));
   process.exit(0);

@@ -9,6 +9,18 @@
     "packageManager": "npm",
     "description": "dameluthas.com portfolio — WP to Next migration"
   },
+  "utilityRepos": [
+    {
+      "name": "Documentation Standards",
+      "path": "documentation-standards",
+      "alias": "docs-std"
+    },
+    {
+      "name": "Career Corpus",
+      "path": "career-corpus",
+      "alias": "cc"
+    }
+  ],
   "cortex": {
     "agentKbPath": "../.agent-kb",
     "dbPath": "../.agent-kb/db/agent_kb.sqlite",
