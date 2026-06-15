@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "prime-gate": {
+      "command": "node",
+      "args": [
+        "../.agent-kb/db/node_modules/tsx/dist/cli.mjs",
+        "../.agent-kb/mcp/prime-gate/src/server.mts"
+      ],
+      "env": {}
+    }
+  }
+}

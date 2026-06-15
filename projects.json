@@ -1,0 +1,86 @@
+{
+  "$schema": "https://one4three.co/schemas/projects.json",
+  "generatedAt": "2026-06-15T03:48:35.291Z",
+  "generatedBy": "documentation-standards/scripts/generate-workspace.mts",
+  "repo": {
+    "name": "Dame Luthas App",
+    "slug": "dame-luthas-app",
+    "alias": "dame-luthas",
+    "description": "dameluthas.com portfolio — WP to Next migration",
+    "owner": "DaBigHomie",
+    "techStack": [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind"
+    ],
+    "packageManager": "npm"
+  },
+  "workspaces": {
+    "antigravity": "dame-luthas-app_antigravity.code-workspace",
+    "cursor": "dame-luthas-app.cursor.code-workspace",
+    "vscode": "dame-luthas-app.code-workspace"
+  },
+  "utilityRepos": [
+    {
+      "name": "Image Gen 30x",
+      "path": "image-gen-30x-cli",
+      "alias": "image-gen"
+    },
+    {
+      "name": "Audit Orchestrator",
+      "path": "audit-orchestrator",
+      "alias": "audit-orch"
+    },
+    {
+      "name": "UGWTF",
+      "path": "ugwtf",
+      "alias": "ugwtf"
+    },
+    {
+      "name": "Documentation Standards",
+      "path": "documentation-standards",
+      "alias": "docs-std"
+    },
+    {
+      "name": "Workflow Agents",
+      "path": "damieus-workflow-agents",
+      "alias": "wf-agents"
+    },
+    {
+      "name": "Management",
+      "path": "Management",
+      "alias": "mgmt"
+    }
+  ],
+  "cortex": {
+    "agentKbPath": "../.agent-kb",
+    "dbPath": "../.agent-kb/db/agent_kb.sqlite",
+    "anvilSpec": "../.agent-kb/11-ANVIL.md",
+    "bootCommand": "npx tsx ../.agent-kb/anvil/cortex-boot.mts --repo=dame-luthas-app --agent={agent_id}",
+    "bootStateFile": ".cortex-boot.json"
+  },
+  "qualityGates": {
+    "typescript": {
+      "command": "npx tsc --noEmit",
+      "required": true,
+      "enabled": true
+    },
+    "lint": {
+      "command": "npm run lint",
+      "required": true,
+      "enabled": true
+    },
+    "build": {
+      "command": "npm run build",
+      "required": true,
+      "enabled": true
+    }
+  },
+  "governance": {
+    "malfig": true,
+    "zeroEmoji": true,
+    "zeroProse": true,
+    "taskIdentifiers": true
+  }
+}

@@ -64,6 +64,7 @@ next-env.d.ts
 # Agent
 .cortex-boot.json
 .handoff.config.json
+!.handoff.config.json
 
 # Environment
 .env

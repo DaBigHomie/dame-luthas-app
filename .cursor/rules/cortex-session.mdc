@@ -1,0 +1,49 @@
+---
+description: CORTEX session lifecycle — prime boot at start, checkpoint during work, close at end
+alwaysApply: true
+---
+
+# CORTEX session (Prime Gate)
+
+**Repo id**: `.repo-root.json` → `dame-luthas-app` (alias `dame-luthas`)  
+**Default agent**: `181`  
+**SSOT**: `../.agent-kb/db/agent_kb.sqlite` — not chat summaries or stale `.cortex-boot.json` alone.
+
+Run all commands from **this repo root**. See `documentation-standards/docs/PRIME-GATE-AGENT-REVIEW.md`.
+
+## Prime boot (every session start)
+
+```bash
+npx tsx ../.agent-kb/anvil/cortex-boot.mts --repo=dame-luthas-app --agent=181 --force
+# or MCP: prime_boot
+cat .cortex-boot.json
+```
+
+**Also read:** `.codebase-manifest.json`, `docs/PROJECT-OVERVIEW.md`, latest `docs/checkpoints/*.md`.
+
+**Task query (when boot stale):**
+
+```bash
+sqlite3 ../.agent-kb/db/agent_kb.sqlite \
+  "SELECT id, priority, status, substr(description,1,60) FROM tasks WHERE repo='dame-luthas-app' AND status!='complete' ORDER BY priority LIMIT 20;"
+```
+
+## During work
+
+```bash
+npx tsx ../.agent-kb/anvil/run.mts checkpoint --task={TASK_ID} --status=complete --repo=dame-luthas-app
+```
+
+Pre-commit: `npx tsc --noEmit && npm run lint && npm run build`
+
+## Session end
+
+```bash
+npx tsx ../.agent-kb/anvil/run.mts close --session={SESSION_ID} --repo=dame-luthas-app
+npx tsx ../.agent-kb/db/sync.mts --push
+```
+
+Claude macOS: `/exit` → `.claude/commands/exit.md`  
+Cursor: `@exit` → `documentation-standards/skills/exit/SKILL.md`
+
+**Production:** https://dameluthas.damieus.app
