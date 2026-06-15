@@ -70,7 +70,7 @@ async function main(): Promise<void> {
         env: { PRIME_SESSION_ID: existingSessionId, PRIME_REPO: ws.repoSlug },
         additional_context:
           `Prime Gate resumed session ${existingSessionId} (repo=${ws.repoSlug}). ` +
-          'SSOT=CORTEX DB. Do NOT use HANDOVER.md. Call prime_handoff_read before work; prime_close when done.',
+          'SSOT=CORTEX DB. Do NOT use HANDOVER.md. Session close is user-initiated only (@exit).',
       }),
     );
     process.exit(0);
@@ -108,7 +108,7 @@ async function main(): Promise<void> {
       additional_context:
         `Prime Gate boot OK. repo=${ws.repoSlug} sessionId=${sessionId}. ` +
         'SSOT=CORTEX DB (handoffs + knowledge handoff:*). ' +
-        'Do NOT use HANDOVER.md. Call prime_handoff_read. Env: prime_env_* MCP. Scripts: .mts only.',
+        'Do NOT use HANDOVER.md. Session close is user-initiated only (@exit). Env: prime_env_* MCP. Scripts: .mts only.',
     }),
   );
   process.exit(0);
