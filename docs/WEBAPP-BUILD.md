@@ -44,8 +44,22 @@ Check items off top to bottom. Stop if a gate fails.
 - [x] Resend server action scaffold (`src/app/actions/contact.ts`)
 - [ ] `RESEND_API_KEY` + verified domain on Vercel
 - [x] Supabase migrations — `supabase/migrations/*` (portfolio, case studies, services, posts, RLS)
-- [ ] Link remote project + `db:push` / `db:seed`
+- [ ] Link remote project + apply migrations via Supabase MCP (see below; never `db reset` or `db push`)
 - [ ] Dashboard post editor
+
+### Supabase migrations (CORTEX / WARDEN)
+
+**P0:** Never `supabase db reset`, `db push`, or destructive DB commands (`knowledge: ref:rules:never_run_db_reset`).
+
+Apply each file in `supabase/migrations/` in order via **Supabase MCP** `apply_migration`:
+
+- `project_id`: `mygbzfvoctlvnxvzivso` (from env / Vercel integration)
+- `name`: snake_case migration name (e.g. `auth_profiles`)
+- `query`: full SQL from the migration file
+
+After all migrations: `npx supabase gen types typescript --project-id mygbzfvoctlvnxvzivso > src/shared/types/database.types.ts` (when wiring the client).
+
+Seed (optional, after schema): `npm run db:seed` (requires `SUPABASE_SERVICE_ROLE_KEY` in `.env.local`).
 
 ## Phase 5 — Social embeds
 
