@@ -635,3 +635,9 @@ git config core.hooksPath .githooks
 ---
 
 *Swarm playbook v1 — synthesized from Dame Luthas migration session + four deep-dive agent audits, 2026-06-11.*
+
+## Change Log
+
+| Version | Date | Author | Change |
+|---|---|---|---|
+| 1.0 | 2026-06-25 | — | Initial version |

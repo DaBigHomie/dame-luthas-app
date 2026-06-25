@@ -61,3 +61,9 @@ cb59ee2 feat(site): remove /about, commit content bundle, and P2 polish
 3. **Manual:** Custom domain `dame-luthas.damieus.app`
 4. Migrate Gatorade/UN prose into structured registry
 5. Phase 1 Stitch designs — see `docs/WEBAPP-BUILD.md`
+
+## Change Log
+
+| Version | Date | Author | Change |
+|---|---|---|---|
+| 1.0 | 2026-06-25 | — | Initial version |

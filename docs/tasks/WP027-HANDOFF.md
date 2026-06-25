@@ -200,3 +200,9 @@ npx tsx ../.agent-kb/anvil/checkpoint.mts --task=task_luthas_wp_027 --status=com
 - [ ] `index.ts` barrel doesn't clobber `text-bands`, `site-nav`, `social-links`
 - [ ] Hand-curated reference preserved at `data/reference/service-blocks-handcurated.ts`
 - [ ] CORTEX checkpoint filed
+
+## Change Log
+
+| Version | Date | Author | Change |
+|---|---|---|---|
+| 1.0 | 2026-06-25 | — | Initial version |

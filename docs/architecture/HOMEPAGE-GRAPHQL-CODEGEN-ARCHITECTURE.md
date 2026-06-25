@@ -590,3 +590,9 @@ sequenceDiagram
     AST->>PUB: download + rewrite paths
     Dev->>Dev: git diff → parity review
 ```
+
+## Change Log
+
+| Version | Date | Author | Change |
+|---|---|---|---|
+| 1.0 | 2026-06-25 | — | Initial version |

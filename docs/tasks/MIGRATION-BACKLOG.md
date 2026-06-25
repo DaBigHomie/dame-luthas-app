@@ -125,3 +125,9 @@ npm run assets:pipeline         # convert + verify bindings
 - [LESSONS-LEARNED-DAME-LUTHAS-WP-MIGRATION.md](../LESSONS-LEARNED-DAME-LUTHAS-WP-MIGRATION.md)
 - [SWARM-PLAYBOOK-WP-TO-NEXT-MIGRATION.md](../SWARM-PLAYBOOK-WP-TO-NEXT-MIGRATION.md)
 - [WIDGET-PARITY-TASKS.md](./WIDGET-PARITY-TASKS.md)
+
+## Change Log
+
+| Version | Date | Author | Change |
+|---|---|---|---|
+| 1.0 | 2026-06-25 | — | Initial version |
