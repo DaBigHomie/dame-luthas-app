@@ -437,3 +437,9 @@ High-count homepage widgets:
 ## Why containers went missing (summary)
 
 Elementor renders blocks from **widget types** (`data-widget_type`). Extractors that only handle a subset drop the rest without error. The fix is **site-wide widget census + registry guardrail** so every type is mapped or explicitly skipped before migration starts — not more ad-hoc scripts.
+
+## Change Log
+
+| Version | Date | Author | Change |
+|---|---|---|---|
+| 1.0 | 2026-06-25 | — | Initial version |

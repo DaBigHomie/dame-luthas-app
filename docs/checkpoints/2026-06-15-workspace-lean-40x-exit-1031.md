@@ -48,3 +48,9 @@ See `docs/tasks/WIDGET-PARITY-TASKS.md` and `docs/MIGRATION-PLAYBOOK.md`.
 1. `task_luthas_wp_020` — StyledImage stagger service layout
 2. `task_luthas_wp_022` — Full testimonials via _elementor_data
 3. `npm run wp:visual-parity-audit` after layout fixes
+
+## Change Log
+
+| Version | Date | Author | Change |
+|---|---|---|---|
+| 1.0 | 2026-06-25 | — | Initial version |

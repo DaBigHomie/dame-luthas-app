@@ -94,3 +94,9 @@ None. Local WP at `dameluthas.local` required for live extract runs; HTML fixtur
 2. Implement Phase B (codegen scripts) per section 10
 3. Implement Phase C widgets
 4. Run `wp:screenshots:next` for parity sign-off
+
+## Change Log
+
+| Version | Date | Author | Change |
+|---|---|---|---|
+| 1.0 | 2026-06-25 | — | Initial version |

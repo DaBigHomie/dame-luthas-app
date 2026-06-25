@@ -40,3 +40,9 @@ npm run wp:visual-parity-audit
 ## Registry cross-reference
 
 See `scripts/wp/lib/widget-registry.ts` — entries with `note` field are partial until closed in this table.
+
+## Change Log
+
+| Version | Date | Author | Change |
+|---|---|---|---|
+| 1.0 | 2026-06-25 | — | Initial version |

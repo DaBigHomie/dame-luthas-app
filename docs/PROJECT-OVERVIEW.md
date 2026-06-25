@@ -76,3 +76,9 @@ This site is the **public portfolio surface** for Dame Luthas. The job-search an
 | **Platform map** | Federated topology + Vercel registry | [CAREER-INTELLIGENCE-PLATFORM-SOLUTION.md](../../project-polaris/docs/CAREER-INTELLIGENCE-PLATFORM-SOLUTION.md) |
 
 **Identity:** Dame Luthas on this site; **Damieus** is the agency brand (damieus.com). Resume tailoring uses the same rule in Polaris `contact-profile.json`.
+
+## Change Log
+
+| Version | Date | Author | Change |
+|---|---|---|---|
+| 1.0 | 2026-06-25 | — | Initial version |

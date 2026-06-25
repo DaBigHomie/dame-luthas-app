@@ -701,3 +701,9 @@ docs/
 ---
 
 *Generated from session transcript + four deep-dive agent audits, 2026-06-11.*
+
+## Change Log
+
+| Version | Date | Author | Change |
+|---|---|---|---|
+| 1.0 | 2026-06-25 | — | Initial version |

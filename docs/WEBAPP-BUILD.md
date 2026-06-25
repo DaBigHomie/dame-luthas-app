@@ -99,3 +99,9 @@ npm run ci:parity
 npm run deploy:prod
 npx tsx scripts/checkpoint.mts "short-title"
 ```
+
+## Change Log
+
+| Version | Date | Author | Change |
+|---|---|---|---|
+| 1.0 | 2026-06-25 | — | Initial version |

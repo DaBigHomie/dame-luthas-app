@@ -51,3 +51,9 @@ npm run ci:parity
 ### Supabase (future)
 
 Schema tables listed in `.codebase-manifest.json` — not wired in native shell yet. See [WEBAPP-BUILD.md](./WEBAPP-BUILD.md) Phase 4.
+
+## Change Log
+
+| Version | Date | Author | Change |
+|---|---|---|---|
+| 1.0 | 2026-06-25 | — | Initial version |
