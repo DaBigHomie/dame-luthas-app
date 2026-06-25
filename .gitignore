@@ -83,3 +83,4 @@ coverage/
 # Supabase CLI
 supabase/.temp/
 .env*.local
+.system/
