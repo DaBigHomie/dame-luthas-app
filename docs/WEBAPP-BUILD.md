@@ -59,7 +59,14 @@ Apply each file in `supabase/migrations/` in order via **Supabase MCP** `apply_m
 
 After all migrations: `npx supabase gen types typescript --project-id mygbzfvoctlvnxvzivso > src/shared/types/database.types.ts` (when wiring the client).
 
-Seed (optional, after schema): `npm run db:seed` (requires `SUPABASE_SERVICE_ROLE_KEY` in `.env.local`).
+Seed (optional, after schema):
+
+```bash
+npm run wp:extract && npm run wp:map   # → data/extracted/supabase-seed.json
+npm run db:seed                        # upsert via REST; needs .env.local keys
+```
+
+Loads `NEXT_PUBLIC_SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY` from `.env.local` (merge from `.env` after Vercel pull).
 
 ## Phase 5 — Social embeds
 

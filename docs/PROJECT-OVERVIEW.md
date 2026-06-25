@@ -64,3 +64,15 @@ npm run verify:public-routes   # WP vs Next matrix
 ```
 
 See [SWARM-PLAYBOOK-WP-TO-NEXT-MIGRATION.md](./SWARM-PLAYBOOK-WP-TO-NEXT-MIGRATION.md) and [WEBAPP-BUILD.md](./WEBAPP-BUILD.md).
+
+## Career Intelligence stack (related repos)
+
+This site is the **public portfolio surface** for Dame Luthas. The job-search and evidence pipeline lives in sibling repos:
+
+| Repo | Role | Doc |
+|------|------|-----|
+| career-corpus | Cited evidence SSOT → resume bundles | [CORPUS-SOLUTION.md](../../career-corpus/docs/CORPUS-SOLUTION.md) |
+| project-polaris | Scout, 40x tailor, assisted apply | [POLARIS-SOLUTION.md](../../project-polaris/docs/POLARIS-SOLUTION.md) |
+| **Platform map** | Federated topology + Vercel registry | [CAREER-INTELLIGENCE-PLATFORM-SOLUTION.md](../../project-polaris/docs/CAREER-INTELLIGENCE-PLATFORM-SOLUTION.md) |
+
+**Identity:** Dame Luthas on this site; **Damieus** is the agency brand (damieus.com). Resume tailoring uses the same rule in Polaris `contact-profile.json`.
