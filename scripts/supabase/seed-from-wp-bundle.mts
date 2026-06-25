@@ -14,6 +14,29 @@ import { join } from "node:path";
 import { HEADLESS_CONFIG } from "../wp/config";
 import type { SupabaseSeedBundle } from "../wp/lib/types";
 
+function loadEnvFile(path: string): void {
+  if (!existsSync(path)) return;
+  for (const line of readFileSync(path, "utf8").split("\n")) {
+    const t = line.trim();
+    if (!t || t.startsWith("#")) continue;
+    const eq = t.indexOf("=");
+    if (eq < 0) continue;
+    const key = t.slice(0, eq).trim();
+    if (process.env[key]) continue;
+    let val = t.slice(eq + 1).trim();
+    if (
+      (val.startsWith('"') && val.endsWith('"')) ||
+      (val.startsWith("'") && val.endsWith("'"))
+    ) {
+      val = val.slice(1, -1);
+    }
+    process.env[key] = val;
+  }
+}
+
+loadEnvFile(join(process.cwd(), ".env"));
+loadEnvFile(join(process.cwd(), ".env.local"));
+
 type ContentRow = Record<string, unknown>;
 
 function loadBundle(): SupabaseSeedBundle {
