@@ -104,7 +104,7 @@ function buildManifest(): RouteManifest {
       const normalized = path === "/" ? "/" : path.replace(/\/$/, "");
       const critical =
         normalized === "/" ||
-        ["/contact", "/about", "/case-studies", "/portfolio"].includes(normalized) ||
+        ["/contact", "/case-studies", "/portfolio"].includes(normalized) ||
         normalized.startsWith("/portfolio/");
 
       return {

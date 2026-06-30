@@ -1,0 +1,46 @@
+{
+  "$schema": "https://one4three.co/schemas/workspace.config.json",
+  "repo": {
+    "name": "Dame Luthas App",
+    "slug": "dame-luthas-app",
+    "alias": "dame-luthas",
+    "techStack": ["Next.js", "React", "TypeScript", "Tailwind"],
+    "owner": "DaBigHomie",
+    "packageManager": "npm",
+    "description": "dameluthas.com portfolio — WP to Next migration"
+  },
+  "utilityRepos": [
+    {
+      "name": "Documentation Standards",
+      "path": "documentation-standards",
+      "alias": "docs-std"
+    },
+    {
+      "name": "Career Corpus",
+      "path": "career-corpus",
+      "alias": "cc"
+    }
+  ],
+  "cortex": {
+    "agentKbPath": "../.agent-kb",
+    "dbPath": "../.agent-kb/db/agent_kb.sqlite",
+    "anvilSpec": "../.agent-kb/11-ANVIL.md"
+  },
+  "qualityGates": {
+    "typescript": {
+      "command": "npx tsc --noEmit",
+      "required": true,
+      "enabled": true
+    },
+    "lint": {
+      "command": "npm run lint",
+      "required": true,
+      "enabled": true
+    },
+    "build": {
+      "command": "npm run build",
+      "required": true,
+      "enabled": true
+    }
+  }
+}

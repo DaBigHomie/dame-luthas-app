@@ -57,6 +57,12 @@ const ROUTES: RouteSpec[] = [
     expectH1: true,
   },
   {
+    id: "portfolio-redirect",
+    wpPath: "/case-studies/",
+    nextPath: "/portfolio",
+    expectH1: true,
+  },
+  {
     id: "pf-redirect",
     wpPath: "/pf/united-nations-cloud-migration-fobos/",
     nextPath: "/pf/united-nations-cloud-migration-fobos",
@@ -130,6 +136,9 @@ async function main(): Promise<void> {
     }
     if (route.expectH1 && !next.h1) {
       issues.push("Next missing H1");
+    }
+    if (route.id === "portfolio-redirect" && !next.finalUrl.includes("/case-studies")) {
+      issues.push(`Expected redirect to /case-studies, got ${next.finalUrl}`);
     }
     if (route.id === "pf-redirect" && !next.finalUrl.includes("/portfolio/")) {
       issues.push(`Expected redirect to /portfolio/, got ${next.finalUrl}`);

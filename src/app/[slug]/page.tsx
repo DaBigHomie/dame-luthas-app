@@ -7,10 +7,17 @@ import {
   isMigratedAvailable,
   loadMigrated,
 } from "@/shared/lib/migrated/content";
-import { AboutPage } from "@/widgets/AboutPage";
 import { ContactPage } from "@/widgets/ContactPage";
 import { MigratedContent } from "@/shared/ui/MigratedContent";
 import { RichContent } from "@/shared/ui/RichContent";
+
+/** Slugs handled by dedicated app routes or removed from the public site. */
+const BLOCKED_SLUGS = new Set([
+  "about",
+  "home",
+  "case-studies",
+  "portfolio",
+]);
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -18,6 +25,10 @@ interface PageProps {
 
 export default async function CmsPage({ params }: PageProps) {
   const { slug } = await params;
+
+  if (BLOCKED_SLUGS.has(slug)) {
+    notFound();
+  }
 
   if (isMigratedAvailable()) {
     const migrated = loadMigrated();
@@ -29,10 +40,6 @@ export default async function CmsPage({ params }: PageProps) {
           about={migrated.aboutPage}
         />
       );
-    }
-
-    if (slug === "about" && migrated.aboutPage) {
-      return <AboutPage about={migrated.aboutPage} />;
     }
 
     const page = getMigratedPage(slug);

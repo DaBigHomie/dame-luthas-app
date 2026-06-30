@@ -20,12 +20,12 @@ Generated from `scripts/wp/lib/widget-registry.ts` partial notes + visual audit 
 | `task_luthas_wp_031` | P3 | Sites 2 & 3 | Not audited | Run `wp:audit-source` per site; extend registry |
 | `task_luthas_wp_032` | **P1** | De-WP runtime | `wp` prefix in app routes/paths/APIs | Zero `wp` in shipped `src/` URLs — see [MIGRATION-BACKLOG.md](./MIGRATION-BACKLOG.md) |
 | `task_luthas_wp_033` | **P1** | Media FSD | ~~wp-migrated~~ | **Done** — `public/assets/` + `assets:pipeline` | verify-bindings passes |
-| `task_luthas_wp_034` | **P1** | Public route audit | Audit homepage-only | `verify:public-routes` — WP vs Next for all public endpoints |
-| `task_luthas_wp_035` | **P1** | `/contact` | Not native-migrated | Extract + native `ContactPage` (WP: `dameluthas.local/contact/`) |
-| `task_luthas_wp_036` | **P1** | `/case-studies` | Route missing | Full page migration (WP: `dameluthas.local/case-studies/`) |
-| `task_luthas_wp_037` | **P1** | Portfolio detail | UN Fobos case study | `/portfolio/united-nations-cloud-migration-fobos` |
-| `task_luthas_wp_038` | **P1** | Portfolio detail | Amazon Labor Union | `/portfolio/amazon-labor-union-digital-transformation` |
-| `task_luthas_wp_039` | **P1** | Portfolio detail | Gatorade Gen-AI | `/portfolio/gatorade-embraces-generative-ai-powered-bottle-design` |
+| `task_luthas_wp_034` | ~~P1 done~~ | Public route audit | ~~Homepage-only~~ | `verify:public-routes` + e2e `@critical` |
+| `task_luthas_wp_035` | ~~P1 done~~ | `/contact` | ~~Not native~~ | Native `ContactPage` + Resend (env pending) |
+| `task_luthas_wp_036` | ~~P1 done~~ | `/case-studies` | ~~Route missing~~ | Native index; no WP bodyHtml leak |
+| `task_luthas_wp_037` | ~~P1 done~~ | Portfolio detail | UN Fobos | Structured registry + detail route |
+| `task_luthas_wp_038` | ~~P1 done~~ | Portfolio detail | Amazon Labor Union | Testimonials + client meta live |
+| `task_luthas_wp_039` | ~~P1 done~~ | Portfolio detail | Gatorade Gen-AI | Structured CTA/meta; prose still HTML |
 
 Full route matrix: [MIGRATION-BACKLOG.md](./MIGRATION-BACKLOG.md)
 
@@ -40,3 +40,9 @@ npm run wp:visual-parity-audit
 ## Registry cross-reference
 
 See `scripts/wp/lib/widget-registry.ts` — entries with `note` field are partial until closed in this table.
+
+## Change Log
+
+| Version | Date | Author | Change |
+|---|---|---|---|
+| 1.0 | 2026-06-25 | — | Initial version |

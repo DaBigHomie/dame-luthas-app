@@ -5,12 +5,17 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
 import type { MigratedPortfolioItem } from "@/shared/lib/migrated/content";
+import {
+  buildPortfolioFilters,
+} from "@/shared/lib/portfolio-labels";
 
 import { PortfolioFilterMenu } from "./PortfolioFilterMenu";
 
 interface PortfolioGridProps {
   items: MigratedPortfolioItem[];
   title?: string;
+  /** When false, omit section h2 (page already has h1). */
+  showHeading?: boolean;
   /** WP thegem-portfolio preset: 2 columns on desktop. */
   columns?: "2" | "3";
   id?: string;
@@ -19,12 +24,14 @@ interface PortfolioGridProps {
 export function PortfolioGrid({
   items,
   title = "Portfolio",
+  showHeading = true,
   columns = "3",
   id,
 }: PortfolioGridProps) {
+  const filters = useMemo(() => buildPortfolioFilters(items), [items]);
   const filterLabels = useMemo(
-    () => ["All", ...items.map((item) => item.title)],
-    [items],
+    () => ["All", ...filters.map((option) => option.label)],
+    [filters],
   );
   const [activeFilter, setActiveFilter] = useState("All");
 
@@ -54,40 +61,48 @@ export function PortfolioGrid({
     return () => observer.disconnect();
   }, [activeFilter, items]);
 
-  const visibleItems =
+  const activeSlug =
     activeFilter === "All"
+      ? null
+      : filters.find((option) => option.label === activeFilter)?.slug;
+
+  const visibleItems =
+    activeSlug === null
       ? items
-      : items.filter((item) => item.title === activeFilter);
+      : items.filter((item) => item.slug === activeSlug);
+
+  function handleFilterSelect(label: string) {
+    setActiveFilter(label);
+  }
 
   return (
     <section id={id} className="mx-auto max-w-[var(--dl-container-max)] px-[21px] py-12">
-      <h2 className="mb-8 text-3xl font-semibold uppercase tracking-wide text-white">
-        {title}
-      </h2>
+      {showHeading ? (
+        <h2 className="mb-8 text-3xl font-semibold uppercase tracking-wide text-white">
+          {title}
+        </h2>
+      ) : null}
 
       <PortfolioFilterMenu
         labels={filterLabels}
         active={activeFilter}
-        onSelect={setActiveFilter}
+        onSelect={handleFilterSelect}
+        options={filters}
       />
 
       <nav
         className="mb-8 hidden flex-wrap gap-3 md:flex"
         aria-label="Portfolio filters"
       >
-        {filterLabels.map((label) => (
-          <button
-            key={label}
-            type="button"
-            onClick={() => setActiveFilter(label)}
-            className={`rounded-full px-4 py-2 text-sm transition ${
-              label === activeFilter
-                ? "bg-[var(--dl-accent)] text-white"
-                : "border border-white/15 text-zinc-300 hover:border-[var(--dl-accent)]"
-            }`}
-          >
-            {label}
-          </button>
+        <FilterButton label="All" active={activeFilter === "All"} onSelect={handleFilterSelect} />
+        {filters.map((option) => (
+          <FilterButton
+            key={option.slug}
+            label={option.label}
+            active={activeFilter === option.label}
+            ariaLabel={option.fullTitle}
+            onSelect={handleFilterSelect}
+          />
         ))}
       </nav>
 
@@ -126,5 +141,33 @@ export function PortfolioGrid({
         ))}
       </div>
     </section>
+  );
+}
+
+function FilterButton({
+  label,
+  active,
+  ariaLabel,
+  onSelect,
+}: {
+  label: string;
+  active: boolean;
+  ariaLabel?: string;
+  onSelect: (label: string) => void;
+}) {
+  return (
+    <button
+      type="button"
+      aria-label={ariaLabel ?? label}
+      title={ariaLabel}
+      onClick={() => onSelect(label)}
+      className={`rounded-full px-4 py-2 text-sm transition ${
+        active
+          ? "bg-[var(--dl-accent)] text-white"
+          : "border border-white/15 text-zinc-300 hover:border-[var(--dl-accent)]"
+      }`}
+    >
+      {label}
+    </button>
   );
 }

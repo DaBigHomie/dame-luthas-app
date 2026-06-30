@@ -495,14 +495,20 @@ npm run build
 | Expectation | More blog/post widgets, fewer TheGem portfolio widgets |
 | Parsers | Post list, category nav — likely fewer custom-menu carousels |
 
-### Dame Luthas (`dame-luthas-app`) — remaining work
+### Dame Luthas (`dame-luthas-app`) — remaining work (2026-06-11)
+
+**Shipped this session:** public routes (`/contact`, `/case-studies`, `/portfolio/[slug]`), hero profile image, Vercel deploy pin, `content.json` in git, `/about` removed, portfolio CSS batch 6, Resend contact scaffold.
 
 | Task ID | Action |
 |---------|--------|
+| Resend env | `RESEND_API_KEY` + verified `RESEND_FROM` on Vercel |
+| Custom domain | Attach `dame-luthas.damieus.app` to `prj_SF0avm0b1fTz5sWtyRdsaoG1hLtv` |
+| Structured prose | Move Gatorade/UN body off `parsePortfolioBody()` into registry |
 | `task_luthas_wp_027` | Emit `service-blocks.ts` from `parseCustomMenus()` |
 | Fixture refresh | Re-capture page 375 HTML (11 custom menus) |
 | `task_luthas_wp_029` | `thegem-styledbutton` CTA skin parity |
 | `task_luthas_wp_030` | P8 hover remix scope |
+| Phase 1 Stitch | Homepage bento + resumes/blog/dashboard designs — [WEBAPP-BUILD.md](./WEBAPP-BUILD.md) |
 
 ---
 
@@ -629,3 +635,9 @@ git config core.hooksPath .githooks
 ---
 
 *Swarm playbook v1 — synthesized from Dame Luthas migration session + four deep-dive agent audits, 2026-06-11.*
+
+## Change Log
+
+| Version | Date | Author | Change |
+|---|---|---|---|
+| 1.0 | 2026-06-25 | — | Initial version |

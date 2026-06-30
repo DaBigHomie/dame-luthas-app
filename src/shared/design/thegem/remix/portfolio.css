@@ -1,0 +1,60 @@
+/**
+ * Remixed from: thegem-portfolio.css (TG-ORCH batch 6)
+ * Portfolio grid cards, excerpt rhythm, gallery lightbox chrome.
+ */
+
+.dl-gem-portfolio-card {
+  transition:
+    transform 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.dl-gem-portfolio-card:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--dl-accent) 45%, transparent);
+  box-shadow: 0 24px 48px rgb(0 0 0 / 35%);
+}
+
+.dl-gem-portfolio-card__image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 45%,
+    rgb(15 15 15 / 72%) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.dl-gem-portfolio-card:hover .dl-gem-portfolio-card__image::after {
+  opacity: 1;
+}
+
+.dl-gem-portfolio-card h3 a {
+  transition: color 0.2s ease;
+}
+
+.dl-gem-gallery-lightbox {
+  backdrop-filter: blur(8px);
+}
+
+.dl-gem-gallery-lightbox img {
+  border-radius: 0.75rem;
+  box-shadow: 0 24px 64px rgb(0 0 0 / 55%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dl-gem-portfolio-card,
+  .dl-gem-portfolio-card__image::after,
+  .dl-gem-portfolio-card h3 a {
+    transition: none !important;
+  }
+
+  .dl-gem-portfolio-card:hover {
+    transform: none;
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "generatedAt": "2026-06-15T18:03:07.413Z",
+  "repo": "dame-luthas-app",
+  "repoPath": "/Users/dame/management-git/dame-luthas-app",
+  "domains": [
+    "doc-place",
+    "quality-gate"
+  ],
+  "github_sha": "ea97d11f139fe80421376b2e2166363d01d625ff",
+  "verdict": "REWORK",
+  "blockers": 1,
+  "findings": [
+    {
+      "severity": "minor",
+      "category": "missing-change-log",
+      "file": "docs/LESSONS-LEARNED-DAME-LUTHAS-WP-MIGRATION.md",
+      "message": "Missing embedded ## Change Log section",
+      "remedy": "Add ## Change Log at bottom of doc"
+    },
+    {
+      "severity": "minor",
+      "category": "missing-change-log",
+      "file": "docs/MIGRATION-PLAYBOOK.md",
+      "message": "Missing embedded ## Change Log section",
+      "remedy": "Add ## Change Log at bottom of doc"
+    },
+    {
+      "severity": "minor",
+      "category": "missing-change-log",
+      "file": "docs/MIGRATION-WALKTHROUGH.md",
+      "message": "Missing embedded ## Change Log section",
+      "remedy": "Add ## Change Log at bottom of doc"
+    },
+    {
+      "severity": "minor",
+      "category": "missing-change-log",
+      "file": "docs/PROJECT-OVERVIEW.md",
+      "message": "Missing embedded ## Change Log section",
+      "remedy": "Add ## Change Log at bottom of doc"
+    },
+    {
+      "severity": "minor",
+      "category": "missing-change-log",
+      "file": "docs/SWARM-PLAYBOOK-WP-TO-NEXT-MIGRATION.md",
+      "message": "Missing embedded ## Change Log section",
+      "remedy": "Add ## Change Log at bottom of doc"
+    },
+    {
+      "severity": "minor",
+      "category": "missing-change-log",
+      "file": "docs/WEBAPP-BUILD.md",
+      "message": "Missing embedded ## Change Log section",
+      "remedy": "Add ## Change Log at bottom of doc"
+    },
+    {
+      "severity": "minor",
+      "category": "missing-change-log",
+      "file": "docs/WP-MIGRATION.md",
+      "message": "Missing embedded ## Change Log section",
+      "remedy": "Add ## Change Log at bottom of doc"
+    },
+    {
+      "severity": "minor",
+      "category": "missing-change-log",
+      "file": "docs/adapters/JNEWS-ADAPTER.md",
+      "message": "Missing embedded ## Change Log section",
+      "remedy": "Add ## Change Log at bottom of doc"
+    },
+    {
+      "severity": "blocker",
+      "category": "banned-doc-name",
+      "file": "docs/architecture/HOMEPAGE-GRAPHQL-CODEGEN-TSA.md",
+      "message": "Banned filename token in HOMEPAGE-GRAPHQL-CODEGEN-TSA.md",
+      "remedy": "Rename to docs/<SYSTEM>-SOLUTION.md or docs/<SYSTEM>-ARCHITECTURE.md per WARDEN sec 4"
+    },
+    {
+      "severity": "minor",
+      "category": "missing-change-log",
+      "file": "docs/architecture/HOMEPAGE-GRAPHQL-CODEGEN-TSA.md",
+      "message": "Missing embedded ## Change Log section",
+      "remedy": "Add ## Change Log at bottom of doc"
+    },
+    {
+      "severity": "minor",
+      "category": "missing-change-log",
+      "file": "docs/checkpoints/2026-06-11-case-studies-deploy-exit-1430.md",
+      "message": "Missing embedded ## Change Log section",
+      "remedy": "Add ## Change Log at bottom of doc"
+    },
+    {
+      "severity": "minor",
+      "category": "missing-change-log",
+      "file": "docs/checkpoints/2026-06-11-graphql-codegen-architecture-1352.md",
+      "message": "Missing embedded ## Change Log section",
+      "remedy": "Add ## Change Log at bottom of doc"
+    },
+    {
+      "severity": "minor",
+      "category": "missing-change-log",
+      "file": "docs/checkpoints/2026-06-11-migration-playbook-widget-census-1305.md",
+      "message": "Missing embedded ## Change Log section",
+      "remedy": "Add ## Change Log at bottom of doc"
+    },
+    {
+      "severity": "minor",
+      "category": "missing-change-log",
+      "file": "docs/checkpoints/2026-06-15-workspace-lean-40x-exit-1031.md",
+      "message": "Missing embedded ## Change Log section",
+      "remedy": "Add ## Change Log at bottom of doc"
+    },
+    {
+      "severity": "minor",
+      "category": "missing-change-log",
+      "file": "docs/tasks/MIGRATION-BACKLOG.md",
+      "message": "Missing embedded ## Change Log section",
+      "remedy": "Add ## Change Log at bottom of doc"
+    },
+    {
+      "severity": "minor",
+      "category": "missing-change-log",
+      "file": "docs/tasks/WIDGET-PARITY-TASKS.md",
+      "message": "Missing embedded ## Change Log section",
+      "remedy": "Add ## Change Log at bottom of doc"
+    }
+  ],
+  "persist": "deferred"
+}

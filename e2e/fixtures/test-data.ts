@@ -13,9 +13,7 @@ export function isIgnoredError(message: string): boolean {
 export const CRITICAL_PATHS = [
   "/",
   "/contact",
-  "/about",
   "/case-studies",
-  "/portfolio",
   "/portfolio/united-nations-cloud-migration-fobos",
   "/portfolio/amazon-labor-union-digital-transformation",
   "/portfolio/gatorade-embraces-generative-ai-powered-bottle-design",

@@ -2,16 +2,20 @@
 
 import { useState } from "react";
 
+import type { PortfolioFilterOption } from "@/shared/lib/portfolio-labels";
+
 interface PortfolioFilterMenuProps {
   labels: string[];
   active: string;
   onSelect: (label: string) => void;
+  options?: PortfolioFilterOption[];
 }
 
 export function PortfolioFilterMenu({
   labels,
   active,
   onSelect,
+  options = [],
 }: PortfolioFilterMenuProps) {
   const [open, setOpen] = useState(false);
   const [animClass, setAnimClass] = useState<"dl-animate-in" | "dl-animate-out" | "">(
@@ -55,11 +59,18 @@ export function PortfolioFilterMenu({
           className={`dl-gem-portfolio-filters__menu mt-2 space-y-1 rounded-xl border border-white/10 bg-[var(--dl-surface)] p-2 ${animClass}`}
           role="listbox"
         >
-          {labels.map((label) => (
+          {labels.map((label) => {
+            const fullTitle =
+              label === "All"
+                ? "All case studies"
+                : options.find((option) => option.label === label)?.fullTitle;
+            return (
             <li key={label} role="option" aria-selected={label === active}>
               <button
                 type="button"
                 className="w-full rounded-lg px-3 py-2 text-left text-sm text-zinc-200 hover:bg-white/5"
+                aria-label={fullTitle ?? label}
+                title={fullTitle}
                 onClick={() => {
                   onSelect(label);
                   close();
@@ -68,7 +79,8 @@ export function PortfolioFilterMenu({
                 {label}
               </button>
             </li>
-          ))}
+            );
+          })}
         </ul>
       ) : null}
     </div>

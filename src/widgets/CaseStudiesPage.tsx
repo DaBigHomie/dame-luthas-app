@@ -1,14 +1,9 @@
 import Link from "next/link";
 
-import {
-  getPageBySlug,
-  listPortfolio,
-} from "@/shared/lib/migrated/content";
-import { MigratedContent } from "@/shared/ui/MigratedContent";
+import { listPortfolio } from "@/shared/lib/migrated/content";
 import { PortfolioGrid } from "@/widgets/PortfolioGrid";
 
 export function CaseStudiesPage() {
-  const page = getPageBySlug("case-studies");
   const items = listPortfolio();
 
   return (
@@ -22,22 +17,16 @@ export function CaseStudiesPage() {
           <span className="text-[var(--dl-accent)]">Case Studies</span>
         </p>
         <h1 className="title-h1 mt-6 text-4xl font-semibold text-white md:text-5xl">
-          {page?.title ?? "Case Studies"}
+          Case Studies
         </h1>
-        {page?.excerpt ? (
-          <p className="styled-subtitle mt-4 max-w-3xl text-lg leading-relaxed text-zinc-400">
-            {page.excerpt.replace(/<[^>]+>/g, "").replace(/&#8217;/g, "'")}
-          </p>
-        ) : null}
+        <p className="styled-subtitle mt-4 max-w-3xl text-lg leading-relaxed text-zinc-400">
+          Our clients come to me with their toughest challenges — from global
+          cloud transformation to grassroots digital infrastructure. Explore
+          selected work below.
+        </p>
       </section>
 
-      <PortfolioGrid items={items} title="Case Studies" columns="3" />
-
-      {page?.bodyHtml ? (
-        <section className="mx-auto max-w-3xl px-6 pb-16">
-          <MigratedContent html={page.bodyHtml} />
-        </section>
-      ) : null}
+      <PortfolioGrid items={items} showHeading={false} columns="3" />
     </main>
   );
 }

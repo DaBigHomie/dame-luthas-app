@@ -19,6 +19,8 @@ import {
 import { parseHero } from "./lib/parsers/parse-hero";
 import * as cheerio from "cheerio";
 
+const PROFILE_IMAGE = "/assets/site/IMG_0666-2-2500px.webp";
+
 interface SnapshotItem {
   id: number;
   slug: string;
@@ -189,7 +191,9 @@ function buildAboutPage(
     role: "Consultant",
     bio,
     image: rewriteMedia(
-      team.image ?? "/assets/site/IMG_0666-2-2500px.webp",
+      team.image?.includes("thegem-person-160")
+        ? "/assets/site/IMG_0666-2-2500px.webp"
+        : (team.image ?? "/assets/site/IMG_0666-2-2500px.webp"),
     ),
     address,
     bodyHtml: sanitizeWpHtml(about?.content ?? ""),
@@ -224,7 +228,7 @@ function main(): void {
       slug: p.slug,
       title: p.title,
       excerpt: p.excerpt || excerptFromHtml(p.content, 160),
-      bodyHtml: sanitizeWpHtml(p.content),
+      bodyHtml: p.slug === "case-studies" ? "" : sanitizeWpHtml(p.content),
       href: p.slug === "home" ? "/" : `/${p.slug}`,
     }));
 
@@ -233,6 +237,7 @@ function main(): void {
   const templates = extractedTemplates.map(mapTemplate);
   const siteDescription =
     "I partner with organizations to solve complex technology challenges and build digital products that drive measurable growth.";
+  const aboutPage = buildAboutPage(about, contact, extractedTemplates, siteDescription);
   const pageSource = extractedPages ? "graphql" : "snapshot";
   const portfolioSourceLabel = extractedPortfolio
     ? "graphql"
@@ -258,7 +263,6 @@ function main(): void {
     navigation: [
       { label: "Home", href: "/" },
       { label: "Case Studies", href: "/case-studies" },
-      { label: "About", href: "/about" },
       { label: "Contact", href: "/contact" },
     ],
     pages,
@@ -279,11 +283,7 @@ function main(): void {
           href: "/contact",
         },
         ctaSecondary: { label: "Case Studies", href: "/case-studies" },
-        image: rewriteMedia(
-          home?.featuredImageUrl ??
-            portfolio[0]?.image ??
-            "/assets/services/home-04.webp",
-        ),
+        image: aboutPage.image ?? PROFILE_IMAGE,
       };
     })(),
     contactPage: contact
@@ -292,7 +292,7 @@ function main(): void {
           bodyHtml: sanitizeWpHtml(contact.content),
         }
       : null,
-    aboutPage: buildAboutPage(about, contact, extractedTemplates, siteDescription),
+    aboutPage,
     templates,
   };
 

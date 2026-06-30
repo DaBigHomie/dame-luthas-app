@@ -1,0 +1,46 @@
+---
+description: Session teardown — CORTEX close first, then 40x handoff pipeline
+globs:
+---
+
+# /exit — Dame Luthas session teardown
+
+**CORTEX close is mandatory.** Follow `documentation-standards/skills/exit/SKILL.md`.
+
+## Step 0: CORTEX prime end
+
+From repo root — session id from `.cortex-boot.json` → `_meta.sessionId`:
+
+```bash
+npx tsx ../.agent-kb/anvil/run.mts close --session=sess_... --repo=dame-luthas-app
+npx tsx ../.agent-kb/db/sync.mts --push
+```
+
+## Step 1: Quality gates
+
+```bash
+npx tsc --noEmit && npm run lint && npm run build
+npm run ci:parity
+```
+
+## Step 2: Checkpoint + manifest
+
+```bash
+npx tsx scripts/checkpoint.mts "session-title"
+```
+
+Manifest: `documentation-standards/docs/context-manifests/YYYY-MM-DD_dame-luthas-*.md`
+
+## Step 3: Slack handoff
+
+```bash
+cd ../documentation-standards
+node scripts/post-handoff-to-slack.mjs --file docs/context-manifests/<manifest>.md --kind handoff
+```
+
+## Step 4: 40x verify
+
+```bash
+cd ../documentation-standards
+node scripts/verify-workspace-40x.mjs
+```

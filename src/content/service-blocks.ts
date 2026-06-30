@@ -2,9 +2,11 @@
 import type { ServiceBlock } from "./types";
 
 const rotateDigital = ["Web Design", "Web Dev", "Web Hosting"];
-const img04 = "/assets/services/home-04.webp";
-const img03 = "/assets/services/home-03.webp";
-const img05 = "/assets/services/home-05.webp";
+const imgAi = "/assets/portfolio/dl-portfolio-1.webp";
+const imgDigital = "/assets/portfolio/dl-portfolio-2.webp";
+const imgCloud = "/assets/portfolio/wto-dameluthas.webp";
+const imgOrganizing = "/assets/portfolio/alu-dameluthas-1.webp";
+const imgConsulting = "/assets/site/IMG_0666-2-2500px.webp";
 
 export const serviceBlocks = [
   {
@@ -16,7 +18,7 @@ export const serviceBlocks = [
         id: "artificial-intelligence",
         title: "Artificial Intelligence",
         eyebrow: "Don't Get Left Behind",
-        image: img04,
+        image: imgAi,
         imagePosition: "left",
         rotating: [],
         items: [
@@ -30,7 +32,7 @@ export const serviceBlocks = [
       {
         id: "digital-presence",
         title: "Digital Presence",
-        image: img03,
+        image: imgDigital,
         imagePosition: "right",
         rotating: rotateDigital,
         items: [
@@ -47,7 +49,7 @@ export const serviceBlocks = [
         id: "cloud-solutions",
         title: "Cloud Solutions",
         eyebrow: "Work from Anywhere",
-        image: img05,
+        image: imgCloud,
         imagePosition: "right",
         rotating: [],
         items: [
@@ -72,7 +74,7 @@ export const serviceBlocks = [
       {
         id: "non-profits",
         title: "Non Profits",
-        image: img04,
+        image: imgOrganizing,
         imagePosition: "left",
         rotating: [],
         items: [
@@ -88,7 +90,7 @@ export const serviceBlocks = [
       {
         id: "graphic-designs",
         title: "Graphic Designs",
-        image: img03,
+        image: imgDigital,
         imagePosition: "right",
         rotating: [],
         items: [
@@ -113,7 +115,7 @@ export const serviceBlocks = [
         id: "back-to-work",
         title: "Get A Job",
         eyebrow: "Back to Work",
-        image: img04,
+        image: imgConsulting,
         imagePosition: "left",
         rotating: [],
         items: [
@@ -127,7 +129,7 @@ export const serviceBlocks = [
         id: "build-your-dream",
         title: "Be Your Own Boss",
         eyebrow: "Build Your Dream",
-        image: img03,
+        image: imgDigital,
         imagePosition: "right",
         rotating: [],
         items: [

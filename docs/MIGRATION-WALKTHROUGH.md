@@ -451,3 +451,9 @@ Homepage source is **WPGraphQL page ID 375** (not 14). Clients, testimonials, an
 | APIs Enabled | `drive.googleapis.com`, `drivemcp.googleapis.com` |
 | MCP Endpoint | `https://drivemcp.googleapis.com/mcp/v1` |
 | Auth | ADC bearer token (1hr expiry, refresh via script) |
+
+## Change Log
+
+| Version | Date | Author | Change |
+|---|---|---|---|
+| 1.0 | 2026-06-25 | — | Initial version |

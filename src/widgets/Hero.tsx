@@ -1,18 +1,23 @@
 import Image from "next/image";
 
 import { heroFallback } from "@/content/hero-fallback";
+import { toHeroProfileImage } from "@/content/profile-image";
 import { isMigratedAvailable, loadMigrated } from "@/shared/lib/migrated/content";
 import { AnimatedHeading } from "@/shared/ui/AnimatedHeading";
 import { AnimatedButton } from "@/shared/ui/AnimatedButton";
 
 export function Hero() {
-  const migrated = isMigratedAvailable() ? loadMigrated().hero : null;
+  const migratedBundle = isMigratedAvailable() ? loadMigrated() : null;
+  const migrated = migratedBundle?.hero ?? null;
+  const heroImage = migratedBundle
+    ? toHeroProfileImage(migratedBundle.aboutPage?.image ?? migrated?.image)
+    : heroFallback.image;
   const hero = migrated
     ? {
         title: migrated.title,
         subtitle: migrated.subtitle,
         ctaPrimary: migrated.ctaPrimary,
-        image: migrated.image,
+        image: heroImage,
       }
     : heroFallback;
 

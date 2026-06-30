@@ -1,12 +1,12 @@
 {
   "$schema": "https://one4three.co/schemas/projects.json",
-  "generatedAt": "2026-06-11T20:29:32.890Z",
-  "generatedBy": "create-repo-workspace.mts",
+  "generatedAt": "2026-06-15T14:30:00.538Z",
+  "generatedBy": "documentation-standards/scripts/generate-workspace.mts",
   "repo": {
     "name": "Dame Luthas App",
     "slug": "dame-luthas-app",
-    "alias": "dla",
-    "description": "Dame Luthas Next.js App - WordPress headless migration and visual parity audit system",
+    "alias": "dame-luthas",
+    "description": "dameluthas.com portfolio — WP to Next migration and visual parity audit system",
     "owner": "DaBigHomie",
     "techStack": [
       "Next.js 16",
@@ -54,17 +54,19 @@
       "name": "Management",
       "path": "Management",
       "alias": "mgmt"
+    },
+    {
+      "name": "Career Corpus",
+      "path": "career-corpus",
+      "alias": "cc"
     }
   ],
   "cortex": {
     "agentKbPath": "../.agent-kb",
     "dbPath": "../.agent-kb/db/agent_kb.sqlite",
     "anvilSpec": "../.agent-kb/11-ANVIL.md",
-    "bootSequence": [
-      "npx tsx ../.agent-kb/anvil/open.mts --repo=dame-luthas-app --agent={agent_id}",
-      "sqlite3 ../.agent-kb/db/agent_kb.sqlite \"SELECT value FROM knowledge WHERE key = 'env:dla:locations'\"",
-      "sqlite3 ../.agent-kb/db/agent_kb.sqlite \"SELECT file_path FROM instruction_files WHERE repo = 'dame-luthas-app'\""
-    ]
+    "bootCommand": "npx tsx ../.agent-kb/anvil/cortex-boot.mts --repo=dame-luthas-app --agent={agent_id}",
+    "bootStateFile": ".cortex-boot.json"
   },
   "qualityGates": {
     "typescript": {
@@ -72,7 +74,7 @@
       "required": true,
       "enabled": true
     },
-    "eslint": {
+    "lint": {
       "command": "npm run lint",
       "required": true,
       "enabled": true

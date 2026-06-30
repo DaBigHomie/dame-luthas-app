@@ -29,7 +29,7 @@ export const HEADLESS_CONFIG = {
   site: {
     name: "Dame Luthas",
     wpDomain: "dameluthas.com",
-    devDomain: "dame-luthas.damieus.app",
+    devDomain: "dameluthas.damieus.app",
     theme: "The Gem",
     pageBuilder: "Elementor",
   },

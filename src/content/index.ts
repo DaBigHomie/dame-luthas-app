@@ -8,5 +8,5 @@ export { testimonials } from "./testimonials";
 export { rotatingPhrases } from "./rotating";
 export { contentSections } from "./sections";
 export { homepageContentMeta } from "./meta";
-export { headerNavigation } from "./site-nav";
+export { headerNavigation, sanitizeHeaderNavigation } from "./site-nav";
 export { socialLinks } from "./social-links";

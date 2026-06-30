@@ -11,13 +11,15 @@ Tracks **non-homepage** migration work, **media/asset architecture**, and **de-W
 | WP source (ground truth) | Expected Next route | Status | Task ID |
 |--------------------------|---------------------|--------|---------|
 | `http://dameluthas.local/` | `/` | ✅ Native shell | — |
-| `http://dameluthas.local/contact/` | `/contact` | ❌ Not migrated (needs native widget + content extract) | `task_luthas_wp_035` |
-| `http://dameluthas.local/case-studies/` | `/case-studies` | ❌ Route missing / not implemented | `task_luthas_wp_036` |
-| `http://dameluthas.local/pf/united-nations-cloud-migration-fobos/` | `/portfolio/united-nations-cloud-migration-fobos` (+ redirect from `/pf/*`) | ❌ Not completed | `task_luthas_wp_037` |
-| `http://dameluthas.local/pf/amazon-labor-union-digital-transformation/` | `/portfolio/amazon-labor-union-digital-transformation` | ❌ Not completed | `task_luthas_wp_038` |
-| `http://dameluthas.local/pf/gatorade-embraces-generative-ai-powered-bottle-design/` | `/portfolio/gatorade-embraces-generative-ai-powered-bottle-design` | ❌ Not completed | `task_luthas_wp_039` |
+| `http://dameluthas.local/contact/` | `/contact` | ✅ Native `ContactPage` + Resend action | `task_luthas_wp_035` |
+| `http://dameluthas.local/case-studies/` | `/case-studies` | ✅ Native index; no stray WP bodyHtml | `task_luthas_wp_036` |
+| `http://dameluthas.local/pf/united-nations-cloud-migration-fobos/` | `/portfolio/united-nations-cloud-migration-fobos` (+ redirect from `/pf/*`) | ✅ Live; structured registry + HTML fallback | `task_luthas_wp_037` |
+| `http://dameluthas.local/pf/amazon-labor-union-digital-transformation/` | `/portfolio/amazon-labor-union-digital-transformation` | ✅ Live; testimonials + client meta | `task_luthas_wp_038` |
+| `http://dameluthas.local/pf/gatorade-embraces-generative-ai-powered-bottle-design/` | `/portfolio/gatorade-embraces-generative-ai-powered-bottle-design` | ✅ Live; structured CTA/meta | `task_luthas_wp_039` |
 
-**Audit command (planned):** `npm run verify:public-routes` — compare HTTP status + title/H1 presence on WP vs Next for every row above. See [MIGRATION-PLAYBOOK.md](../MIGRATION-PLAYBOOK.md) Phase 1b.
+**Audit command:** `npm run verify:public-routes` — compare HTTP status + title/H1 presence on WP vs Next for every row above. See [MIGRATION-PLAYBOOK.md](../MIGRATION-PLAYBOOK.md) Phase 1b.
+
+**2026-06-11 session:** `/about` removed (404). `/portfolio` → `/case-studies`. Production: https://dame-luthas-app.vercel.app
 
 **WP portfolio slug prefix:** Source uses `/pf/{slug}/`; Next app uses `/portfolio/{slug}`. Accept either permanent redirect (`/pf/*` → `/portfolio/*`) or Next rewrite in `next.config.ts`.
 
@@ -29,38 +31,27 @@ Tracks **non-homepage** migration work, **media/asset architecture**, and **de-W
 |----|----------|------|---------|--------------|------------|
 | `task_luthas_wp_032` | **P1** | De-WP runtime | ~~App exposes wp routes~~ | **Done 2026-06-11** — removed `/api/wp-*`, pilot CSS proxy; static `/assets/` only | `grep -r 'api/wp-' src/` → 0 |
 | `task_luthas_wp_033` | **P1** | Media FSD | ~~wp-migrated raw copies~~ | **Done 2026-06-11** — `npm run assets:pipeline`; 73 files in `public/assets/` | `assets:verify-bindings` passes |
-| `task_luthas_wp_034` | **P1** | Public endpoint audit | `wp:audit-source` only audits homepage URL passed in; no Next-side route matrix | Extend audit: WP URL list → expected Next path → status (200/404/content diff) | Script exits 1 if any public route missing or 404 on Next; documented in playbook Phase 1b |
+| `task_luthas_wp_034` | **P1** | Public endpoint audit | ~~Homepage-only audit~~ | **Done 2026-06-11** — `npm run verify:public-routes` + Playwright `@critical` | Script + e2e cover public matrix |
 
 ---
 
 ## Route migration backlog (detail)
 
-### `task_luthas_wp_035` — Contact page
+### `task_luthas_wp_035` — Contact page ✅ (2026-06-11)
 
-- **WP:** [view-source:http://dameluthas.local/contact/](http://dameluthas.local/contact/)
-- **Gap:** `[slug]/page.tsx` renders `ContactPage` only when `data/migrated/content.json` exists; native shell path not implemented
-- **Work:** GraphQL/Cheerio extract → `src/content/contact.ts` → native `ContactPage` widget (CF7 replacement for form)
-- **Depends on:** `task_luthas_wp_033` (contact hero/media paths)
+- Native `src/app/contact/page.tsx` + `ContactPage` widget
+- Resend server action wired; requires Vercel env (`RESEND_API_KEY`, `RESEND_FROM`)
 
-### `task_luthas_wp_036` — Case studies
+### `task_luthas_wp_036` — Case studies ✅ (2026-06-11)
 
-- **WP:** [view-source:http://dameluthas.local/case-studies/](http://dameluthas.local/case-studies/)
-- **Gap:** No `src/app/case-studies/page.tsx` or slug handler
-- **Work:** Audit widget census on page → registry → extract → widget(s) → route
+- `CaseStudiesPage` + `PortfolioGrid`; empty `bodyHtml` in migrate script (fixes Gatorade article leak)
+- Canonical index at `/case-studies`; `/portfolio` redirects
 
-### `task_luthas_wp_037` — UN Cloud Migration (portfolio)
+### `task_luthas_wp_037`–`039` — Portfolio detail ✅ (2026-06-11)
 
-- **WP:** [view-source:http://dameluthas.local/pf/united-nations-cloud-migration-fobos/](http://dameluthas.local/pf/united-nations-cloud-migration-fobos/)
-- **Gap:** Portfolio detail not extracted to native content; `/portfolio/[slug]` requires migrated JSON or live GraphQL item
-- **Work:** Extract `thegemPfItem` body + media → `src/content/portfolio/{slug}.ts` or shared portfolio index
-
-### `task_luthas_wp_038` — Amazon Labor Union
-
-- **WP:** [view-source:http://dameluthas.local/pf/amazon-labor-union-digital-transformation/](http://dameluthas.local/pf/amazon-labor-union-digital-transformation/)
-
-### `task_luthas_wp_039` — Gatorade Gen-AI
-
-- **WP:** [view-source:http://dameluthas.local/pf/gatorade-embraces-generative-ai-powered-bottle-design/](http://dameluthas.local/pf/gatorade-embraces-generative-ai-powered-bottle-design/)
+- `/portfolio/[slug]` with `resolveCaseStudy()` + structured registry (Amazon, Gatorade, UN)
+- `/pf/[slug]` → `/portfolio/[slug]` redirect
+- **Follow-up:** migrate remaining prose off `MigratedContent` / HTML parse — **done 2026-06-11** (all 3 case studies use `nativeContent` registry)
 
 ---
 
@@ -134,3 +125,9 @@ npm run assets:pipeline         # convert + verify bindings
 - [LESSONS-LEARNED-DAME-LUTHAS-WP-MIGRATION.md](../LESSONS-LEARNED-DAME-LUTHAS-WP-MIGRATION.md)
 - [SWARM-PLAYBOOK-WP-TO-NEXT-MIGRATION.md](../SWARM-PLAYBOOK-WP-TO-NEXT-MIGRATION.md)
 - [WIDGET-PARITY-TASKS.md](./WIDGET-PARITY-TASKS.md)
+
+## Change Log
+
+| Version | Date | Author | Change |
+|---|---|---|---|
+| 1.0 | 2026-06-25 | — | Initial version |

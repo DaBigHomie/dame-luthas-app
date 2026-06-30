@@ -1,4 +1,15 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Dame Luthas App
+
+Personal portfolio site — Next.js migration from WordPress (TheGem + Elementor).
+
+**Production:** https://dame-luthas-app.vercel.app
+
+## Docs
+
+- [Project overview](./docs/PROJECT-OVERVIEW.md)
+- [WP migration](./docs/WP-MIGRATION.md)
+- [Webapp build sequence](./docs/WEBAPP-BUILD.md)
+- [Swarm playbook](./docs/SWARM-PLAYBOOK-WP-TO-NEXT-MIGRATION.md)
 
 ## Getting Started
 

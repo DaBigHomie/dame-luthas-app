@@ -604,19 +604,32 @@ api/wp-media/route.ts → uploadsRoot()
 
 ---
 
-## 12. Open issues at session end
+## 12. Open issues at session end (updated 2026-06-11)
 
 | ID | Issue | Priority |
 |----|-------|----------|
-| `task_luthas_wp_027` | Auto-emit `service-blocks.ts` from widget walk | P1 |
-| Fixture drift | Refresh `data/fixtures/page-375.html` (8→11 menus) | P1 |
+| Resend env | Contact form wired; fails without `RESEND_API_KEY` on Vercel | P1 |
+| Vercel shell env | Stray `VERCEL_PROJECT_ID` pointed at workflow-agents — pin in shell | P1 |
+| Structured prose | Gatorade/UN detail still uses HTML parse + `MigratedContent` | P2 |
+| `task_luthas_wp_027` | Auto-emit `service-blocks.ts` from widget walk | P2 |
+| Fixture drift | Refresh `data/fixtures/page-375.html` (8→11 menus) | P2 |
 | `task_luthas_wp_029`–`031` | Button skins, P8 hovers, sites 2&3 | P2–P3 |
-| `task_luthas_wp_032`–`034` | De-WP runtime, media FSD, public route audit | P1 — [MIGRATION-BACKLOG.md](./tasks/MIGRATION-BACKLOG.md) |
-| `task_luthas_wp_035`–`039` | Contact, case-studies, 3 portfolio pages | P1 |
 | Visual audit scroll | Below-fold lazy sections not audited | P2 |
 | CF7/Woo shortcodes | Native replacements needed | P3 |
 | Pilot CSS runtime walks | Codegen manifest to remove `readdirSync` from build graph | P3 |
 | Split content barrels | Prevent emit clobbering manual exports | P2 |
+
+**Closed 2026-06-11:** `task_luthas_wp_032`–`034` (de-WP runtime, media FSD, public routes); `task_luthas_wp_035`–`039` (contact, case-studies, portfolio detail); case-studies Gatorade bodyHtml leak; Vercel deploy hijack via manifest pin.
+
+### 12.1 Session 2026-06-11 — case studies & deploy
+
+| Lesson | Detail |
+|--------|--------|
+| **Index page bodyHtml** | WP exported full Gatorade article into `case-studies` page — index must not render `MigratedContent` for listing routes |
+| **Vercel project drift** | Shell `VERCEL_PROJECT_ID` overrode CLI link — read org/project from `.codebase-manifest.json` and warn on mismatch |
+| **content.json in CI** | Gitignore blocked build on Vercel — commit bundle + `prebuild` ensure script |
+| **About route** | Live WP nav had no `/about` — block slug + remove nav rather than ship orphan page |
+| **Structured case studies** | Registry merges with HTML parse — ship meta/testimonials first, prose migration second |
 
 ---
 
@@ -688,3 +701,9 @@ docs/
 ---
 
 *Generated from session transcript + four deep-dive agent audits, 2026-06-11.*
+
+## Change Log
+
+| Version | Date | Author | Change |
+|---|---|---|---|
+| 1.0 | 2026-06-25 | — | Initial version |

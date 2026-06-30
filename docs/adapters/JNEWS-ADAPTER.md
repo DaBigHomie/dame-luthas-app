@@ -107,3 +107,9 @@ export const BLOCK_REGISTRY: Record<
 5. Reuse Phases 5, 7, 9, 10 from the main playbook unchanged
 
 See [MIGRATION-PLAYBOOK.md](../MIGRATION-PLAYBOOK.md) for shared phases and [SWARM-PLAYBOOK-WP-TO-NEXT-MIGRATION.md](../SWARM-PLAYBOOK-WP-TO-NEXT-MIGRATION.md) for agent roles.
+
+## Change Log
+
+| Version | Date | Author | Change |
+|---|---|---|---|
+| 1.0 | 2026-06-25 | — | Initial version |
