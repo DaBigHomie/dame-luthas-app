@@ -1,0 +1,97 @@
+{
+  "$schema": "https://one4three.co/schemas/projects.json",
+  "generatedAt": "2026-06-11T20:29:32.890Z",
+  "generatedBy": "create-repo-workspace.mts",
+  "repo": {
+    "name": "Dame Luthas App",
+    "slug": "dame-luthas-app",
+    "alias": "dla",
+    "description": "Dame Luthas Next.js App - WordPress headless migration and visual parity audit system",
+    "owner": "DaBigHomie",
+    "techStack": [
+      "Next.js 16",
+      "React 19",
+      "Tailwind CSS v4",
+      "Playwright",
+      "WordPress Migration",
+      "TypeScript",
+      "npm"
+    ],
+    "packageManager": "npm"
+  },
+  "workspaces": {
+    "antigravity": "dame-luthas-app_antigravity.code-workspace",
+    "cursor": "dame-luthas-app.cursor.code-workspace",
+    "vscode": "dame-luthas-app.code-workspace"
+  },
+  "utilityRepos": [
+    {
+      "name": "Image Gen 30x",
+      "path": "image-gen-30x-cli",
+      "alias": "image-gen"
+    },
+    {
+      "name": "Audit Orchestrator",
+      "path": "audit-orchestrator",
+      "alias": "audit-orch"
+    },
+    {
+      "name": "UGWTF",
+      "path": "ugwtf",
+      "alias": "ugwtf"
+    },
+    {
+      "name": "Documentation Standards",
+      "path": "documentation-standards",
+      "alias": "docs-std"
+    },
+    {
+      "name": "Workflow Agents",
+      "path": "damieus-workflow-agents",
+      "alias": "wf-agents"
+    },
+    {
+      "name": "Management",
+      "path": "Management",
+      "alias": "mgmt"
+    }
+  ],
+  "cortex": {
+    "agentKbPath": "../.agent-kb",
+    "dbPath": "../.agent-kb/db/agent_kb.sqlite",
+    "anvilSpec": "../.agent-kb/11-ANVIL.md",
+    "bootSequence": [
+      "npx tsx ../.agent-kb/anvil/open.mts --repo=dame-luthas-app --agent={agent_id}",
+      "sqlite3 ../.agent-kb/db/agent_kb.sqlite \"SELECT value FROM knowledge WHERE key = 'env:dla:locations'\"",
+      "sqlite3 ../.agent-kb/db/agent_kb.sqlite \"SELECT file_path FROM instruction_files WHERE repo = 'dame-luthas-app'\""
+    ]
+  },
+  "qualityGates": {
+    "typescript": {
+      "command": "npx tsc --noEmit",
+      "required": true,
+      "enabled": true
+    },
+    "eslint": {
+      "command": "npm run lint",
+      "required": true,
+      "enabled": true
+    },
+    "build": {
+      "command": "npm run build",
+      "required": true,
+      "enabled": true
+    },
+    "e2e": {
+      "command": "npm run test:e2e",
+      "required": false,
+      "enabled": true
+    }
+  },
+  "governance": {
+    "malfig": true,
+    "zeroEmoji": true,
+    "zeroProse": true,
+    "taskIdentifiers": true
+  }
+}

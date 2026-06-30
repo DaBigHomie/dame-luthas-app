@@ -2,63 +2,51 @@
 applyTo: "**"
 ---
 
-# Commit Quality Rules — michael-imani-hub
+# Commit & Quality Gate Rules
 
-## Format
-```
-{type}({scope}): {description}
-```
+> Managed by DaBigHomie/documentation-standards — do not edit in target repos.
 
-## Types
-| Type | Usage |
-|------|-------|
-| `feat` | New feature or capability |
-| `fix` | Bug fix |
-| `chore` | Build, config, dependency updates |
-| `docs` | Documentation only |
-| `refactor` | Code restructure without behavior change |
-| `style` | Formatting, CSS, token changes |
-| `test` | Test additions or fixes |
-| `perf` | Performance improvements |
+## Pre-Commit Steps (MANDATORY)
 
-## Scopes (MIH-specific)
-| Scope | Files |
-|-------|-------|
-| `clothing` | `src/features/clothing/**` |
-| `music` | `src/features/music/**` |
-| `angels` | `src/features/angels/**` |
-| `checkout` | `src/features/checkout/**` |
-| `admin` | `src/features/admin/**` |
-| `shared` | `src/shared/**` |
-| `entities` | `src/entities/**` |
-| `widgets` | `src/widgets/**` |
-| `app` | `src/app/**` |
-| `design` | `src/shared/design/**`, `output/stitch/**` |
-| `docs` | `docs/**`, `*.md` |
-| `agents` | `.github/agents/**`, `.github/instructions/**` |
-| `config` | `next.config.ts`, `tsconfig.json`, `package.json`, etc. |
+1. `npx tsc --noEmit` — 0 errors
+2. `npm run lint` — 0 errors
+3. `npm run build` — succeeds
+4. Test in browser if UI changes
+5. Workflow files: NO `${{ }}` syntax in comments
+6. Ask user to review before committing
+7. `git status` then `git add -A` then `git status --short` then commit
 
-## Examples
-```
-feat(clothing): add product grid with infinite scroll
-fix(checkout): correct total calculation on quantity change
-style(design): update primary accent token to Electric Blue
-docs(agents): add malfig-gatekeeper agent spec for MIH
-chore(config): update Supabase client to @supabase/ssr 0.5
-```
+## Commit Format
 
-## Pre-Commit Gate (MANDATORY)
+**Short**: `feat/fix/docs: [description]`
+
+**Multi-line** — use heredoc (never `-m` with line breaks):
 ```bash
-npx tsc --noEmit && npm run lint && npm run build 2>&1 | tail -10
-```
-Never commit if any gate fails. If lint auto-fixes, re-stage only the fixed files.
+git commit -F - <<'EOF'
+feat: Description
 
-## Staging Discipline
-```bash
-# CORRECT — explicit staging
-git add src/features/clothing/ui/ProductCard.tsx src/features/clothing/index.ts
-
-# BLOCKED — mass staging
-git add -A
-git commit -a
+Testing Evidence:
+- TypeScript: 0 errors
+- Build: Successful
+EOF
 ```
+
+**Never**: `git reset`, `git commit -a` (doesn't stage untracked files)
+
+## Pre-Deployment Quality Gates
+
+| Gate | Command | Must Pass |
+|------|---------|-----------|
+| TypeScript | `npx tsc --noEmit` | 0 errors |
+| Lint | `npm run lint` | 0 errors |
+| Build | `npm run build` | Success |
+| Unit Tests | `npm test -- --run` | All pass |
+| E2E | `npx playwright test` | All pass |
+
+NEVER deploy if any gate fails.
+
+## Terminal Output Rules
+
+- Read ALL output — never ignore warnings, deprecation notices, or errors
+- Never proceed if: build failed, type errors, test failures, security vulnerabilities
+- Escalate to user if: unknown errors, conflicting messages, cannot determine root cause

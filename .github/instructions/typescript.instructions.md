@@ -1,65 +1,29 @@
 ---
-applyTo: "src/**/*.ts,src/**/*.tsx"
+applyTo: "**/*.ts,**/*.tsx,**/*.js,**/*.jsx"
 ---
 
-# TypeScript Rules — michael-imani-hub
+# TypeScript & Build Rules
 
-## Strict Config
-- All files must compile with `npx tsc --noEmit` — no errors allowed.
-- `strict: true` is enforced — no `any` without an inline justification comment.
-- Prefer `unknown` over `any` for external data ingestion.
+> Managed by DaBigHomie/documentation-standards — do not edit in target repos.
 
-## JSONB / Supabase Type Patterns
-```typescript
-// Cast through unknown first
-const metadata = row.metadata as unknown as ProductMetadata;
+## Dev Server vs Production Build
 
-// Insert type issues — use as never only as last resort
-const { error } = await supabase
-  .from('products')
-  .insert(payload as never);
+CRITICAL: Local dev server may show NO errors while production build fails.
+
+| Mode | Tool | Type Checking |
+|------|------|---------------|
+| `npm run dev` | esbuild | None (fast) |
+| `npm run build` | tsc + esbuild | Full (strict) |
+
+ALWAYS run before committing:
+```bash
+npx tsc --noEmit    # Must have 0 errors
+npm run lint        # Must have 0 errors
 ```
 
-## Design Token Types
-```typescript
-// src/shared/design/tokens.ts exports typed token constants
-import { TOKENS } from '@/shared/design/tokens';
-// Never use raw string hex values — reference TOKENS.*
-```
+## Strict Settings Enforced in Production
 
-## Path Aliases
-Use `@/` for absolute imports from `src/`:
-```typescript
-import { Button } from '@/shared/ui/button';
-import { useProducts } from '@/features/clothing';
-import { TOKENS } from '@/shared/design/tokens';
-```
-
-## Component Typing
-```typescript
-// Props interface over type for extensibility
-interface ProductCardProps {
-  product: Product;
-  className?: string;
-}
-
-// Use React.FC sparingly — prefer explicit return type
-function ProductCard({ product, className }: ProductCardProps): React.ReactElement {
-  // ...
-}
-```
-
-## Server Action Types
-```typescript
-'use server';
-
-export async function addToCart(
-  productId: string,
-  quantity: number
-): Promise<{ success: boolean; error?: string }> {
-  // ...
-}
-```
-
-## No Implicit Returns
-Functions must explicitly return or be typed `void`. Avoid implicit `undefined` returns in async functions.
+These tsconfig.json settings are checked by tsc but ignored by esbuild:
+- `"strict": true`
+- `"noImplicitAny": true`
+- `"strictNullChecks": true`
