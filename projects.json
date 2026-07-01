@@ -6,7 +6,7 @@
     "name": "Dame Luthas App",
     "slug": "dame-luthas-app",
     "alias": "dame-luthas",
-    "description": "dameluthas.com portfolio — WP to Next migration and visual parity audit system",
+    "description": "Dame Luthas Next.js App - WordPress headless migration and visual parity audit system",
     "owner": "DaBigHomie",
     "techStack": [
       "Next.js 16",
