@@ -4,7 +4,7 @@ import type { ParsedFooterContent } from "@/shared/lib/migrated/templates";
 
 interface FooterBottomBarProps {
   footer: ParsedFooterContent;
-  site: { contact: { email: string; linkedin: string } };
+  site: { name: string; contact: { phone?: string; email: string; linkedin: string } };
   navigation: Array<{ label: string; href: string }>;
 }
 
@@ -57,7 +57,7 @@ function SocialIcon({ network }: { network: string }) {
 
 function resolveCtaHref(
   label: string,
-  contact: { phone: string; email: string; linkedin: string },
+  contact: { email: string; linkedin: string },
 ): string {
   const key = label.toLowerCase();
   if (key.includes("email")) return `mailto:${contact.email}`;
