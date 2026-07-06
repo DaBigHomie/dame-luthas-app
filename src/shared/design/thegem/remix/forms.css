@@ -5,27 +5,28 @@
 
 .dl-gem-form-underline {
   border: 0;
-  border-bottom: 1px solid rgb(0 0 0 / 0.3);
+  border-bottom: 1px solid hsl(var(--border));
   background: transparent;
+  color: hsl(var(--foreground));
   transition: border-color var(--dl-gem-duration-base) var(--dl-gem-ease);
 }
 
 .dl-gem-form-underline:focus {
-  border-bottom-color: rgb(0 0 0 / 0.8);
+  border-bottom-color: hsl(var(--primary));
   outline: none;
 }
 
 .dl-gem-form-submit {
   border-radius: 9999px;
-  background: var(--dl-footer-bar-bg);
-  color: var(--dl-footer-bar-text);
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
   transition: background-color var(--dl-gem-duration-base) var(--dl-gem-ease),
     color var(--dl-gem-duration-base) var(--dl-gem-ease);
 }
 
 .dl-gem-form-submit:hover {
-  background: var(--dl-footer-bar-text);
-  color: var(--dl-footer-bar-bg);
+  background: hsl(var(--primary-hover));
+  color: hsl(var(--primary-foreground));
 }
 
 @media (prefers-reduced-motion: reduce) {

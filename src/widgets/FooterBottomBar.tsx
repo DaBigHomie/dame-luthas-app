@@ -1,10 +1,11 @@
 import Link from "next/link";
 
-import { loadMigrated } from "@/shared/lib/migrated/content";
 import type { ParsedFooterContent } from "@/shared/lib/migrated/templates";
 
 interface FooterBottomBarProps {
   footer: ParsedFooterContent;
+  site: { name: string; contact: { phone?: string; email: string; linkedin: string } };
+  navigation: Array<{ label: string; href: string }>;
 }
 
 const SOCIAL_LABELS: Record<string, string> = {
@@ -56,7 +57,7 @@ function SocialIcon({ network }: { network: string }) {
 
 function resolveCtaHref(
   label: string,
-  contact: { phone: string; email: string; linkedin: string },
+  contact: { email: string; linkedin: string },
 ): string {
   const key = label.toLowerCase();
   if (key.includes("email")) return `mailto:${contact.email}`;
@@ -73,9 +74,11 @@ function resolveSocialHref(
   return null;
 }
 
-export function FooterBottomBar({ footer }: FooterBottomBarProps) {
-  const { site, navigation } = loadMigrated();
-
+export function FooterBottomBar({
+  footer,
+  site,
+  navigation,
+}: FooterBottomBarProps) {
   const navLinks =
     footer.links.length > 0
       ? footer.links.filter((item) =>

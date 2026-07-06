@@ -8,11 +8,11 @@
   --dl-gem-duration-slow: 500ms;
   --dl-gem-ease: cubic-bezier(0.4, 0, 0.2, 1);
 
-  --dl-footer-yellow: #f3e04a;
-  --dl-footer-lavender: #c4c0ee;
-  --dl-footer-bar-bg: #ffffff;
-  --dl-footer-bar-text: #0a0a0f;
-  --dl-footer-bar-muted: #6b6b6b;
+  /* Footer bar repointed to the dark Luthas Enterprise surface (was white #ffffff).
+     TheGem yellow/lavender removed — ContactFormBlock no longer uses them. */
+  --dl-footer-bar-bg: hsl(var(--surface));
+  --dl-footer-bar-text: hsl(var(--foreground));
+  --dl-footer-bar-muted: hsl(var(--muted-foreground));
 }
 
 @media (prefers-reduced-motion: reduce) {

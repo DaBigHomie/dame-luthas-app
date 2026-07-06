@@ -1,78 +1,47 @@
 /**
- * Design Tokens — Dame Luthas
- * 
- * SSOT for all colors, spacing, typography.
- * No raw hex values anywhere else in the codebase.
+ * Design Tokens — Dame Luthas ("Luthas Enterprise")
+ *
+ * TS mirror of the CSS custom properties in src/app/globals.css.
+ * SSOT + rationale: docs/design/DESIGN-SYSTEM-RECOMMENDATION.md
+ * WCAG verified by scripts/design/audit-contrast.mts (all required checks pass).
+ *
+ * Values are HSL channel strings, matching globals.css `:root`. Wrap with `hsl()`
+ * when used as a color, e.g. `hsl(${tokens.colors.primary.DEFAULT})`.
  */
 
 export const tokens = {
   colors: {
-    brand: {
-      accent: '#8F93F1',
-      background: '#0a0a0f',
-      surface: '#14141c',
-    },
+    background: "222 47% 6%",
+    surface: "222 47% 8%",
+    elevated: "222 47% 10%",
+    foreground: "0 0% 100%",
+    mutedForeground: "222 14% 70%",
+    border: { DEFAULT: "222 18% 46%", subtle: "222 30% 18%" },
     primary: {
-      DEFAULT: '#8F93F1',
-      foreground: 'hsl(0, 0%, 100%)',
-      50: 'hsl(220, 90%, 96%)',
-      100: 'hsl(220, 90%, 90%)',
-      500: 'hsl(220, 90%, 56%)',
-      600: 'hsl(220, 90%, 48%)',
-      700: 'hsl(220, 90%, 40%)',
-      900: 'hsl(220, 90%, 20%)',
+      DEFAULT: "217 91% 60%",
+      foreground: "222 47% 6%",
+      hover: "217 91% 55%",
+      soft: "217 50% 16%",
     },
-    background: {
-      DEFAULT: 'hsl(0, 0%, 100%)',
-      dark: 'hsl(220, 20%, 10%)',
-      muted: 'hsl(220, 10%, 96%)',
-    },
-    text: {
-      DEFAULT: 'hsl(220, 20%, 15%)',
-      muted: 'hsl(220, 10%, 45%)',
-      inverse: 'hsl(0, 0%, 100%)',
-    },
-    border: {
-      DEFAULT: 'hsl(220, 10%, 90%)',
-      dark: 'hsl(220, 10%, 30%)',
-    },
-    accent: {
-      success: 'hsl(145, 70%, 45%)',
-      warning: 'hsl(40, 95%, 55%)',
-      error: 'hsl(0, 80%, 55%)',
-      info: 'hsl(200, 85%, 55%)',
-    },
-  },
-  spacing: {
-    xs: '0.25rem',
-    sm: '0.5rem',
-    md: '1rem',
-    lg: '1.5rem',
-    xl: '2rem',
-    '2xl': '3rem',
-    '3xl': '4rem',
+    accent: { DEFAULT: "187 100% 42%", foreground: "222 47% 6%" },
+    success: "142 71% 45%",
+    warning: "38 92% 50%",
+    error: "0 91% 71%",
+    info: "199 92% 60%",
+    ring: "217 91% 60%",
   },
   typography: {
     fontFamily: {
-      sans: "'Inter', system-ui, -apple-system, sans-serif",
-      mono: "'JetBrains Mono', 'Fira Code', monospace",
-    },
-    fontSize: {
-      xs: '0.75rem',
-      sm: '0.875rem',
-      base: '1rem',
-      lg: '1.125rem',
-      xl: '1.25rem',
-      '2xl': '1.5rem',
-      '3xl': '1.875rem',
-      '4xl': '2.25rem',
+      sans: "var(--font-outfit), system-ui, sans-serif",
+      serif: "var(--font-cardo), Georgia, serif",
     },
   },
-  borderRadius: {
-    sm: '0.25rem',
-    md: '0.5rem',
-    lg: '0.75rem',
-    xl: '1rem',
-    full: '9999px',
+  radius: {
+    sm: "0.5rem",
+    md: "0.75rem",
+    lg: "1rem",
+    xl: "1.5rem",
+    full: "9999px",
   },
+  containerMax: "1170px",
 } as const;

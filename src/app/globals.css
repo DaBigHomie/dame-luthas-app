@@ -1,26 +1,61 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0f0f0f;
-  --foreground: #ffffff;
-  --bg: #0f0f0f;
-  --text: #ffffff;
-  --text-muted: rgba(255, 255, 255, 0.7);
-  --dl-bg: #0f0f0f;
-  --dl-surface: #181818;
-  --dl-accent: #8f93f1;
-  --dl-cta-mint: #a9fdff;
-  --dl-accent-hover: #3c3950;
-  --dl-footer-yellow: #f7df3d;
-  --dl-footer-lavender: #cecee8;
-  --dl-yellow: #f7df3d;
-  --dl-lavender: #cecee8;
+  /* Luthas Enterprise palette (HSL channels). SSOT: docs/design/DESIGN-SYSTEM-RECOMMENDATION.md
+     Verified WCAG by scripts/design/audit-contrast.mts (all required checks pass). */
+  --background: 222 47% 6%;
+  --surface: 222 47% 8%;
+  --elevated: 222 47% 10%;
+  --foreground: 0 0% 100%;
+  --muted-foreground: 222 14% 70%;
+  --border: 222 18% 46%; /* interactive (3.6:1) */
+  --border-subtle: 222 30% 18%; /* decorative dividers only */
+  --primary: 217 91% 60%;
+  --primary-foreground: 222 47% 6%; /* dark text on primary fills */
+  --primary-hover: 217 91% 55%;
+  --primary-soft: 217 50% 16%;
+  --accent: 187 100% 42%;
+  --accent-foreground: 222 47% 6%;
+  --success: 142 71% 45%;
+  --warning: 38 92% 50%;
+  --error: 0 91% 71%;
+  --info: 199 92% 60%;
+  --ring: 217 91% 60%;
+  --glow-primary: 0 0 40px hsl(217 91% 60% / 0.3);
+  --glow-soft: 0 0 20px hsl(217 91% 60% / 0.15);
+
   --dl-container-max: 1170px;
+
+  /* Legacy --dl-* names repointed to the new system so existing var() refs recolor.
+     (TheGem inheritance removed: --dl-footer-yellow, --dl-footer-lavender, --dl-yellow, --dl-lavender) */
+  --dl-bg: hsl(var(--background));
+  --dl-surface: hsl(var(--surface));
+  --dl-accent: hsl(var(--primary));
+  --dl-accent-hover: hsl(var(--primary-hover));
+  --dl-cta-mint: hsl(var(--accent));
+
+  --bg: hsl(var(--background));
+  --text: hsl(var(--foreground));
+  --text-muted: hsl(var(--muted-foreground));
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-surface: hsl(var(--surface));
+  --color-elevated: hsl(var(--elevated));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-border: hsl(var(--border));
+  --color-border-subtle: hsl(var(--border-subtle));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-primary-hover: hsl(var(--primary-hover));
+  --color-primary-soft: hsl(var(--primary-soft));
+  --color-accent: hsl(var(--accent));
+  --color-success: hsl(var(--success));
+  --color-warning: hsl(var(--warning));
+  --color-error: hsl(var(--error));
+  --color-info: hsl(var(--info));
   --font-sans: var(--font-outfit), system-ui, sans-serif;
   --font-serif: var(--font-cardo), Georgia, serif;
 }
@@ -30,6 +65,12 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-outfit), system-ui, sans-serif;
+}
+
+/* WCAG 2.4.7/2.4.11 — solid focus indicator (the glow alone is insufficient on dark) */
+:where(a, button, [role="button"], input, textarea, select):focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
 }
 
 body.wp-pilot-theme {
