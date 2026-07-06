@@ -11,10 +11,23 @@ tags: [dame-luthas-app, portfolio, case-studies, e2e, a11y, automation, implemen
 # Career Portfolio Delivery — Implementation Plan
 
 > **Status:** Active · **Owner:** Portfolio Delivery Lead · **Last updated:** 2026-07-06
-> **Doc type:** Plan (strategic, sequenced) · **Scope:** `dame-luthas-app` ONLY — the public Career Portfolio surface (case studies, portfolio detail pages, contact). No cortex/maximus infrastructure, no cluster/swarm framing — agents below are named by role.
+> **Doc type:** Plan (strategic, sequenced) · **Scope:** `dame-luthas-app` — the public Career Portfolio surface (case studies, portfolio detail pages, contact) — is the consumer/presentation repo in the 3-repo Career Portfolio product (career-corpus -> project-polaris -> dame-luthas-app). No cortex/maximus infrastructure, no cluster/swarm framing — agents below are named by role.
 > **CI model:** local quality gates own merge readiness. GitHub Actions are **RETIRED** as a governance gate for this workspace — a residual `.github/workflows/ci.yml` may still exist in-repo and can surface as a required check on GitHub's side; it is vestigial and is overridden with `--admin` at merge time where it blocks, never treated as the gate of record.
 
 Every wave below carries an implementation **Detail** block, a **Prompt card** (the exact agent prompt + routing + commands), a pre-assigned **Worktree & branch**, an **Automation** tag, and a **Gate**, so a downstream agent can execute without re-deriving context.
+
+---
+
+## Cross-repo handoffs (Career Portfolio)
+The portfolio is three repos, one product. Data flows one way: evidence -> engine/site.
+- **career-corpus** (evidence SSOT) — publishes `enriched/bundles/*.json` (4 bundles). Publishes only.
+- **project-polaris** (engine) — consumes bundles via `npm run seed:career-corpus`; tailors/validates/renders/applies. May cite the portfolio URL in cover letters.
+- **dame-luthas-app** (portfolio, THIS plan) — will consume the SAME career-corpus bundles for case-study citations via `scripts/corpus/sync-bundle-citations.mts` (planned) — a dla-owned script to be **created in Wave 3 of this plan**, reading `../career-corpus/enriched/bundles/` (verified 2026-07-06: no `scripts/corpus/*` directory exists in this repo today — do not cite it as already implemented). Renders dameluthas.damieus.app.
+- Companion plans: [corpus](../../../career-corpus/docs/plans/CORPUS-DELIVERY-PLAN.md) · [polaris](../../../project-polaris/docs/plans/POLARIS-JOBHUNT-DELIVERY-PLAN.md).
+- Ownership rule: a shared handoff script lives in the CONSUMER repo; dla owns `scripts/corpus/sync-bundle-citations.mts` and READS career-corpus's published bundles — career-corpus never pushes into dla.
+
+> [!IMPORTANT]
+> **audit-fix-plan finding (forensic-auditing / doc-forensic-inventory, cross-repo reconciliation pass).** Two relative-path bugs and one tense/fabrication risk were found and fixed in this section: (1) the companion-plan links originally used `../../<repo>/...`, which from `docs/plans/` only escapes to this repo's own root, not to the sibling repos directory — corrected to `../../../<repo>/...` (verified both links resolve on disk). (2) The dame-luthas-app bullet originally described `scripts/corpus/sync-bundle-citations.mts` in present tense ("consumes... via"), which reads as already-implemented; verified `scripts/corpus/` does not exist in this repo yet — the script is Wave 3 planned work. Corrected to future tense with an explicit "not yet built" note, matching the honesty standard project-polaris's companion plan already applied to the same fact.
 
 ---
 
@@ -196,7 +209,7 @@ confirmation no .github/workflows/* file was touched. dame-luthas-app only.
 ---
 
 ## PR references
-- **This plan** — filed on branch `docs/portfolio-delivery-plan-20260706`. PR: _to be filled on open_.
+- **This plan** — filed on branch `docs/portfolio-delivery-plan-20260706`, merged as dame-luthas-app #9 (`abe4f12`). Cross-repo reconciliation filed on branch `docs/portfolio-plan-crossrepo-20260706`. PR: _to be filled on open_.
 - Prior repo work referenced for context (not owned by this plan): dame-luthas-app #8 (`302993d`, Luthas Enterprise design system V3).
 
 ## Lessons learned
@@ -227,8 +240,15 @@ Four findings from the 50x audit (forensic-auditing, forecast-scrutiny, doc-fore
 3. The Wave 3 (then-Wave 2) idempotency claim had no verification step. Fixed by adding an explicit `git status --porcelain` clean-diff check to the gate.
 4. `src/content/case-studies/registry` was referenced as a directory; verified it is a single file, `registry.ts`. Fixed throughout Wave 2/3 references. A fifth, doc-forensic-inventory finding — `docs/PROJECT-OVERVIEW.md` documents the current route/content architecture and will drift once Waves 2–4 land — is tracked as a follow-up task in the Live task list below rather than expanded inline here, since it is a downstream update, not a defect in this plan's own content.
 
+### audit-fix-plan pass (cross-repo reconciliation, 2026-07-06)
+Two findings from the 50x audit (forensic-auditing, doc-forensic-inventory) on the newly added "Cross-repo handoffs" section were identified and fixed before merge (inline `[!IMPORTANT]` callout marks where):
+1. **Broken relative links (forensic-auditing).** The companion-plan links used `../../<repo>/...`, which from `docs/plans/` only resolves to this repo's own root (`dame-luthas-app/`), not the sibling repos directory — a crude path assumption never checked against actual directory depth. Verified via direct filesystem resolution and corrected to `../../../<repo>/...`; both links now resolve to existing files (`career-corpus/docs/plans/CORPUS-DELIVERY-PLAN.md`, `project-polaris/docs/plans/POLARIS-JOBHUNT-DELIVERY-PLAN.md`).
+2. **Present-tense fabrication risk (doc-forensic-inventory).** The dame-luthas-app cross-repo bullet described `scripts/corpus/sync-bundle-citations.mts` in present tense ("consumes... via"), implying it already exists; verified `scripts/corpus/` is absent from this repo today (the script is Wave 3 planned work, not yet built). Corrected to future tense with an explicit "not yet built" note — the same honesty check project-polaris's companion plan already applied to the identical fact, now made consistent here.
+No blast-radius risk: both fixes are confined to this repo's own doc; no write access was taken to career-corpus or project-polaris, consistent with the read-only handoff.
+
 ## Change Log
 | Version | Date | Author | Change |
 |---|---|---|---|
+| 1.2 | 2026-07-06 | Claude (Sonnet 5) | Cross-repo reconciliation: removed the "`dame-luthas-app` ONLY / cross-repo out of scope" framing (the three Career Portfolio repos — career-corpus, project-polaris, dame-luthas-app — are ONE product and reference each other by design); added the "Cross-repo handoffs" section near the top identifying dame-luthas-app as the portfolio/consumer repo, linking the two companion plans (career-corpus's `CORPUS-DELIVERY-PLAN.md`, project-polaris's `POLARIS-JOBHUNT-DELIVERY-PLAN.md`), and restating the ownership rule (dla owns `scripts/corpus/sync-bundle-citations.mts`, reads `../career-corpus/enriched/bundles/`, career-corpus never writes into dla); confirmed the existing Wave 2/3 bridge-script framing was already ownership-correct (no wording changes needed there). audit-fix-plan pass then caught and fixed two issues in the new section itself: a broken relative-path assumption in the companion links (`../../<repo>` does not escape this repo's root; corrected to `../../../<repo>`, both verified to resolve) and a present-tense fabrication risk (the sync script read as already-built; corrected to future tense + "not yet built," matching project-polaris's companion doc). |
 | 1.1 | 2026-07-06 | Claude (opus 4.8) | audit-fix-plan pass: reordered Wave 2/3 to fix a broken DAG dependency, scoped a new narrow bridge script instead of implying `wp:build-content`/`assets:pipeline` integrate with career-corpus (verified false), added explicit idempotency verification to the refresh-loop gate, corrected `registry.ts` file references (was described as a directory), added a follow-up task for `PROJECT-OVERVIEW.md` drift. |
 | 1.0 | 2026-07-06 | Claude (opus 4.8) | Initial strategic plan: 8 Value & Intent sub-blocks, 4 sequenced waves (Playwright root-cause, corpus refresh loop, citation footer, a11y/Lighthouse local gate) with Detail + Prompt card + Worktree/branch + Automation + Routing + Gate per wave. |
