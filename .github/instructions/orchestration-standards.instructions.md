@@ -1,4 +1,9 @@
-@AGENTS.md
+---
+title: Orchestration Standards
+version: 1.0.0
+updated: 2026-07-07
+applies_to: '**'
+---
 
 <!-- BEGIN: orchestration-standards-enforcer (source: documentation-standards/skills/orchestration-standards-enforcer/SKILL.md) -->
 ## Orchestration Standards (MALFIG-aligned)

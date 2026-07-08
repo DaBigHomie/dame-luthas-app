@@ -40,6 +40,24 @@ git branch --show-current
 - **Do not** `reset --hard` or force-push without explicit user approval.
 - If the user only wanted a handoff without commit, **document** WIP in the manifest (see §3).
 
+## 2.5. Forensic sanity pass (before writing the manifest)
+
+If this session made non-trivial claims that will end up in the manifest — new cross-repo
+references, new tool/version pointers, "delivered" or "fixed" statements — run a **forensic-auditing**
+pass over the touched files before writing them down as fact. This is not a full 50x audit; check
+specifically:
+
+- **Diff against live git HEAD** (not memory) — does the referenced file/branch/PR actually exist
+  where the doc says it does, right now?
+- **Trace, don't assume, tool behavior** — if the manifest says "ran X to do Y," confirm by reading
+  X, not by its name (see `forensic-auditing` skill, rule 1 and 2).
+- **Cross-repo sync copies** — if a file being referenced is known to be synced across repos
+  (MALFIG gatekeeper pattern), name the canonical copy explicitly; don't assume "the" copy without
+  checking for a second untracked/divergent one.
+
+Invoke the `forensic-auditing` skill directly for sessions with material claims; skip it for
+routine sessions with no new cross-references (adds no value there, just cost).
+
 ## 3. Handoff and agent manifests
 
 1. **Primary hub:** `documentation-standards` — use [`KEY-FILES.md`](https://github.com/DaBigHomie/documentation-standards/blob/master/KEY-FILES.md) and [`docs/AGENT-CONTEXT-KEY.md`](https://github.com/DaBigHomie/documentation-standards/blob/master/docs/AGENT-CONTEXT-KEY.md) as pointers.
@@ -48,7 +66,32 @@ git branch --show-current
    - Filename: **`YYYY-MM-DD_HH-mm_scope.md`** or **`SESSION-<repo>-<branch>-YYYYMMDD.md`**.
    - Include: repos touched, branches, commits made (hashes), files intentionally dirty, **next steps**, links to PRs/issues if any.
 
-3. Align with **[`docs/PROMPT-NEXT-AGENT-HANDOFF.md`](https://github.com/DaBigHomie/documentation-standards/blob/master/docs/PROMPT-NEXT-AGENT-HANDOFF.md)** — note whether **Mechanism A/B** (delegate / Cursor handoff) applies later.
+3. **For larger sessions** (many files, multiple repos, or a handoff someone else needs to pick up
+   cold): use the **`@dabighomie/handoff-framework`** package at `~/management-git/handoff-framework`
+   instead of a single freeform manifest — it produces a numbered, session-named template set
+   (`00-MASTER_INDEX`, `01-PROJECT_STATE`, …) built for exactly this "next agent shouldn't re-read
+   the whole codebase" problem:
+
+   ```bash
+   cd ~/management-git/handoff-framework
+   node bin/handoff.mjs init <project> --session <slug>       # scaffolds docs/handoff-<slug>/
+   node bin/handoff.mjs generate <project> --session <slug>   # state snapshot
+   node bin/handoff.mjs validate <project> --session <slug>   # 7-point quality score
+   ```
+
+   Use the single-file manifest (step 2) for routine sessions; use the framework for the ones
+   where handoff quality actually matters. They are not mutually exclusive — the framework's
+   `01-PROJECT_STATE` doc can point back at the single-file manifest for the quick version.
+
+4. **Known drift, not yet reconciled:** `scripts/exit-session.mts` (a separate, working automation
+   for steps 1–4 of this skill) writes its own JSON handoff manifest to
+   `handoff-framework/docs/context-manifests/`, not `documentation-standards/docs/context-manifests/`
+   as documented above, and that directory in practice holds session-report emails, not manifests —
+   this script's manifest path is effectively unused. Running `npx tsx scripts/exit-session.mts <alias>`
+   is a real shortcut for steps 1/2/4 of this skill; don't rely on its manifest step until this is
+   reconciled.
+
+5. Align with **[`docs/PROMPT-NEXT-AGENT-HANDOFF.md`](https://github.com/DaBigHomie/documentation-standards/blob/master/docs/PROMPT-NEXT-AGENT-HANDOFF.md)** — note whether **Mechanism A/B** (delegate / Cursor handoff) applies later.
 
 See **[reference.md](reference.md)** for a manifest skeleton.
 
@@ -139,8 +182,10 @@ npx tsx ~/management-git/documentation-standards/scripts/send-report.mts \
    cd ~/management-git/documentation-standards
    node scripts/verify-workspace-40x.mjs --strict-prime-gate
    node scripts/verify-workspace-40x.mjs --test-health
-   node scripts/verify-context-footprint.mjs
    ```
+
+   (`verify-workspace-40x.mjs` already includes the per-repo footprint table —
+   `verify-context-footprint.mjs` is deprecated, do not call it separately.)
 
    When **`atl-table-booking-app`** was touched and tests ran:
 
