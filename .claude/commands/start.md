@@ -1,47 +1,46 @@
-# /start — Dame Luthas session boot (CORTEX + Prime Gate)
+# /start — ATB Session Startup (Prime Boot)
 
-Run at the **start of every session** on `dame-luthas-app`.
+Run this at the start of every session on the `atl-table-booking-app` repo.
 
-## 1. CORTEX boot (SSOT — not chat recap)
+## Steps
 
-```bash
-cd ~/management-git/dame-luthas-app
-npx tsx ../.agent-kb/anvil/cortex-boot.mts --repo=dame-luthas-app --agent=181 --force
-```
-
-Read `.cortex-boot.json` → `tasks`, `knowledge.recentEntries`, `plans.activeCheckpoints`.
-
-Optional ANVIL open:
+1. **Read cortex boot context**
 
 ```bash
-npx tsx ../.agent-kb/anvil/run.mts open --repo=dame-luthas-app --agent=181
+cat /Users/dabighomie/Management\ Git/atl-table-booking-app/.cortex-boot.json
 ```
 
-## 2. Git state
+2. **Git state**
 
 ```bash
-git branch --show-current && git status --short && git log --oneline -5
+cd /Users/dabighomie/Management\ Git/atl-table-booking-app && git branch --show-current && git status --short && git log --oneline -5
 ```
 
-## 3. Quality gate snapshot (before edits)
+3. **Open PRs + issues**
 
 ```bash
-npx tsc --noEmit && npm run lint
+cd /Users/dabighomie/Management\ Git/atl-table-booking-app && gh pr list --state open && gh issue list --state open --limit 10
 ```
 
-## 4. Docs load order
+4. **Task list**
 
-1. `.codebase-manifest.json`
-2. `docs/PROJECT-OVERVIEW.md`
-3. `docs/WEBAPP-BUILD.md` (phase checklist)
-4. Latest `docs/checkpoints/*.md`
+Use TaskList tool to show all pending/in-progress tasks.
 
-## 5. Report back
+5. **Read HANDOVER.md if it exists**
 
-- Session id from `.cortex-boot.json`
-- CORTEX pending / in-progress tasks (DB truth)
-- Git branch + last commit
-- Production URL: https://dameluthas.damieus.app
-- Recommended next task (priority order)
+```bash
+cat /Users/dabighomie/Management\ Git/atl-table-booking-app/HANDOVER.md 2>/dev/null || echo "No handover doc"
+```
 
-**Rule:** Continuity lives in **CORTEX SQLite** (`sessions`, `tasks`, `knowledge`). Do not treat chat summaries or stale `.cortex-boot.json` alone as SSOT — re-run boot if file is older than last commit.
+6. **Source env credentials**
+
+```bash
+source /Users/dabighomie/Management\ Git/.env.mcp 2>/dev/null
+```
+
+7. **Report back** with:
+   - Active branch
+   - Last 3 commits
+   - Pending tasks (from TaskList)
+   - Any blockers from HANDOVER.md
+   - What to work on next
